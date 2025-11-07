@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "listings": "Listings",
+    "profile": "Profile",
+    "login": "Log in"
+  },
+  "home": {
+    "title": "Welcome",
+    "subtitle": "Service for Ukrainians in Europe"
+  },
+  "about": {
+    "title": "Welcome",
+    "subtitle": "Service for Ukrainians in Europe"
+  }
+}

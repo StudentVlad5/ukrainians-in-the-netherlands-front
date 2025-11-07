@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Startpagina",
+    "listings": "Advertenties",
+    "profile": "Profiel",
+    "login": "Inloggen"
+  },
+  "home": {
+    "title": "Welkom",
+    "subtitle": "Platform voor Oekraïners in Europa"
+  },
+  "about": {
+    "title": "Welkom",
+    "subtitle": "Platform voor Oekraïners in Europa"
+  }
+}

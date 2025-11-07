@@ -1,0 +1,32 @@
+import { getRequestConfig } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+// 1️⃣ Static imports
+import ua from "./messages/ua.json";
+import nl from "./messages/nl.json";
+import de from "./messages/de.json";
+import en from "./messages/en.json";
+
+// 2️⃣ Define a type for your messages from one of the imports
+type Messages = typeof ua;
+
+export const locales = ["ua", "nl", "de", "en"];
+export const defaultLocale = "ua";
+
+// 3️⃣ Use Record<string, Messages> to type the map
+const messagesMap: Record<string, Messages> = { ua, nl, de, en };
+
+// 4️⃣ Export config
+export default getRequestConfig(async ({ locale }) => {
+  const finalLocale = locale ?? defaultLocale;
+
+  // This check is now valid
+  if (!messagesMap[finalLocale]) {
+    notFound();
+  }
+
+  return {
+    locale: finalLocale,
+    messages: messagesMap[finalLocale],
+  };
+});

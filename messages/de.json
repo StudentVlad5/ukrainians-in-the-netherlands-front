@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "listings": "Anzeigen",
+    "profile": "Profil",
+    "login": "Anmelden"
+  },
+  "home": {
+    "title": "Willkommen",
+    "subtitle": "Plattform für Ukrainer in Europa"
+  },
+  "about": {
+    "title": "Willkommen",
+    "subtitle": "Plattform für Ukrainer in Europa"
+  }
+}
