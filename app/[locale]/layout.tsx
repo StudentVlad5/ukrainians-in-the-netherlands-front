@@ -6,6 +6,7 @@ import "@/app/globals.css";
 
 // 1. Import ReactNode for typing children
 import { ReactNode } from "react";
+import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 
 // 2. Define the prop types
 type Props = {
@@ -22,7 +23,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   try {
     // getMessages() implicitly uses the locale from the request
-    messages = await getMessages();
+    messages = await getMessages({ locale });
   } catch (error) {
     console.error("i18n error:", error);
     notFound();
@@ -33,7 +34,10 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-screen bg-gray-50 text-gray-900">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar locale={locale} />
-          <main>{children}</main>
+          <main>
+            {" "}
+            <PageTransitionWrapper>{children}</PageTransitionWrapper>
+          </main>
         </NextIntlClientProvider>
       </body>
     </html>
