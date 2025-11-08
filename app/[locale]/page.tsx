@@ -17,8 +17,8 @@ export default function HomePage() {
       <AboutUs />
       <LegalStatus />
       <NewsSection />
-      <MarketplaceSection />
       <ProvidersSection />
+      <MarketplaceSection />
       <TestimonialsSection />
       <CallToAction />
     </>

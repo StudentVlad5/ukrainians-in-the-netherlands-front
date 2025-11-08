@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface IProvider {
   id: number;
@@ -80,36 +81,36 @@ export const ProvidersSection: React.FC = () => {
       `}</style>
       <section
         id="providers"
-        className="py-16 md:py-24 bg-gray-900 text-white overflow-hidden"
+        className="py-16 md:py-24 bg-blue-50 text-gray-900 overflow-hidden"
       >
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Наші Майстри та Підприємці
           </h2>
 
-          <div className="relative w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_10%,_black_90%,transparent_100%)]">
+          <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent_0,black_10%,black_90%,transparent_100%)]">
             <div
-              className="flex animate-scroll-slow"
+              className="flex animate-scroll-slow p-2"
               style={{ width: `${mockProviders.length * 2 * 12}rem` }}
             >
               {duplicatedProviders.map((provider, index) => (
-                <a
+                <Link
                   key={index}
                   href={`/provider/${provider.id}`}
-                  className="flex flex-col items-center justify-center w-48 mx-4 flex-shrink-0 group"
+                  className="flex flex-col items-center justify-center w-48 mx-4 shrink-0 group"
                 >
                   <Image
                     src={provider.imageUrl}
                     alt={provider.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-yellow-400 transition-transform duration-300 group-hover:scale-110"
+                    className="w-24 h-24 rounded-full object-cover border-4 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
                     onError={(e) =>
                       (e.currentTarget.src =
                         "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
                     }
                   />
                   <h3 className="text-xl font-bold mt-3">{provider.name}</h3>
-                  <p className="text-yellow-400">{provider.specialty}</p>
-                </a>
+                  <p className="text-blue-600">{provider.specialty}</p>
+                </Link>
               ))}
             </div>
           </div>

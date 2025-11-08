@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
         }
       />
 
-      <div className="relative z-20 p-4 animate-fade-in-down">
+      <div className="relative z-20 p-4 animate-fade-in-down flex justify-end flex-col items-center h-full w-full">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
           Українці в Нідерландах
         </h1>

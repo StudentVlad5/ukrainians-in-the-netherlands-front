@@ -29,7 +29,7 @@ export const LegalStatus: React.FC = () => {
               rel="noopener noreferrer"
               className="bg-white border-2 border-gray-600 text-gray-700 font-bold py-3 px-6 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              Rijksoverheid (NL)
+              Національний уряд (NL)
             </Link>
           </div>
         </div>
