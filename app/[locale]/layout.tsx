@@ -1,17 +1,17 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Header/Navbar";
 import "@/app/globals.css";
 
 // 1. Import ReactNode for typing children
 import { ReactNode } from "react";
-import PageTransitionWrapper from "@/components/PageTransitionWrapper";
+import PageTransitionWrapper from "@/components/UI/PageTransitionWrapper/PageTransitionWrapper";
+import { Footer } from "@/components/Footer/Footer";
 
 // 2. Define the prop types
 type Props = {
   children: ReactNode;
-  // 'params' is a regular object, not a promise.
   params: Promise<{ locale: string }>;
 };
 
@@ -22,7 +22,6 @@ export default async function LocaleLayout({ children, params }: Props) {
   let messages;
 
   try {
-    // getMessages() implicitly uses the locale from the request
     messages = await getMessages({ locale });
   } catch (error) {
     console.error("i18n error:", error);
@@ -38,6 +37,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             {" "}
             <PageTransitionWrapper>{children}</PageTransitionWrapper>
           </main>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

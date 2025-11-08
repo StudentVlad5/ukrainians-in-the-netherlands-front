@@ -1,9 +1,10 @@
 {
   "nav": {
     "home": "Home",
-    "listings": "Listings",
-    "profile": "Profile",
-    "login": "Log in"
+    "news": "News",
+    "market": "Ads",
+    "masters": "Masters",
+    "profile": "Profile"
   },
   "home": {
     "title": "Welcome",

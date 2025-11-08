@@ -1,9 +1,10 @@
 {
   "nav": {
-    "home": "Startpagina",
-    "listings": "Advertenties",
-    "profile": "Profiel",
-    "login": "Inloggen"
+    "home": "Thuis",
+    "news": "Nieuws",
+    "market": "Advertenties",
+    "masters": "Meesters",
+    "profile": "Profiel"
   },
   "home": {
     "title": "Welkom",

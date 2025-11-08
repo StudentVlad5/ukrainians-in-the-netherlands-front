@@ -4,8 +4,9 @@ import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { navMenu } from "../helper/CONST";
+import { navMenu } from "@/helper/CONST";
 import { useState } from "react";
+import { MenuIcon, XIcon } from "../UI/Icons/icons";
 
 function NavItem({ item, locale, t, pathname }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -16,7 +17,7 @@ function NavItem({ item, locale, t, pathname }) {
       : pathname.split("/").slice(2).join("").startsWith(item.path);
 
   return (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+    <motion.header whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
       <Link
         href={`/${locale}/${item.path}`}
         className="px-2 py-1 rounded block"
@@ -51,17 +52,23 @@ function NavItem({ item, locale, t, pathname }) {
           {t(item.key)}
         </motion.span>
       </Link>
-    </motion.div>
+    </motion.header>
   );
 }
 
 export default function Navbar({ locale }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <nav className="flex justify-between items-center p-4 bg-white shadow text-gray-700">
-      <div className="flex gap-4">
+    <nav className="flex justify-between items-center p-4 bg-white shadow text-gray-700 relative z-30">
+      {/* Логотип*/}
+      <Link href="/" className="text-[30px] font-bold flex items-center">
+        <span className="text-blue-600">UA</span>
+        <span className="text-yellow-400">in</span>
+        <span className="text-red-600">NL</span>
+      </Link>
+      <div className="md:flex gap-4 sm:hidden">
         {navMenu.map((item) => (
           <NavItem
             key={item.key}
@@ -72,8 +79,32 @@ export default function Navbar({ locale }) {
           />
         ))}
       </div>
+      {/* Кнопка мобільного меню */}
 
+      {/* Мобільне меню */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 z-40 h-screen flex flex-col items-center pt-4 gap-4 justify-center">
+          {navMenu.map((item) => (
+            <NavItem
+              key={item.key}
+              item={item}
+              locale={locale}
+              t={t}
+              pathname={pathname}
+              onClick={() => setIsMenuOpen(false)}
+            />
+          ))}
+        </div>
+      )}
       <LanguageSwitcher locale={locale} />
+      <button
+        className="md:hidden"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle menu"
+        type="button"
+      >
+        {isMenuOpen ? <XIcon /> : <MenuIcon />}
+      </button>
     </nav>
   );
 }

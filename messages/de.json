@@ -1,9 +1,10 @@
 {
   "nav": {
-    "home": "Startseite",
-    "listings": "Anzeigen",
-    "profile": "Profil",
-    "login": "Anmelden"
+    "home": "Zuhause",
+    "news": "Neuigkeiten",
+    "market": "Anzeigen",
+    "masters": "Meister",
+    "profile": "Profil"
   },
   "home": {
     "title": "Willkommen",

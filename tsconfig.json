@@ -32,7 +32,7 @@
     "**/*.mts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "components/LanguageSwitcher.jsx"
+    "components/Header/LanguageSwitcher.jsx"
   ],
   "exclude": ["node_modules"]
 }
