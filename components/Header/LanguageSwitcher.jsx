@@ -21,7 +21,7 @@ export default function LanguageSwitcher({ locale }) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 font-black">
       {locales.map((l) => {
         const isActive = l === locale;
         return (

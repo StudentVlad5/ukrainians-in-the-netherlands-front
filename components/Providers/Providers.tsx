@@ -102,7 +102,7 @@ export const ProvidersSection: React.FC = () => {
                   <Image
                     src={provider.imageUrl}
                     alt={provider.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
+                    className="w-24 h-24 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
                     onError={(e) =>
                       (e.currentTarget.src =
                         "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
