@@ -7,17 +7,19 @@ import { useState } from "react";
 export default function LanguageSwitcher({ locale }) {
   const router = useRouter();
   const pathname = usePathname();
-  const locales = ["ua", "nl", "de", "en"];
+  const locales = ["uk", "nl", "de", "en"];
   const [isAnimating, setIsAnimating] = useState(false);
 
   const changeLanguage = async (newLocale) => {
     setIsAnimating(true);
-
-    // Дочекатися завершення анімації перед переходом
     await new Promise((res) => setTimeout(res, 300));
 
-    const pathWithoutLocale = pathname.split("/").slice(2).join("/");
-    router.push(`/${newLocale}/${pathWithoutLocale}`);
+    const pathWithoutLocale =
+      pathname.replace(new RegExp(`^/(${locales.join("|")})(?=/|$)`), "") ||
+      "/";
+
+    const newPath = `/${newLocale}${pathWithoutLocale}`;
+    router.push(newPath);
   };
 
   return (

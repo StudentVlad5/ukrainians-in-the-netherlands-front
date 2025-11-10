@@ -11,15 +11,27 @@ import { MenuIcon, XIcon } from "../UI/Icons/icons";
 function NavItem({ item, locale, t, pathname, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  // ✅ Локалі, які використовуються в проєкті
+  const locales = ["uk", "nl", "de", "en"];
+
+  // ✅ Прибираємо локаль із pathname через RegExp
+  const cleanPath = pathname.replace(
+    new RegExp(`^/(${locales.join("|")})(?=/|$)`),
+    ""
+  );
+
+  // ✅ Перевірка активності
   const isActive =
     item.path === "/"
-      ? pathname.split("/").length < 3
-      : pathname.split("/").slice(2).join("").startsWith(item.path);
+      ? cleanPath === "/" || cleanPath === ""
+      : cleanPath.startsWith(item.path);
 
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
       <Link
-        href={`/${locale}/${item.path}`}
+        href={`/${locale}${
+          item.path.startsWith("/") ? item.path : `/${item.path}`
+        }`}
         onClick={onClick}
         className="w-full text-center"
       >
@@ -121,8 +133,7 @@ export default function Navbar({ locale }) {
       </AnimatePresence>
       {/* Мовний перемикач */}
 
-        <LanguageSwitcher locale={locale} />
-
+      <LanguageSwitcher locale={locale} />
 
       <button
         className="lg:hidden cursor-pointer p-2 rounded-md hover:bg-gray-100 transition"

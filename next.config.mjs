@@ -4,7 +4,14 @@ const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Ваш next.config, якщо тут щось було
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:3030/api/:path*', 
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
