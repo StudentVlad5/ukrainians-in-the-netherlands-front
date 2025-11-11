@@ -13,5 +13,26 @@
   "about": {
     "title": "Willkommen",
     "subtitle": "Plattform für Ukrainer in Europa"
+  },
+  "profile": {
+    "title": "Willkommen",
+    "subtitle": "Plattform für Ukrainer in Europa",
+    "loading": "Lädt...",
+    "avatarTitle": "Benutzeravatar",
+    "avatarLabel": "Profilbild hochladen",
+    "avatarButton": "Avatar aktualisieren",
+    "dataTitle": "Benutzerdaten",
+    "email": "E-Mail",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefonnummer",
+    "city": "Stadt",
+    "country": "Land",
+    "saveButton": "Daten speichern",
+    "logout": "Ausloggen",
+    "saveSuccess": "Profil erfolgreich aktualisiert.",
+    "saveError": "Fehler beim Aktualisieren des Profils. Bitte versuchen Sie es erneut.",
+    "avatarSuccess": "Avatar erfolgreich aktualisiert.",
+    "avatarError": "Fehler beim Aktualisieren des Avatars. Bitte versuchen Sie es erneut."
   }
 }

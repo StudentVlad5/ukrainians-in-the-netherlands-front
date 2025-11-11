@@ -27,7 +27,6 @@ export default function RegisterForm() {
 
       if (res.ok) {
         router.push("/profile");
-        router.refresh();
       } else {
         const data = await res.json();
         setError(
@@ -80,7 +79,11 @@ export default function RegisterForm() {
       />
 
       <div>
-        <Button type="submit" isLoading={isLoading}>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          disabled={isLoading || !email || !password || !phone}
+        >
           Зареєструватися
         </Button>
       </div>

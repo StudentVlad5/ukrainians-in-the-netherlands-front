@@ -13,5 +13,26 @@
   "about": {
     "title": "Welcome",
     "subtitle": "Service for Ukrainians in Europe"
+  },
+  "profile": {
+    "title": "Welcome",
+    "subtitle": "Service for Ukrainians in Europe",
+    "loading": "Loading...",
+    "avatarTitle": "User Avatar",
+    "avatarLabel": "Upload Profile Picture",
+    "avatarButton": "Update Avatar",
+    "dataTitle": "User Data",
+    "email": "Email",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone Number",
+    "city": "City",
+    "country": "Country",
+    "saveButton": "Save Data",
+    "logout": "Logout",
+    "saveSuccess": "Profile updated successfully.",
+    "saveError": "Error updating profile. Please try again.",
+    "avatarSuccess": "Avatar updated successfully.",
+    "avatarError": "Error updating avatar. Please try again."
   }
 }

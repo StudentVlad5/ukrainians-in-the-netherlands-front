@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -22,10 +23,12 @@ export default function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+      const data = await res.json();
       if (res.ok) {
+        Cookies.set("accessToken", data.token, {
+          expires: 1,
+        });
         router.push("/profile");
-        router.refresh();
       } else {
         const data = await res.json();
         setError(data.message || "Неправильний email або пароль.");
@@ -71,7 +74,11 @@ export default function LoginForm() {
       {/* Тут можна додати "Забули пароль?" */}
 
       <div>
-        <Button type="submit" isLoading={isLoading}>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          disabled={isLoading || !email || !password}
+        >
           Увійти
         </Button>
       </div>

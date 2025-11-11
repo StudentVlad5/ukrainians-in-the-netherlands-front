@@ -13,5 +13,26 @@
   "about": {
     "title": "Welkom",
     "subtitle": "Platform voor Oekraïners in Europa"
+  },
+  "profile": {
+    "title": "Welkom",
+    "subtitle": "Platform voor Oekraïners in Europa",
+    "loading": "Bezig met laden...",
+    "avatarTitle": "Gebruikersavatar",
+    "avatarLabel": "Profielfoto uploaden",
+    "avatarButton": "Avatar bijwerken",
+    "dataTitle": "Gebruikersgegevens",
+    "email": "E-mail",
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "phone": "Telefonnummer",
+    "city": "Stad",
+    "country": "Land",
+    "saveButton": "Gegevens opslaan",
+    "logout": "Uitloggen",
+    "saveSuccess": "Profiel succesvol bijgewerkt.",
+    "saveError": "Fout bij het bijwerken van het profiel. Probeer het opnieuw.",
+    "avatarSuccess": "Avatar succesvol bijgewerkt.",
+    "avatarError": "Fout bij het bijwerken van de avatar. Probeer het opnieuw."
   }
 }
