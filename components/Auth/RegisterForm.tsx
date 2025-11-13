@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
+import { BASE_URL } from "@/helper/CONST";
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function RegisterForm() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, phone }),

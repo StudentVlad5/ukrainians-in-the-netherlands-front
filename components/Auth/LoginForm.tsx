@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
 import Cookies from "js-cookie";
+import { BASE_URL } from "@/helper/CONST";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function LoginForm() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

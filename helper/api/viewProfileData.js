@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
+import { BASE_URL } from "../CONST";
 
 export const refreshUserProfile = async (token) => {
-  const res = await fetch("/api/profile/user", {
+  const res = await fetch(`${BASE_URL}/profile/user`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -17,7 +18,7 @@ export const refreshUserProfile = async (token) => {
 };
 
 export const updateUserProfile = async (formData, token) => {
-  const res = await fetch("/api/profile/user", {
+  const res = await fetch(`${BASE_URL}/profile/user`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -37,7 +38,7 @@ export const uploadUserAvatar = async (avatarFile, token) => {
   const uploadData = new FormData();
   uploadData.append("avatar", avatarFile);
 
-  const res = await fetch("/api/profile/avatar", {
+  const res = await fetch(`${BASE_URL}/profile/avatar`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

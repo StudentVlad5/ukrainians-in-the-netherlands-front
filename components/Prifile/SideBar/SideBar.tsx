@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { SidebarButton } from "../../UI/SidebarButton/SidebarButtun";
 import { UserProfile, ActiveTab } from "../types";
+import { BASE_URL } from "@/helper/CONST";
 
 export const Sidebar = ({
   formData,
@@ -22,7 +23,7 @@ export const Sidebar = ({
     const token = Cookies.get("accessToken");
     if (token) {
       try {
-        await fetch("/api/auth/logout", {
+        await fetch(`${BASE_URL}/auth/logout`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
         });
