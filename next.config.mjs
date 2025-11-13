@@ -8,7 +8,9 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:3030/api/:path*",
+        // destination: "http://localhost:3030/api/:path*",
+        destination:
+          "https://ukrainians-in-the-netherlands-backe.vercel.app/api/:path*",
       },
     ];
   },

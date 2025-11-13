@@ -32,7 +32,8 @@
     "**/*.mts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "components/Header/LanguageSwitcher.jsx"
+    "components/Header/LanguageSwitcher.jsx",
+    "helper/api/checkTocken.js"
   ],
   "exclude": ["node_modules"]
 }

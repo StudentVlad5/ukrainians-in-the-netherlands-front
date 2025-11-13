@@ -15,8 +15,9 @@
     "subtitle": "Plattform für Ukrainer in Europa"
   },
   "profile": {
-    "title": "Willkommen",
-    "subtitle": "Plattform für Ukrainer in Europa",
+    "sidebarPersonal": "Persönliche Daten",
+    "fullName": "Vollständiger Name",
+    "workInProgress": "In Arbeit...",
     "loading": "Lädt...",
     "avatarTitle": "Benutzeravatar",
     "avatarLabel": "Profilbild hochladen",
@@ -33,6 +34,18 @@
     "saveSuccess": "Profil erfolgreich aktualisiert.",
     "saveError": "Fehler beim Aktualisieren des Profils. Bitte versuchen Sie es erneut.",
     "avatarSuccess": "Avatar erfolgreich aktualisiert.",
-    "avatarError": "Fehler beim Aktualisieren des Avatars. Bitte versuchen Sie es erneut."
+    "avatarError": "Fehler beim Aktualisieren des Avatars. Bitte versuchen Sie es erneut.",
+    "editButton": "Profil bearbeiten",
+    "editTitle": "Profil bearbeiten",
+    "sidebarFavorites": "Favoriten",
+    "sidebarOrders": "Bestellungen",
+    "notSet": "Nicht gesetzt",
+    "favoritesTitle": "Ihre Lieblingsanzeigen",
+    "ordersTitle": "Befehl",
+    "status": "Status",
+    "website": "Website",
+    "linkedin": "Linkedin",
+    "facebook": "Facebook",
+    "role": "Rolle"
   }
 }

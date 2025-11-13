@@ -15,8 +15,9 @@
     "subtitle": "Service for Ukrainians in Europe"
   },
   "profile": {
-    "title": "Welcome",
-    "subtitle": "Service for Ukrainians in Europe",
+    "sidebarPersonal": "Personal Data",
+    "fullName": "Full Name",
+    "workInProgress": "Work in Progress...",
     "loading": "Loading...",
     "avatarTitle": "User Avatar",
     "avatarLabel": "Upload Profile Picture",
@@ -33,6 +34,18 @@
     "saveSuccess": "Profile updated successfully.",
     "saveError": "Error updating profile. Please try again.",
     "avatarSuccess": "Avatar updated successfully.",
-    "avatarError": "Error updating avatar. Please try again."
+    "avatarError": "Error updating avatar. Please try again.",
+    "editButton": "Edit Profile",
+    "editTitle": "Edit Profile",
+    "sidebarFavorites": "Favorites",
+    "sidebarOrders": "Orders",
+    "notSet": "Not set",
+    "favoritesTitle": "Your Favorite Ads",
+    "ordersTitle": "Orders",
+    "status": "Status",
+    "website": "Website",
+    "linkedin": "Linkedin",
+    "facebook": "Facebook",
+    "role": "Role"
   }
 }

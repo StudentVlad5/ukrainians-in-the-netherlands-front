@@ -15,8 +15,9 @@
     "subtitle": "Platform voor Oekraïners in Europa"
   },
   "profile": {
-    "title": "Welkom",
-    "subtitle": "Platform voor Oekraïners in Europa",
+    "sidebarPersonal": "Persoonlijke gegevens",
+    "fullName": "Volledige naam",
+    "workInProgress": "Werk in uitvoering...",
     "loading": "Bezig met laden...",
     "avatarTitle": "Gebruikersavatar",
     "avatarLabel": "Profielfoto uploaden",
@@ -33,6 +34,18 @@
     "saveSuccess": "Profiel succesvol bijgewerkt.",
     "saveError": "Fout bij het bijwerken van het profiel. Probeer het opnieuw.",
     "avatarSuccess": "Avatar succesvol bijgewerkt.",
-    "avatarError": "Fout bij het bijwerken van de avatar. Probeer het opnieuw."
+    "avatarError": "Fout bij het bijwerken van de avatar. Probeer het opnieuw.",
+    "editButton": "Profiel bewerken",
+    "editTitle": "Profiel bewerken",
+    "sidebarFavorites": "Favorieten",
+    "sidebarOrders": "Bestellingen",
+    "notSet": "Niet ingesteld",
+    "favoritesTitle": "Uw favoriete advertenties",
+    "ordersTitle": "Volgorde",
+    "status": "Status",
+    "website": "Website",
+    "linkedin": "Linkedin",
+    "facebook": "Facebook",
+    "role": "Rol"
   }
 }
