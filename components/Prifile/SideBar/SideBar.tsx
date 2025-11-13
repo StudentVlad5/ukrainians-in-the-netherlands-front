@@ -52,7 +52,7 @@ export const Sidebar = ({
         </div>
 
         {/* Навігація */}
-        <div className="space-y-2 flex-grow">
+        <div className="space-y-2 grow">
           <SidebarButton
             label={t("sidebarPersonal")}
             icon={

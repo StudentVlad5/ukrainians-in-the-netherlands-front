@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import { Placeholder } from "@/components/UI/Placeholder/Placeholder";
 import { Sidebar } from "@/components/Prifile/SideBar/SideBar";
 import { EditProfileForm } from "@/components/Prifile/EditProfileForm/EditProfileForm";
