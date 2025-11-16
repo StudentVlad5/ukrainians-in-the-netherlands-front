@@ -125,14 +125,14 @@ export const EditProfileForm = ({
           onChange={onFormChange}
           disabled={isSaving}
         />
-        {(formData.role === "admin" || formData.role === "saler") && (
+        {(formData.role === "admin" || formData.role === "seller") && (
           <>
             <Input
               id="website"
               name="website"
               label={t("website")}
               type="text"
-              value={formData.contact?.website || ""}
+              value={formData.contacts?.website || ""}
               onChange={onFormChange}
               disabled={isSaving}
             />
@@ -141,7 +141,7 @@ export const EditProfileForm = ({
               name="facebook"
               label={t("facebook")}
               type="text"
-              value={formData.contact?.facebook || ""}
+              value={formData.contacts?.facebook || ""}
               onChange={onFormChange}
               disabled={isSaving}
             />
@@ -150,7 +150,7 @@ export const EditProfileForm = ({
               name="linkedin"
               label={t("linkedin")}
               type="text"
-              value={formData.contact?.linkedin || ""}
+              value={formData.contacts?.linkedin || ""}
               onChange={onFormChange}
               disabled={isSaving}
             />

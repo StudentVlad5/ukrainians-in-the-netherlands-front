@@ -7,10 +7,10 @@ export interface UserProfile {
   city: string;
   phone: string;
   role: string;
-  contact?: {
-    website: string;
-    linkedin: string;
-    facebook: string;
+  contacts?: {
+    website?: string;
+    linkedin?: string;
+    facebook?: string;
   };
   status: string;
 }

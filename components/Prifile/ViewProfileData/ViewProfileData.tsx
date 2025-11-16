@@ -29,15 +29,15 @@ export const ViewProfileData = ({
           <>
             <InfoRow
               label={t("website")}
-              value={user.contact?.website || t("notSet")}
+              value={user.contacts?.website || t("notSet")}
             />
             <InfoRow
               label={t("linkedin")}
-              value={user.contact?.linkedin || t("notSet")}
+              value={user.contacts?.linkedin || t("notSet")}
             />
             <InfoRow
               label={t("facebook")}
-              value={user.contact?.facebook || t("notSet")}
+              value={user.contacts?.facebook || t("notSet")}
             />
           </>
         )}
