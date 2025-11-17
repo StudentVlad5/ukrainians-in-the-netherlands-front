@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import { BASE_URL } from "../CONST";
+import { onSuccess } from "@/lib/Messages/NotifyMessages";
 
 export const SaveDataProduct = async (token, product, formData) => {
   const res = await fetch(
@@ -18,6 +19,7 @@ export const SaveDataProduct = async (token, product, formData) => {
   }
 
   const data = await res.json();
+  if (data) onSuccess("Збереження відбулося успішно");
   return data;
 };
 
@@ -44,5 +46,22 @@ export const getProducts = async (
   }
 
   const data = await res.json();
+  return data;
+};
+
+export const DeleteDataProduct = async (token, id) => {
+  const res = await fetch(`${BASE_URL}/products/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!res.ok) {
+    if (res.status === 401) Cookies.remove("accessToken");
+    router.push("/login");
+    throw new Error("Не вдалося завантажити профіль.");
+  }
+
+  const data = await res.json();
+  if (data) onSuccess("Видалення відбулося успішно");
   return data;
 };

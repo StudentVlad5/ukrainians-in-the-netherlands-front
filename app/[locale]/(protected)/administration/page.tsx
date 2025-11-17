@@ -18,7 +18,7 @@ import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import Cookies from "js-cookie";
 import { ProductForm } from "@/components/Administration/ProductForm/ProductForm";
 import { IProduct } from "@/components/Administration/types";
-import { getProducts } from "@/helper/api/viewProductData";
+import { DeleteDataProduct, getProducts } from "@/helper/api/viewProductData";
 
 // --- Main Page -------------------------------------------------------
 export default function ProductsDashboardPage() {
@@ -84,8 +84,23 @@ export default function ProductsDashboardPage() {
     fetchProducts();
   }, [fetchProducts]);
 
+  async function deleteItem(p: IProduct) {
+    const token = checkToken(router);
+    try {
+      if (p._id) {
+        const res = await DeleteDataProduct(token, p._id);
+        if (res.success && res.success === true) {
+          fetchProducts();
+        }
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+    }
+  }
+
   function openEdit(p: IProduct) {
-    console.log("p", p);
     setEditingProduct(p);
     setModalOpen(true);
   }
@@ -109,10 +124,11 @@ export default function ProductsDashboardPage() {
       <Card>
         <CardContent className="p-6 space-y-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Products</h1>
-            <Button onClick={openCreate}>Add Product</Button>
+            <h1 className="text-2xl font-bold">
+              Products: {totalItems > 0 && totalItems}
+            </h1>
           </div>
-          {totalItems > 0 && <h4>{totalItems}</h4>}
+          <Button onClick={openCreate}>Add Product</Button>
           {/* Filters */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Input
@@ -156,9 +172,8 @@ export default function ProductsDashboardPage() {
             </div>
           </div>
 
-          {/* Table */}
           <div className="overflow-x-auto">
-            <table className="w-full border">
+            <table className="hidden md:table w-full border">
               <thead>
                 <tr className="bg-gray-100 text-left">
                   <th className="p-2">Image</th>
@@ -171,49 +186,98 @@ export default function ProductsDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {products &&
-                  products.map((p) => (
-                    <tr key={p._id} className="border-t">
-                      <td className="p-2">
-                        {p.images?.[0] && (
-                          <Image
-                            src={p.images[0]}
-                            width={60}
-                            height={60}
-                            alt={p.title.uk || "Product thumbnail"}
-                            className="rounded"
-                          />
-                        )}
-                      </td>
-                      <td className="p-2 font-semibold">{p.title.uk}</td>
-                      <td className="p-2">{p.category}</td>
-                      <td className="p-2">€{p.price}</td>
-                      <td className="p-2">{p.location.city}</td>
-                      <td className="p-2">{p.status}</td>
-                      <td className="p-2 space-x-2">
-                        <Button onClick={() => openEdit(p)}>Edit</Button>
-                        <Button
-                          className="bg-red-600 hover:bg-red-700 text-white"
-                          // onClick={() => handleDelete(p._id)} // TODO: Додати функцію
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
+                {products?.map((p) => (
+                  <tr key={p._id} className="border-t">
+                    <td className="p-2">
+                      {p.images?.[0] && (
+                        <Image
+                          src={p.images[0]}
+                          width={60}
+                          height={60}
+                          alt={p.title.uk || "Product thumbnail"}
+                          className="rounded"
+                        />
+                      )}
+                    </td>
+                    <td className="p-2 font-semibold">{p.title.uk}</td>
+                    <td className="p-2">{p.category}</td>
+                    <td className="p-2">€{p.price}</td>
+                    <td className="p-2">{p.location.city}</td>
+                    <td className="p-2">{p.status}</td>
+                    <td className="p-2 flex flex-col gap-2">
+                      <Button onClick={() => openEdit(p)}>Edit</Button>
+                      <Button
+                        onClick={() => deleteItem(p)}
+                        className="bg-red-600 hover:bg-red-700 text-white"
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
+
+            {/* MOBILE CARD VIEW */}
+            <div className="md:hidden space-y-4">
+              {products?.map((p) => (
+                <div
+                  key={p._id}
+                  className="border rounded-lg p-3 shadow-sm bg-white"
+                >
+                  <div className="flex gap-3">
+                    {p.images?.[0] && (
+                      <Image
+                        src={p.images[0]}
+                        width={80}
+                        height={80}
+                        alt={p.title.uk}
+                        className="rounded object-cover"
+                      />
+                    )}
+
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg">{p.title.uk}</h3>
+                      <p className="text-sm text-gray-600">{p.category}</p>
+                      <p className="text-sm text-gray-600">{p.location.city}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3">
+                    <p className="font-medium text-gray-900">€{p.price}</p>
+                    <p className="text-sm text-gray-700">Status: {p.status}</p>
+                  </div>
+
+                  <div className="mt-4 flex gap-2">
+                    <Button onClick={() => openEdit(p)} className="flex-1">
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => deleteItem(p)}
+                      className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Pagination */}
           <div className="flex justify-center gap-4 pt-4">
-            <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            <Button
+              className="flex justify-center items-center"
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
               Prev
             </Button>
             <span className="py-2">
               Page {page} / {totalPages}
             </span>
             <Button
+              className="flex justify-center items-center"
               disabled={page === totalPages}
               onClick={() => setPage(page + 1)}
             >
