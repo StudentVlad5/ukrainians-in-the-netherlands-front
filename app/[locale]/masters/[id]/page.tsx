@@ -56,7 +56,7 @@ export default function MasterProfile() {
                     Локація
                   </p>
                   <p className="text-lg font-extrabold text-slate-900">
-                    {master.location}
+                    {master.location.address}
                   </p>
                 </div>
               </div>

@@ -26,8 +26,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 2,
@@ -44,8 +48,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 3,
@@ -62,8 +70,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 4,
@@ -80,8 +92,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 5,
@@ -98,8 +114,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 6,
@@ -116,8 +136,12 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
   {
     id: 7,
@@ -134,7 +158,11 @@ export const masters = [
     telegram: "maria_cakes_nl",
     whatsapp: "+31612345678",
     portfolio: ["/img1.jpg", "/img2.jpg", "/img3.jpg"],
-    location: "Амстердам (Північна Голландія)",
     minOrder: "від €50",
+    location: {
+      address: "Amsterdam, NL",
+      lat: 52.3676,
+      lng: 4.9041,
+    },
   },
 ];
