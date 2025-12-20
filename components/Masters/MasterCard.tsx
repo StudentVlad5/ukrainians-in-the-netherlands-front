@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import defaultImage from "@/public/images/no-photo-available-icon.jpg";
+import Link from "next/link";
 
 interface IProvider {
   id: number;
@@ -12,7 +13,7 @@ interface IProvider {
   description: string;
   rating: number;
   education: string;
-  languages: string[]; // Додаємо масив мов (напр. ["UA", "EN", "NL"])
+  languages: string[];
 }
 
 export default function MasterCard({ master }: { master: IProvider }) {
@@ -31,10 +32,10 @@ export default function MasterCard({ master }: { master: IProvider }) {
           src={master.imageUrl || defaultImage}
           alt={master.name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover  transition-transform duration-700 group-hover:scale-110 "
         />
         {/* Оверлей для м'якого читання тексту поверх фото */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Рейтинг у верхньому куті */}
         <div className="absolute top-4 right-4 backdrop-blur-md bg-white/70 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
@@ -82,9 +83,12 @@ export default function MasterCard({ master }: { master: IProvider }) {
             </span>
           </div>
 
-          <button className="bg-nl-red hover:bg-nl-blue text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95 shadow-lg shadow-nl-red/20">
+          <Link
+            href={`/masters/${master.id}`}
+            className="bg-nl-red hover:bg-nl-blue text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95 shadow-lg shadow-nl-red/20 cursor-pointer"
+          >
             Записатись
-          </button>
+          </Link>
         </div>
       </div>
     </motion.article>
