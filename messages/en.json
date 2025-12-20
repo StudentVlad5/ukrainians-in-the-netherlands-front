@@ -49,5 +49,11 @@
     "role": "Role",
     "welcome": "Welcome",
     "administration": "Administration"
+  },
+  "masters": {
+    "title": "Masters",
+    "subtitle": "Find qualified professionals for your needs",
+    "searchPlaceholder": "Search for Masters...",
+    "noResults": "No masters found."
   }
 }

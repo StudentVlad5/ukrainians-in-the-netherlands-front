@@ -10,21 +10,13 @@ import { MenuIcon, XIcon } from "../UI/Icons/icons";
 
 function NavItem({ item, locale, t, pathname, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
+  const itemPath = item.path.startsWith("/") ? item.path : `/${item.path}`;
 
-  // ✅ Локалі, які використовуються в проєкті
-  const locales = ["uk", "nl", "de", "en"];
-
-  // ✅ Прибираємо локаль із pathname через RegExp
-  const cleanPath = pathname.replace(
-    new RegExp(`^/(${locales.join("|")})(?=/|$)`),
-    ""
-  );
-
-  // ✅ Перевірка активності
+  //  Прибираємо локаль із pathname через RegExp
   const isActive =
-    item.path === "/"
-      ? cleanPath === "/" || cleanPath === ""
-      : cleanPath.startsWith(item.path);
+    itemPath === "/"
+      ? pathname === "/" || pathname === ""
+      : pathname.startsWith(itemPath);
 
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

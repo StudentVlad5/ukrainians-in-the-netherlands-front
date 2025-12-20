@@ -49,5 +49,11 @@
     "role": "Rolle",
     "welcome": "Willkommen",
     "administration": "Verwaltung"
+  },
+  "masters": {
+    "title": "Meisters",
+    "subtitle": "Finden Sie qualifizierte Fachkräfte für Ihre Bedürfnisse",
+    "searchPlaceholder": "Suchen nach Meistern...",
+    "noResults": "Keine Meister gefunden."
   }
 }
