@@ -48,7 +48,8 @@
     "facebook": "Facebook",
     "role": "Role",
     "welcome": "Welcome",
-    "administration": "Administration"
+    "add_product": "Add product",
+    "add_specialist": "Add specialist"
   },
   "masters": {
     "title": "Masters",

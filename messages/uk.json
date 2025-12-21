@@ -48,7 +48,8 @@
     "facebook": "Facebook",
     "role": "Роль",
     "welcome": "Вітаємо",
-    "administration": "Адміністрування"
+    "add_product": "Додати товар",
+    "add_specialist": "Додати спеціаліста"
   },
   "masters": {
     "title": "Майстри",
