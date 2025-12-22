@@ -1,12 +1,11 @@
 import Cookies from "js-cookie";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { BASE_URL } from "../CONST";
 
 /* ===================== GET ALL ===================== */
 export async function getSpecialists(token) {
   const accessToken = token || Cookies.get("accessToken");
 
-  const res = await fetch(`${API_URL}/api/specialists`, {
+  const res = await fetch(`${BASE_URL}/specialists`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -21,44 +20,36 @@ export async function getSpecialists(token) {
 }
 
 /* ===================== CREATE ===================== */
-export async function createSpecialist(token, data) {
-  const res = await fetch(`${API_URL}/api/specialists`, {
+export async function createSpecialist(token, formData) {
+  const res = await fetch(`${BASE_URL}/specialists`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      // ПРИМІТКА: Content-Type НЕ ставимо вручну для FormData!
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: formData, // Передаємо FormData напряму
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to create specialist");
-  }
-
+  if (!res.ok) throw new Error("Failed to create specialist");
   return res.json();
 }
 
-/* ===================== UPDATE ===================== */
-export async function updateSpecialist(token, id, data) {
-  const res = await fetch(`${API_URL}/api/specialists/${id}`, {
+export async function updateSpecialist(token, id, formData) {
+  const res = await fetch(`${BASE_URL}/specialists/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: formData,
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to update specialist");
-  }
-
+  if (!res.ok) throw new Error("Failed to update specialist");
   return res.json();
 }
 
 /* ===================== HIDE (SOFT DELETE) ===================== */
 export async function hideSpecialist(token, id) {
-  const res = await fetch(`${API_URL}/api/specialists/${id}/hide`, {
+  const res = await fetch(`${BASE_URL}/specialists/${id}/hide`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -74,7 +65,7 @@ export async function hideSpecialist(token, id) {
 
 /* ===================== DELETE ===================== */
 export async function deleteSpecialist(token, id) {
-  const res = await fetch(`${API_URL}/api/specialists/${id}`, {
+  const res = await fetch(`${BASE_URL}/specialists/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

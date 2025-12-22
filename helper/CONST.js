@@ -6,9 +6,9 @@ export const navMenu = [
   { key: "profile", path: "profile" },
 ];
 
-export const BASE_URL =
-  "https://ukrainians-in-the-netherlands-backend.onrender.com/api";
-// export const BASE_URL = "http://localhost:3030/api";
+// export const BASE_URL =
+//   "https://ukrainians-in-the-netherlands-backend.onrender.com/api";
+export const BASE_URL = "http://localhost:3030/api";
 
 export const masters = [
   {
@@ -32,6 +32,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 1,
   },
   {
     id: 2,
@@ -54,6 +55,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 2,
   },
   {
     id: 3,
@@ -76,6 +78,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 3,
   },
   {
     id: 4,
@@ -98,6 +101,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 4,
   },
   {
     id: 5,
@@ -120,6 +124,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 5,
   },
   {
     id: 6,
@@ -142,6 +147,7 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 6,
   },
   {
     id: 7,
@@ -164,5 +170,6 @@ export const masters = [
       lat: 52.3676,
       lng: 4.9041,
     },
+    author: 7,
   },
 ];

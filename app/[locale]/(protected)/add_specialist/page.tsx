@@ -18,9 +18,9 @@ import {
   deleteSpecialist,
 } from "@/helper/api/viewSpecialistData";
 import { SpecialistForm } from "@/components/Administration/SpecialistForm/SpecialistForm";
-import { checkToken } from "@/helper/api/checkTocken";
 import { useRouter } from "next/navigation";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
+import { useTranslations } from "next-intl";
 
 export default function SpecialistsDashboardPage() {
   const [items, setItems] = useState<ISpecialist[]>([]);
@@ -29,12 +29,13 @@ export default function SpecialistsDashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [, setError] = useState("");
   const router = useRouter();
+  const token = Cookies.get("accessToken");
+  const t = useTranslations("add_specialist");
 
   useEffect(() => {
     const fetchProfile = async () => {
       setIsLoading(true);
-      const token = checkToken(router);
-
+      if (!token) return;
       try {
         const data = await refreshUserProfile(token);
         if (data.role !== "seller" && data.role !== "admin") {
@@ -48,7 +49,7 @@ export default function SpecialistsDashboardPage() {
     };
 
     fetchProfile();
-  }, [router]);
+  }, [router, token]);
 
   const fetchData = useCallback(async () => {
     const token = Cookies.get("accessToken");
@@ -84,44 +85,46 @@ export default function SpecialistsDashboardPage() {
     <div className="p-10">
       <Card>
         <CardContent className="space-y-4">
-          <div className="flex justify-between">
-            <h1 className="text-2xl font-bold">Specialists</h1>
-            <Button onClick={openCreate}>Add Specialist</Button>
+          <div className="flex justify-between gap-2">
+            <h1 className="text-2xl font-bold">{t("Specialists")}</h1>
+            <Button onClick={openCreate}>{t("Add Specialist")}</Button>
           </div>
 
-          <table className="w-full border">
+          <table className="w-full border text-gray-700">
             <thead className="bg-gray-100">
               <tr>
-                <th className="p-2">Image</th>
-                <th className="p-2">Name (UA)</th>
-                <th className="p-2">Specialty</th>
-                <th className="p-2">Status</th>
-                <th className="p-2">Actions</th>
+                <th className="p-2">{t("Image")}</th>
+                <th className="p-2">{t("Name")}</th>
+                <th className="p-2">{t("Specialty")}</th>
+                <th className="p-2">{t("Status")}</th>
+                <th className="p-2">{t("Actions")}</th>
               </tr>
             </thead>
-            <tbody>
-              {items.map((s) => (
-                <tr key={s._id} className="border-t">
-                  <td className="p-2">
-                    {s.imageUrl && (
-                      <Image src={s.imageUrl} width={50} height={50} alt="" />
-                    )}
-                  </td>
-                  <td className="p-2">{s.name.uk}</td>
-                  <td className="p-2">{s.specialty.uk}</td>
-                  <td className="p-2">{s.isActive ? "Active" : "Hidden"}</td>
-                  <td className="p-2 flex gap-2">
-                    <Button onClick={() => openEdit(s)}>Edit</Button>
-                    <Button
-                      className="bg-red-600 text-white"
-                      onClick={() => remove(s._id)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {!isLoading && (
+              <tbody>
+                {items.map((s) => (
+                  <tr key={s._id} className="border-t">
+                    <td className="p-2">
+                      {s.imageUrl && (
+                        <Image src={s.imageUrl} width={50} height={50} alt="" />
+                      )}
+                    </td>
+                    <td className="p-2">{s.name.uk}</td>
+                    <td className="p-2">{s.specialty.uk}</td>
+                    <td className="p-2">{s.isActive ? "Active" : "Hidden"}</td>
+                    <td className="p-2 flex gap-2">
+                      <Button onClick={() => openEdit(s)}>Edit</Button>
+                      <Button
+                        className="bg-red-600 text-white"
+                        onClick={() => remove(s._id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
         </CardContent>
       </Card>
@@ -131,13 +134,14 @@ export default function SpecialistsDashboardPage() {
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {editing ? "Edit Specialist" : "Create Specialist"}
+              {editing ? t("Edit Specialist") : t("Create Specialist")}
             </DialogTitle>
           </DialogHeader>
 
           <SpecialistForm
             key={editing?._id || "new"}
             specialist={editing}
+            token={token}
             onSaved={() => {
               setModalOpen(false);
               fetchData();

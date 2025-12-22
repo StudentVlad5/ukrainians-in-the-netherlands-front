@@ -1,139 +1,464 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ISpecialist } from "@/helper/types/specialist";
-import { MultilangString } from "@/helper/types/common";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
 import {
   createSpecialist,
   updateSpecialist,
 } from "@/helper/api/viewSpecialistData";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const langs = ["uk", "en", "nl", "de"] as const;
-
-const emptyML = (): MultilangString => ({
-  uk: "",
-  en: "",
-  nl: "",
-  de: "",
-});
+const availableLanguages = ["uk", "en", "nl", "de"];
 
 export const SpecialistForm = ({
   specialist,
   onSaved,
+  token,
 }: {
   specialist: ISpecialist | null;
   onSaved: () => void;
+  token: string | undefined;
 }) => {
   const [activeLang, setActiveLang] = useState<(typeof langs)[number]>("uk");
+  const [isGeocoding, setIsGeocoding] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [form, setForm] = useState<ISpecialist>({
-    isActive: specialist?.isActive ?? true,
-    name: specialist?.name ?? emptyML(),
-    specialty: specialist?.specialty ?? emptyML(),
-    education: specialist?.education ?? emptyML(),
-    description: specialist?.description ?? emptyML(),
-    imageUrl: specialist?.imageUrl ?? "",
+  // Файли та прев'ю
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string>(
+    specialist?.imageUrl || ""
+  );
+  const [portfolioFiles, setPortfolioFiles] = useState<File[]>([]);
+  const [portfolioPreviews, setPortfolioPreviews] = useState<string[]>(
+    specialist?.portfolio || []
+  );
+
+  const [form, setForm] = useState<Partial<ISpecialist>>({
+    name: specialist?.name ?? { uk: "", en: "", nl: "", de: "" },
+    specialty: specialist?.specialty ?? { uk: "", en: "", nl: "", de: "" },
+    education: specialist?.education ?? { uk: "", en: "", nl: "", de: "" },
+    description: specialist?.description ?? { uk: "", en: "", nl: "", de: "" },
+    email: specialist?.email ?? "",
     phone: specialist?.phone ?? "",
+    rating: specialist?.rating ?? 0,
     instagram: specialist?.instagram ?? "",
-    minOrder: specialist?.minOrder ?? "",
+    telegram: specialist?.telegram ?? "",
+    whatsapp: specialist?.whatsapp ?? "",
+    minOrder: specialist?.minOrder ?? "", // тепер обробляємо як число або рядок з валютою
     languages: specialist?.languages ?? [],
+    location: specialist?.location ?? { address: "", lat: 0, lng: 0 },
   });
 
-  const handleMLChange = (
-    field: keyof Pick<
-      ISpecialist,
-      "name" | "specialty" | "education" | "description"
-    >,
-    value: string
-  ) => {
-    setForm((prev) => ({
-      ...prev,
-      [field]: {
-        ...(prev[field] as MultilangString),
-        [activeLang]: value,
-      },
-    }));
+  const t = useTranslations("add_specialist");
+
+  // Валідація Email (регулярний вираз)
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  // Геокодинг з обробкою порожніх результатів
+  const handleAddressChange = async (address: string) => {
+    setForm((prev) => ({ ...prev, location: { ...prev.location!, address } }));
+    setErrors((prev) => ({ ...prev, location: "" })); // Очищуємо помилку при вводі
+
+    if (address.length > 3) {
+      setIsGeocoding(true);
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            address
+          )}&limit=1`
+        );
+        const data = await res.json();
+
+        if (data && data.length > 0) {
+          setForm((prev) => ({
+            ...prev,
+            location: {
+              ...prev.location!,
+              lat: parseFloat(data[0].lat),
+              lng: parseFloat(data[0].lon),
+            },
+          }));
+        } else {
+          setErrors((prev) => ({
+            ...prev,
+            location: t("City not found. Check the spelling (eg Amsterdam)."),
+          }));
+        }
+      } catch (e) {
+        console.log(e);
+        setErrors((prev) => ({
+          ...prev,
+          location: t("Map service error. Try again later."),
+        }));
+      } finally {
+        setIsGeocoding(false);
+      }
+    }
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.name?.[activeLang])
+      newErrors.name = t("Please enter a name for the current language");
+    if (!validateEmail(form.email || ""))
+      newErrors.email = t("Enter a valid email address (eg user@mail.com)");
+    if (!form.phone || form.phone.length < 9)
+      newErrors.phone = t("Enter a valid phone number");
+    if (!form.location?.lat || form.location?.lat === 0)
+      newErrors.location = t("Need to find city to get coordinates");
+    if (!form.minOrder)
+      newErrors.minOrder = t("Indicate the amount of the minimum order");
+    if (!form.rating) newErrors.rating = t("Indicate a rating from 0 to 5");
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const save = async () => {
-    if (specialist?._id) {
-      await updateSpecialist(specialist._id, form);
-    } else {
-      await createSpecialist(form);
+    if (!validate()) return;
+
+    const formData = new FormData();
+    [
+      "name",
+      "specialty",
+      "education",
+      "description",
+      "location",
+      "languages",
+    ].forEach((key) => {
+      formData.append(key, JSON.stringify(form[key as keyof ISpecialist]));
+    });
+
+    formData.append("email", form.email || "");
+    formData.append("phone", form.phone || "");
+    formData.append("instagram", form.instagram || "");
+    formData.append("telegram", form.telegram || "");
+    formData.append("whatsapp", form.whatsapp || "");
+    formData.append("minOrder", String(form.minOrder));
+    formData.append("rating", String(form.rating));
+
+    if (avatar) formData.append("imageUrl", avatar);
+    portfolioFiles.forEach((file) => formData.append("portfolio", file));
+
+    try {
+      if (specialist?._id) {
+        await updateSpecialist(token!, specialist._id, formData);
+      } else {
+        await createSpecialist(token!, formData);
+      }
+      onSaved();
+    } catch (e) {
+      console.log(e);
+      setErrors((prev) => ({
+        ...prev,
+        global: t("Error saving to server."),
+      }));
     }
-    onSaved();
   };
 
+  const ErrorMsg = ({ field }: { field: string }) => (
+    <AnimatePresence mode="wait">
+      {errors[field] && (
+        <motion.p
+          initial={{ height: 0, opacity: 0, y: -5 }}
+          animate={{ height: "auto", opacity: 1, y: 0 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="text-red-500 text-xs mt-1 font-medium"
+        >
+          {errors[field]}
+        </motion.p>
+      )}
+    </AnimatePresence>
+  );
+
   return (
-    <div className="space-y-6">
-      {/* LANG TABS */}
-      <div className="flex gap-2">
+    <div className="space-y-6 max-w-2xl mx-auto p-6 bg-white border rounded-2xl shadow-xl text-gray-800">
+      {/* Мовні перемикачі */}
+      <div className="flex gap-2 p-1 bg-gray-100 rounded-xl">
         {langs.map((l) => (
-          <Button
-            key={l}
+          <button
             type="button"
-            variant={activeLang === l ? "primary" : "secondary"}
+            key={l}
             onClick={() => setActiveLang(l)}
+            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${
+              activeLang === l
+                ? "bg-white shadow text-blue-600"
+                : "text-gray-500 hover:text-gray-700"
+            }`}
           >
             {l.toUpperCase()}
-          </Button>
+          </button>
         ))}
       </div>
 
-      {/* MULTILANG FIELDS */}
-      <Input
-        label={`Name (${activeLang})`}
-        id={`Name (${activeLang})`}
-        value={form.name[activeLang]}
-        onChange={(e) => handleMLChange("name", e.target.value)}
-      />
+      {/* Фото прев'ю */}
+      <div className="flex flex-col md:flex-row gap-6 bg-gray-50 p-4 rounded-xl border">
+        <div className="flex-1 space-y-2">
+          <label htmlFor="avatarPreview" className="text-sm font-bold block">
+            {t("Profile photo")} (Avatar)
+          </label>
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 rounded-full bg-gray-200 overflow-hidden border">
+              {avatarPreview && (
+                <Image
+                  width="56"
+                  height="56"
+                  src={avatarPreview}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
+            <input
+              id="avatarPreview"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setAvatar(file);
+                  setAvatarPreview(URL.createObjectURL(file));
+                }
+              }}
+              className="text-xs"
+            />
+          </div>
+        </div>
+        <div className="flex-1 space-y-2">
+          <label
+            htmlFor="portfolioPreviews"
+            className="text-sm font-bold block"
+          >
+            {t("Portfolio")} (Files)
+          </label>
+          <input
+            id="portfolioPreviews"
+            title="portfolioPreviews"
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => {
+              const files = Array.from(e.target.files || []);
+              setPortfolioFiles(files);
+              setPortfolioPreviews(files.map((f) => URL.createObjectURL(f)));
+            }}
+            className="text-xs"
+          />
+          <div className="flex gap-1 mt-2 flex-wrap">
+            {portfolioPreviews.slice(0, 5).map((url, i) => (
+              <Image
+                key={i}
+                alt="portfolio Previews"
+                src={url}
+                width="56"
+                height="56"
+                className="w-8 h-8 object-cover rounded shadow-sm"
+              />
+            ))}
+            {portfolioPreviews.length > 5 && (
+              <span className="text-xs text-gray-400">
+                +{portfolioPreviews.length - 5}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
 
-      <Input
-        label={`Specialty (${activeLang})`}
-        id={`Specialty (${activeLang})`}
-        value={form.specialty[activeLang]}
-        onChange={(e) => handleMLChange("specialty", e.target.value)}
-      />
+      {/* Основна інформація */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="col-span-2">
+          <Input
+            id="name"
+            label={`${t("Full name")} (${activeLang})`}
+            value={form.name?.[activeLang]}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                name: { ...form.name!, [activeLang]: e.target.value },
+              })
+            }
+          />
+          <ErrorMsg field="name" />
+        </div>
 
-      <Input
-        label={`Education (${activeLang})`}
-        id={`Education (${activeLang})`}
-        value={form.education?.[activeLang] || ""}
-        onChange={(e) => handleMLChange("education", e.target.value)}
-      />
+        <Input
+          id="specialty"
+          label={t("Specialty")}
+          value={form.specialty?.[activeLang]}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              specialty: { ...form.specialty!, [activeLang]: e.target.value },
+            })
+          }
+        />
+        <Input
+          id="education"
+          label={t("Education")}
+          value={form.education?.[activeLang]}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              education: { ...form.education!, [activeLang]: e.target.value },
+            })
+          }
+        />
 
-      <Input
-        label={`Description (${activeLang})`}
-        id={`Description (${activeLang})`}
-        value={form.description?.[activeLang] || ""}
-        onChange={(e) => handleMLChange("description", e.target.value)}
-      />
+        <div className="col-span-2">
+          <label htmlFor="description" className="text-sm font-bold block mb-1">
+            {t("Profile description")} ({activeLang})
+          </label>
+          <textarea
+            id="description"
+            title="description"
+            className="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none min-h-[100px]"
+            value={form.description?.[activeLang]}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                description: {
+                  ...form.description!,
+                  [activeLang]: e.target.value,
+                },
+              })
+            }
+          />
+        </div>
 
-      {/* COMMON */}
-      <Input
-        label="Phone"
-        id="Phone"
-        value={form.phone || ""}
-        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-      />
+        <div>
+          <Input
+            id="email"
+            label="Email"
+            type="email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <ErrorMsg field="email" />
+        </div>
+        <div>
+          <Input
+            id="phone"
+            label={t("Phone")}
+            value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          />
+          <ErrorMsg field="phone" />
+        </div>
+      </div>
 
-      <Input
-        label="Instagram"
-        id="Instagram"
-        value={form.instagram || ""}
-        onChange={(e) => setForm({ ...form, instagram: e.target.value })}
-      />
+      {/* Соцмережі та фінанси */}
+      <div className="grid grid-cols-2 gap-4">
+        <Input
+          id="telegram"
+          label="Telegram (@username)"
+          value={form.telegram}
+          onChange={(e) => setForm({ ...form, telegram: e.target.value })}
+        />
+        <Input
+          id="whatsapp"
+          label="WhatsApp"
+          value={form.whatsapp}
+          onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+        />
+        <Input
+          id="instagram"
+          label="Instagram"
+          value={form.instagram}
+          onChange={(e) => setForm({ ...form, instagram: e.target.value })}
+        />
+        <div>
+          <Input
+            id="minOrder"
+            label={t("Min. order (€)")}
+            placeholder="напр. 50"
+            value={form.minOrder}
+            onChange={(e) => setForm({ ...form, minOrder: e.target.value })}
+          />
+          <ErrorMsg field="minOrder" />
+        </div>
+        <div>
+          <Input
+            id="rating"
+            label={t("Rating")}
+            type="number"
+            min="0"
+            max="5"
+            value={form.rating}
+            onChange={(e) => setForm({ ...form, rating: e.target.value })}
+          />
+          <ErrorMsg field="rating" />
+        </div>
+      </div>
 
-      <Input
-        label="Min order"
-        id="Min order"
-        value={form.minOrder || ""}
-        onChange={(e) => setForm({ ...form, minOrder: e.target.value })}
-      />
+      {/* Локація з поясненням */}
+      <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100 relative">
+        <label className="text-sm font-bold block mb-1">
+          {t("City and Country")}
+        </label>
+        <div className="relative">
+          <input
+            className="w-full p-2 border rounded-lg text-sm pr-10"
+            placeholder={t("Enter a city (eg Amsterdam, NL)")}
+            value={form.location?.address}
+            onChange={(e) => handleAddressChange(e.target.value)}
+          />
+          {isGeocoding && (
+            <div className="absolute right-3 top-2.5 animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" />
+          )}
+        </div>
+        <ErrorMsg field="location" />
+        {!form.location?.lat && !errors.location && (
+          <p className="text-[10px] text-blue-600 mt-1 italic">
+            {t(
+              "* We will automatically determine the coordinates after entering the name of the city. This is required for display on the map."
+            )}
+          </p>
+        )}
+      </div>
 
-      <Button onClick={save}>Save</Button>
+      {/* Мови */}
+      <div className="flex justify-around py-3 border-t">
+        {availableLanguages.map((lang) => (
+          <label
+            key={lang}
+            className="flex items-center gap-2 cursor-pointer text-xs font-bold uppercase"
+          >
+            <input
+              type="checkbox"
+              checked={form.languages?.includes(lang)}
+              onChange={() => {
+                const cur = form.languages || [];
+                setForm({
+                  ...form,
+                  languages: cur.includes(lang)
+                    ? cur.filter((l) => l !== lang)
+                    : [...cur, lang],
+                });
+              }}
+            />
+            {lang}
+          </label>
+        ))}
+      </div>
+
+      <Button
+        onClick={save}
+        className="w-full py-4 rounded-xl text-lg font-extrabold shadow-blue-200 shadow-lg"
+      >
+        {t("Save changes")}
+      </Button>
     </div>
   );
 };
