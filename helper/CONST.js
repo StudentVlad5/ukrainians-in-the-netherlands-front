@@ -6,9 +6,9 @@ export const navMenu = [
   { key: "profile", path: "profile" },
 ];
 
-// export const BASE_URL =
-//   "https://ukrainians-in-the-netherlands-backend.onrender.com/api";
-export const BASE_URL = "http://localhost:3030/api";
+export const BASE_URL =
+  "https://ukrainians-in-the-netherlands-backend.onrender.com/api";
+// export const BASE_URL = "http://localhost:3030/api";
 
 export const masters = [
   {
