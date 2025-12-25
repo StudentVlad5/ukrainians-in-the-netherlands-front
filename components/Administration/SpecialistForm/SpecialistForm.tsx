@@ -52,6 +52,7 @@ export const SpecialistForm = ({
     minOrder: specialist?.minOrder ?? "", // тепер обробляємо як число або рядок з валютою
     languages: specialist?.languages ?? [],
     location: specialist?.location ?? { address: "", lat: 0, lng: 0 },
+    isActive: specialist?.isActive ?? false,
   });
 
   const t = useTranslations("add_specialist");
@@ -92,14 +93,14 @@ export const SpecialistForm = ({
         } else {
           setErrors((prev) => ({
             ...prev,
-            location: t("City not found. Check the spelling (eg Amsterdam)."),
+            location: t("City not found"),
           }));
         }
       } catch (e) {
         console.log(e);
         setErrors((prev) => ({
           ...prev,
-          location: t("Map service error. Try again later."),
+          location: t("Map service error"),
         }));
       } finally {
         setIsGeocoding(false);
@@ -113,7 +114,7 @@ export const SpecialistForm = ({
     if (!form.name?.[activeLang])
       newErrors.name = t("Please enter a name for the current language");
     if (!validateEmail(form.email || ""))
-      newErrors.email = t("Enter a valid email address (eg user@mail.com)");
+      newErrors.email = t("Enter a valid email address");
     if (!form.phone || form.phone.length < 9)
       newErrors.phone = t("Enter a valid phone number");
     if (!form.location?.lat || form.location?.lat === 0)
@@ -163,7 +164,7 @@ export const SpecialistForm = ({
       console.log(e);
       setErrors((prev) => ({
         ...prev,
-        global: t("Error saving to server."),
+        global: t("Error saving to server"),
       }));
     }
   };
@@ -192,7 +193,7 @@ export const SpecialistForm = ({
             type="button"
             key={l}
             onClick={() => setActiveLang(l)}
-            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${
+            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer ${
               activeLang === l
                 ? "bg-white shadow text-blue-600"
                 : "text-gray-500 hover:text-gray-700"
@@ -205,8 +206,11 @@ export const SpecialistForm = ({
 
       {/* Фото прев'ю */}
       <div className="flex flex-col md:flex-row gap-6 bg-gray-50 p-4 rounded-xl border">
-        <div className="flex-1 space-y-2">
-          <label htmlFor="avatarPreview" className="text-sm font-bold block">
+        <div className="flex-1 space-y-2 cursor-pointer">
+          <label
+            htmlFor="avatarPreview"
+            className="text-sm font-bold block cursor-pointer"
+          >
             {t("Profile photo")} (Avatar)
           </label>
           <div className="flex items-center gap-3">
@@ -232,14 +236,14 @@ export const SpecialistForm = ({
                   setAvatarPreview(URL.createObjectURL(file));
                 }
               }}
-              className="text-xs"
+              className="text-xs cursor-pointer"
             />
           </div>
         </div>
-        <div className="flex-1 space-y-2">
+        <div className="flex-1 space-y-2 cursor-pointer">
           <label
             htmlFor="portfolioPreviews"
-            className="text-sm font-bold block"
+            className="text-sm font-bold block cursor-pointer"
           >
             {t("Portfolio")} (Files)
           </label>
@@ -254,7 +258,7 @@ export const SpecialistForm = ({
               setPortfolioFiles(files);
               setPortfolioPreviews(files.map((f) => URL.createObjectURL(f)));
             }}
-            className="text-xs"
+            className="text-xs cursor-pointer"
           />
           <div className="flex gap-1 mt-2 flex-wrap">
             {portfolioPreviews.slice(0, 5).map((url, i) => (
@@ -381,7 +385,7 @@ export const SpecialistForm = ({
         <div>
           <Input
             id="minOrder"
-            label={t("Min. order (€)")}
+            label={t("order")}
             placeholder="напр. 50"
             value={form.minOrder}
             onChange={(e) => setForm({ ...form, minOrder: e.target.value })}
@@ -421,15 +425,14 @@ export const SpecialistForm = ({
         <ErrorMsg field="location" />
         {!form.location?.lat && !errors.location && (
           <p className="text-[10px] text-blue-600 mt-1 italic">
-            {t(
-              "* We will automatically determine the coordinates after entering the name of the city. This is required for display on the map."
-            )}
+            {t("map message")}
           </p>
         )}
       </div>
 
       {/* Мови */}
       <div className="flex justify-around py-3 border-t">
+        <h6>{t("My languages")} </h6>
         {availableLanguages.map((lang) => (
           <label
             key={lang}
@@ -451,6 +454,26 @@ export const SpecialistForm = ({
             {lang}
           </label>
         ))}
+      </div>
+      <div className="flex justify-around py-3 border-t">
+        <h6>{t("IsActive")} </h6>
+        <label
+          htmlFor="isActive"
+          className="flex items-center gap-2 cursor-pointer text-xs font-bold"
+        >
+          <input
+            type="checkbox"
+            id="isActive"
+            checked={form.isActive}
+            onChange={() => {
+              setForm({
+                ...form,
+                isActive: !form.isActive,
+              });
+            }}
+          />{" "}
+          isActive
+        </label>
       </div>
 
       <Button

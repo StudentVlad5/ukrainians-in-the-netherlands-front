@@ -34,6 +34,7 @@ export async function createSpecialist(token, formData) {
   return res.json();
 }
 
+/* ===================== UPDATE ===================== */
 export async function updateSpecialist(token, id, formData) {
   const res = await fetch(`${BASE_URL}/specialists/${id}`, {
     method: "PUT",

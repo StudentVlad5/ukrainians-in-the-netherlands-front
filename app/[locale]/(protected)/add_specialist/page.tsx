@@ -20,7 +20,8 @@ import {
 import { SpecialistForm } from "@/components/Administration/SpecialistForm/SpecialistForm";
 import { useRouter } from "next/navigation";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import type { Lang } from "@/helper/types/common";
 
 export default function SpecialistsDashboardPage() {
   const [items, setItems] = useState<ISpecialist[]>([]);
@@ -31,6 +32,7 @@ export default function SpecialistsDashboardPage() {
   const router = useRouter();
   const token = Cookies.get("accessToken");
   const t = useTranslations("add_specialist");
+  const locale = useLocale() as Lang;
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -103,14 +105,16 @@ export default function SpecialistsDashboardPage() {
             {!isLoading && (
               <tbody>
                 {items.map((s) => (
-                  <tr key={s._id} className="border-t">
+                  <tr key={s._id} className="border-t text-white">
                     <td className="p-2">
                       {s.imageUrl && (
                         <Image src={s.imageUrl} width={50} height={50} alt="" />
                       )}
                     </td>
-                    <td className="p-2">{s.name.uk}</td>
-                    <td className="p-2">{s.specialty.uk}</td>
+                    <td className="p-2">{s.name?.[locale] ?? s.name.uk}</td>
+                    <td className="p-2">
+                      {s.specialty?.[locale] ?? s.specialty.uk}
+                    </td>
                     <td className="p-2">{s.isActive ? "Active" : "Hidden"}</td>
                     <td className="p-2 flex gap-2">
                       <Button onClick={() => openEdit(s)}>Edit</Button>

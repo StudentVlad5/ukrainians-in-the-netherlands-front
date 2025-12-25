@@ -2,20 +2,10 @@
 
 import { motion } from "framer-motion";
 import MasterCard from "./MasterCard";
-
-export interface Master {
-  id: number;
-  name: string;
-  specialty: string;
-  imageUrl: string;
-  description: string;
-  rating: number;
-  education: string;
-  languages: string[];
-}
+import { ISpecialist } from "@/helper/types/specialist";
 
 interface MastersGridProps {
-  filteredMasters: Master[];
+  filteredMasters: ISpecialist[];
 }
 
 export default function MastersGrid({ filteredMasters }: MastersGridProps) {
@@ -42,7 +32,7 @@ export default function MastersGrid({ filteredMasters }: MastersGridProps) {
     >
       {filteredMasters.map((master) => (
         <motion.div
-          key={master.id}
+          key={master._id?.toString()}
           variants={{
             hidden: { opacity: 0, y: 20 },
             show: { opacity: 1, y: 0 },

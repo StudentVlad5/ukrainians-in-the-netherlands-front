@@ -1,7 +1,7 @@
 import { MultilangString } from "./common";
 
 export interface ISpecialist {
-  _id?: string;
+  _id: string;
   isActive: boolean;
   name: MultilangString;
   specialty: MultilangString;
