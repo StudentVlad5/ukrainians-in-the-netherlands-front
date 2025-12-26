@@ -10,10 +10,6 @@
     "title": "Willkommen",
     "subtitle": "Plattform für Ukrainer in Europa"
   },
-  "about": {
-    "title": "Willkommen",
-    "subtitle": "Plattform für Ukrainer in Europa"
-  },
   "profile": {
     "sidebarPersonal": "Persönliche Daten",
     "fullName": "Vollständiger Name",
@@ -112,5 +108,40 @@
     "My works": "Meine Werke",
     "Foto": "foto",
     "No address specified": "Keine Adresse angegeben"
+  },
+  "about": {
+    "About Us": "Über uns",
+    "title": "Willkommen",
+    "subtitle": "Service für Ukrainer in Europa",
+    "Strength Born of Trials": "Stärke, geboren aus Prüfungen",
+    "part_1": "Wir sind Ukrainer, die durch den Krieg in den Niederlanden eine neue Heimat gefunden haben. Wir ließen alles zurück, brachten aber einen unbezwingbaren Geist, eine unbezähmbare Kultur und den Wunsch mit, ein neues Leben aufzubauen.",
+    "part_2": "Jeder von uns ist eine Geschichte. Eine Geschichte über die Arbeitssuche, die Eingewöhnung von Kindern an neue Schulen, das Erlernen einer Sprache und unglaubliche Dankbarkeit. Wir danken den Niederlanden, Deutschland und ganz Europa für ihre offenen Herzen und Türen.",
+    "part_3": "Diese Plattform wurde geschaffen, um sich gegenseitig zu unterstützen, Erfahrungen auszutauschen, Ihre Dienste anzubieten und in unserer Community zu finden, was Sie brauchen.",
+    "Contact us": "Neem contact met ons op",
+    "alt": "Die ukrainische Gemeinschaft in den Niederlanden"
+  },
+  "hero": {
+    "Ukrainians and friends in the Netherlands": "Ukrainer und Freunde in den Niederlanden",
+    "Ukrainians in the Netherlands": "Ukrainer in den Niederlanden",
+    "moto": "Lasst uns vereinen Wir arbeiten. Wir gestalten gemeinsam die Zukunft.",
+    "Support": "Unterstützen Sie Ihre eigenen"
+  },
+  "callToAction": {
+    "Join": "Treten Sie der Community bei!",
+    "Offer": "Bieten Sie Dienstleistungen an, verkaufen Sie Waren oder organisieren Sie Veranstaltungen? Erzählen Sie unserer Community etwas über sich.",
+    "Add your business": "Fügen Sie Ihr Unternehmen hinzu",
+    "Find an event": "Finden Sie eine Veranstaltung"
+  },
+  "legalStatus": {
+    "Importantly": "Wichtig",
+    "navigation": "Ihr Status: Navigation in Europa",
+    "lows": "Das Verständnis Ihres rechtlichen Status ist der Schlüssel zu Ihrer Stabilität. Die meisten Ukrainer in der EU, einschließlich der Niederlande, unterliegen der Richtlinie zum vorübergehenden Schutz (RTB in den Niederlanden).",
+    "Official": "Offiziell: IND (NL)",
+    "National Government": "Nationale regering"
+  },
+  "providers": {
+    "Failed to load wizards": "Assistenten konnten nicht geladen werden",
+    "Our Masters and Entrepreneurs": "Unsere Meister und Unternehmer",
+    "Error loading data": "Fehler beim Laden der Daten"
   }
 }

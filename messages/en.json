@@ -10,10 +10,6 @@
     "title": "Welcome",
     "subtitle": "Service for Ukrainians in Europe"
   },
-  "about": {
-    "title": "Welcome",
-    "subtitle": "Service for Ukrainians in Europe"
-  },
   "profile": {
     "sidebarPersonal": "Personal Data",
     "fullName": "Full Name",
@@ -112,5 +108,40 @@
     "My works": "My works",
     "Foto": "foto",
     "No address specified": "No address specified"
+  },
+  "about": {
+    "About Us": "About Us",
+    "title": "Welcome",
+    "subtitle": "Service for Ukrainians in Europe",
+    "Strength Born of Trials": "Strength Born of Trials",
+    "part_1": "We are Ukrainians who found a new home in the Netherlands because of the war. We left everything behind, but brought with us an indomitable spirit, culture and desire to build a new life.",
+    "part_2": "Each of us is a story. A story about finding a job, adapting children to new schools, learning a language, and incredible gratitude. We thank the Netherlands, Germany and all of Europe for their open hearts and doors.",
+    "part_3": "This platform is created to support each other, share experiences, offer your services and find what you need in our community.",
+    "Contact us": "Contact us",
+    "alt": "The Ukrainian community in the Netherlands"
+  },
+  "hero": {
+    "Ukrainians and friends in the Netherlands": "Ukrainians and friends in the Netherlands",
+    "Ukrainians in the Netherlands": "Ukrainians in the Netherlands",
+    "moto": "Let's unite We are working. We create the future together.",
+    "Support": "Support your own"
+  },
+  "callToAction": {
+    "Join": "Join the Community!",
+    "Offer": "Do you offer services, sell goods or organize events? Tell our community about yourself.",
+    "Add your business": "Add your business",
+    "Find an event": "Find an event"
+  },
+  "legalStatus": {
+    "Importantly": "Importantly",
+    "navigation": "Your Status: Navigation in Europe",
+    "lows": "Understanding your legal status is key to your stability. Most Ukrainians in the EU, including the Netherlands, are under the Temporary Protection Directive (RTB in the Netherlands).",
+    "Official": "Official: IND (NL)",
+    "National Government": "National Government"
+  },
+  "providers": {
+    "Failed to load wizards": "Failed to load wizards",
+    "Our Masters and Entrepreneurs": "Our Masters and Entrepreneurs",
+    "Error loading data": "Error loading data"
   }
 }

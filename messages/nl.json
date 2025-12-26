@@ -10,10 +10,6 @@
     "title": "Welkom",
     "subtitle": "Platform voor Oekraïners in Europa"
   },
-  "about": {
-    "title": "Welkom",
-    "subtitle": "Platform voor Oekraïners in Europa"
-  },
   "profile": {
     "sidebarPersonal": "Persoonlijke gegevens",
     "fullName": "Volledige naam",
@@ -112,5 +108,40 @@
     "My works": "Mijn werken",
     "Foto": "foto",
     "No address specified": "Geen adres opgegeven"
+  },
+  "about": {
+    "About Us": "Over ons",
+    "title": "Welkom",
+    "subtitle": "Dienst voor Oekraïners in Europa",
+    "Strength Born of Trials": "Kracht geboren uit beproevingen",
+    "part_1": "Wij zijn Oekraïners die door de oorlog een nieuw thuis in Nederland hebben gevonden. We lieten alles achter, maar brachten een ontembare geest, cultuur en verlangen mee om een ​​nieuw leven op te bouwen.",
+    "part_2": "Ieder van ons is een verhaal. Een verhaal over het vinden van een baan, het adijsen van kinderen aan nieuwe scholen, het leren van een taal en ongelooflijke gratisheid. Wij danken Nederland, Duitsland en heel Europa voor hun open harten en deuren.",
+    "part_3": "Dit platform is gemaakt om elkaar te ondersteunen, ervaringen te delen, uw diensten aan te bieden en te vinden wat u nodig heeft in onze community.",
+    "Contact us": "Neem contact met ons op",
+    "alt": "De Oekraïense gemeenschap in Nederland"
+  },
+  "hero": {
+    "Ukrainians and friends in the Netherlands": "Oekraïners en vrienden in Nederland",
+    "Ukrainians in the Netherlands": "Oekraïners in Nederland",
+    "moto": "Laten we ons verenigen. We werken. Wij creëren samen de toekomst.",
+    "Support": "Steun uw eigen"
+  },
+  "callToAction": {
+    "Join": "Sluit je aan bij de gemeenschap!",
+    "Offer": "Biedt u diensten aan, verkoopt u goederen of organiseert u evenementen? Vertel onze community over jezelf.",
+    "Add your business": "Voeg uw bedrijf toe",
+    "Find an event": "Zoek een evenement"
+  },
+  "legalStatus": {
+    "Importantly": "Belangrijk",
+    "navigation": "Uw status: navigatie in Europa",
+    "lows": "Inzicht in uw juridische status is de sleutel tot uw stabiliteit. De meeste Oekraïners in de EU, inclusief Nederland, vallen onder de Tijdelijke Beschermingsrichtlijn (RTB in Nederland).",
+    "Official": "Functionaris: IND (NL)",
+    "National Government": "Nationale regering"
+  },
+  "providers": {
+    "Failed to load wizards": "Kan wizards niet laden",
+    "Our Masters and Entrepreneurs": "Onze meesters en ondernemers",
+    "Error loading data": "Fout bij het laden van gegevens"
   }
 }

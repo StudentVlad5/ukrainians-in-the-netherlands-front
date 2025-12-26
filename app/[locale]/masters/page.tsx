@@ -70,7 +70,7 @@ export default function MastersPage() {
           <div className="text-center py-20">{t("Loading")}...</div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
-            {t("Помилка завантаження даних")}
+            {t("Error loading data")}
           </div>
         ) : (
           <MastersGrid filteredMasters={filteredMasters} />

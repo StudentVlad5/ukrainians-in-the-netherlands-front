@@ -1,77 +1,56 @@
+import { useEffect, useMemo, useState } from "react";
+import { getPublicSpecialistsWithLimits } from "@/helper/api/getPublicData";
+import { ISpecialist } from "@/helper/types/specialist";
+import { onFetchError } from "@/lib/Messages/NotifyMessages";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import defaultImage from "@/public/images/no-photo-available-icon.jpg";
+import { Lang } from "@/helper/types/common";
 
-interface IProvider {
-  id: number;
-  name: string;
-  specialty: string;
-  imageUrl: string;
-}
-
-const mockProviders: IProvider[] = [
-  {
-    id: 1,
-    name: "Марія К.",
-    specialty: "Кондитер",
-    imageUrl: "",
-  },
-  {
-    id: 2,
-    name: "Олександр П.",
-    specialty: "Фотограф",
-    imageUrl: "",
-  },
-  {
-    id: 3,
-    name: "Ірина С.",
-    specialty: "Майстер манікюру",
-    imageUrl: "",
-  },
-  {
-    id: 4,
-    name: "Тарас Г.",
-    specialty: "Кераміст",
-    imageUrl: "",
-  },
-  {
-    id: 5,
-    name: "Олена В.",
-    specialty: "Майстриня",
-    imageUrl: "",
-  },
-  {
-    id: 6,
-    name: "Віктор Л.",
-    specialty: "Програміст",
-    imageUrl: "",
-  },
-  {
-    id: 7,
-    name: "Анна Д.",
-    specialty: "Перекладач",
-    imageUrl: "",
-  },
-];
 export const ProvidersSection: React.FC = () => {
-  // Цей компонент створює ефект "біжучої стрічки" (marquee) за допомогою CSS
-  // Це замінює Swiper, щоб уникнути зовнішніх бібліотек
+  const [providers, setProviders] = useState<ISpecialist[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [getError, setGetError] = useState(false);
+  const t = useTranslations("providers");
+  const locale = useLocale() as Lang;
 
-  const duplicatedProviders = [...mockProviders, ...mockProviders]; // Дублюємо для безперервного циклу
+  const duplicatedProviders = useMemo(
+    () => [...providers, ...providers],
+    [providers]
+  );
+
+  useEffect(() => {
+    const fetchProviders = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getPublicSpecialistsWithLimits(20);
+
+        if (Array.isArray(data)) {
+          setProviders(data);
+          setGetError(false);
+        }
+      } catch (e) {
+        setGetError(true);
+        onFetchError(t("Failed to load wizards"));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProviders();
+  }, []);
 
   return (
     <>
       {" "}
       <style>{`
-               /* Анімація для біжучої стрічки (заміна Swiper) */
         @keyframes scroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            /* Тут ми зсуваємо на половину ширини контейнера.
-              (Кількість елементів * ширина)
-            */
-            transform: translateX(-${mockProviders.length * 12}rem);
+            transform: translateX(-${providers.length * 12}rem);
           }
         }
 
@@ -84,35 +63,50 @@ export const ProvidersSection: React.FC = () => {
         className="py-16 md:py-24 bg-blue-50 text-gray-900 overflow-hidden"
       >
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Наші Майстри та Підприємці
-          </h2>
-
+          <Link href="/masters">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              {t("Our Masters and Entrepreneurs")}
+            </h2>
+          </Link>
           <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent_0,black_10%,black_90%,transparent_100%)]">
-            <div
-              className="flex animate-scroll-slow p-2"
-              style={{ width: `${mockProviders.length * 2 * 12}rem` }}
-            >
-              {duplicatedProviders.map((provider, index) => (
-                <Link
-                  key={index}
-                  href={`/provider/${provider.id}`}
-                  className="flex flex-col items-center justify-center w-48 mx-4 shrink-0 group"
-                >
-                  <Image
-                    src={provider.imageUrl}
-                    alt={provider.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
-                    onError={(e) =>
-                      (e.currentTarget.src =
-                        "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
-                    }
-                  />
-                  <h3 className="text-xl font-bold mt-3">{provider.name}</h3>
-                  <p className="text-blue-600">{provider.specialty}</p>
-                </Link>
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="text-center py-20">{t("Loading")}...</div>
+            ) : getError ? (
+              <div className="text-center py-20 text-red-500">
+                {t("Error loading data")}
+              </div>
+            ) : (
+              <div
+                className="flex animate-scroll-slow p-2"
+                style={{ width: `${providers.length * 2 * 12}rem` }}
+              >
+                {duplicatedProviders.map((provider, index) => (
+                  <Link
+                    key={index}
+                    href={`/masters/${provider._id}`}
+                    className="flex flex-col items-center justify-center w-48 mx-4 shrink-0 group"
+                  >
+                    <Image
+                      src={provider?.imageUrl || defaultImage}
+                      alt={provider.name[locale] || provider.name.uk}
+                      width={96}
+                      height={96}
+                      className="w-24 h-24 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) =>
+                        (e.currentTarget.src =
+                          "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
+                      }
+                    />
+                    <h3 className="text-xl font-bold mt-3">
+                      {provider.name[locale]}
+                    </h3>
+                    <p className="text-blue-600">
+                      {provider.specialty[locale]}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
