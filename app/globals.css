@@ -37,3 +37,17 @@ body {
     touch-action: manipulation;
   }
 }
+
+/* Робимо контейнер слайда більшим */
+.yarl__slide_image {
+  min-width: 95vw !important; /* 95% ширини екрана */
+  min-height: 90vh !important; /* 90% висоти екрана */
+}
+
+@media (min-width: 680px) {
+  .yarl__slide_image {
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+}

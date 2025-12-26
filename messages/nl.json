@@ -90,5 +90,27 @@
     "Save changes": "Wijzigingen opslaan",
     "My languages": "Mijn talen",
     "IsActive": "Activeren"
+  },
+  "specialists": {
+    "Our specialists": "Onze specialisten",
+    "Failed to load wizards": "Kan wizards niet laden",
+    "Choose a proven master in your field": "Kies een bewezen meester in jouw vakgebied",
+    "Loading": "Laden",
+    "Error loading data": "Fout bij het laden van gegevens",
+    "No masters found for your request": "Geen masters gevonden voor uw aanvraag.",
+    "Education": "Onderwijs",
+    "not specified": "Niet gespecificeerd",
+    "more details": "Meer details",
+    "Failed to load wizard data": "Kan wizardgegevens niet laden",
+    "Back to the masters": "Terug naar de meesters",
+    "Location": "Locatie",
+    "Order": "Volgorde",
+    "From": "Van",
+    "The price is negotiable": "De prijs is bespreekbaar",
+    "Not specified": "Niet gespecificeerd",
+    "Languages": "Talen",
+    "My works": "Mijn werken",
+    "Foto": "foto",
+    "No address specified": "Geen adres opgegeven"
   }
 }

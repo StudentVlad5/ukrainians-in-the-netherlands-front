@@ -90,5 +90,27 @@
     "Save changes": "Зберегти зміни",
     "My languages": "Мої мови",
     "IsActive": "Активувати"
+  },
+  "specialists": {
+    "Our specialists": "Наші спеціалісти",
+    "Failed to load wizards": "Не вдалося завантажити майстрів",
+    "Choose a proven master in your field": "Оберіть перевіреного майстра у вашій сфері",
+    "Loading": "Завантаження",
+    "Error loading data": "Помилка завантаження даних",
+    "No masters found for your request": "За вашим запитом не знайдено майстрів.",
+    "Education": "Освіта",
+    "not specified": "Не зазначено",
+    "more details": "Більше інформації",
+    "Failed to load wizard data": "Не вдалося завантажити дані про майстра",
+    "Back to the masters": "Назад до майстрів",
+    "Location": "Локація",
+    "Order": "Замовлення",
+    "From": "Від",
+    "The price is negotiable": "Ціна за домовленістю",
+    "Not specified": "Не вказано",
+    "Languages": "Мови",
+    "My works": "Мої роботи",
+    "Foto": "фото",
+    "No address specified": "Адреса не вказана"
   }
 }

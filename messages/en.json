@@ -90,5 +90,27 @@
     "Save changes": "Save changes",
     "My languages": "My languages",
     "IsActive": "Activate"
+  },
+  "specialists": {
+    "Our specialists": "Our specialists",
+    "Failed to load wizards": "Failed to load wizards",
+    "Choose a proven master in your field": "Choose a proven master in your field",
+    "Loading": "Loading",
+    "Error loading data": "Error loading data",
+    "No masters found for your request": "No masters found for your request.",
+    "Education": "Education",
+    "not specified": "Not specified",
+    "more details": "More details",
+    "Failed to load wizard data": "Failed to load wizard data",
+    "Back to the masters": "Back to the masters",
+    "Location": "Location",
+    "Order": "Order",
+    "From": "From",
+    "The price is negotiable": "The price is negotiable",
+    "Not specified": "Not specified",
+    "Languages": "Languages",
+    "My works": "My works",
+    "Foto": "foto",
+    "No address specified": "No address specified"
   }
 }

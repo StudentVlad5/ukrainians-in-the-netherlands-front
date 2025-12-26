@@ -90,5 +90,27 @@
     "Save changes": "Änderungen speichern",
     "My languages": "Meine Sprachen",
     "IsActive": "Aktivieren"
+  },
+  "specialists": {
+    "Our specialists": "Unsere Spezialisten",
+    "Failed to load wizards": "Assistenten konnten nicht geladen werden",
+    "Choose a proven master in your field": "Wählen Sie einen ausgewiesenen Meister in Ihrem Fachgebiet",
+    "Loading": "Laden",
+    "Error loading data": "Fehler beim Laden der Daten",
+    "No masters found for your request": "Keine Master für Ihre Anfrage gefunden.",
+    "Education": "Ausbildung",
+    "not specified": "Nicht angegeben",
+    "more details": "Weitere details",
+    "Failed to load wizard data": "Assistentendaten konnten nicht geladen werden",
+    "Back to the masters": "Zurück zu den Meistern",
+    "Location": "Standort",
+    "Order": "Befehl",
+    "From": "Aus",
+    "The price is negotiable": "Der Preis ist Verhandlungsbasis",
+    "Not specified": "Nicht angegeben",
+    "Languages": "Sprachen",
+    "My works": "Meine Werke",
+    "Foto": "foto",
+    "No address specified": "Keine Adresse angegeben"
   }
 }

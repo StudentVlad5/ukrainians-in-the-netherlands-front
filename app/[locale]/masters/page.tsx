@@ -5,6 +5,7 @@ import { getPublicSpecialists } from "@/helper/api/getPublicData";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import { useEffect, useState } from "react";
 import { ISpecialist } from "@/helper/types/specialist";
+import { useTranslations } from "next-intl";
 
 export default function MastersPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,6 +13,7 @@ export default function MastersPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [masters, setMasters] = useState<ISpecialist[]>([]);
   const [getError, setGetError] = useState(false);
+  const t = useTranslations("specialists");
 
   useEffect(() => {
     const fetchMasters = async () => {
@@ -25,7 +27,7 @@ export default function MastersPage() {
         }
       } catch (e) {
         setGetError(true);
-        onFetchError("Не вдалося завантажити майстрів");
+        onFetchError(t("Не вдалося завантажити майстрів"));
       } finally {
         setIsLoading(false);
       }
@@ -49,13 +51,12 @@ export default function MastersPage() {
   return (
     <section className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-black">
-            Наші спеціалісти
+            {t("Our specialists")}
           </h1>
           <p className="mt-2 text-gray-600 max-w-xl">
-            Оберіть перевіреного майстра у вашій сфері
+            {t("Choose a proven master in your field")}
           </p>
         </div>
 
@@ -66,10 +67,10 @@ export default function MastersPage() {
           onProfessionChange={setProfession}
         />
         {isLoading ? (
-          <div className="text-center py-20">Завантаження...</div>
+          <div className="text-center py-20">{t("Loading")}...</div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
-            Помилка завантаження даних
+            {t("Помилка завантаження даних")}
           </div>
         ) : (
           <MastersGrid filteredMasters={filteredMasters} />

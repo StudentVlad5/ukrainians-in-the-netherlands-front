@@ -5,7 +5,7 @@ import Image from "next/image";
 import defaultImage from "@/public/images/no-photo-available-icon.jpg";
 import Link from "next/link";
 import { ISpecialist } from "@/helper/types/specialist";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // Визначаємо інтерфейс пропсів правильно
 interface MasterCardProps {
@@ -14,6 +14,7 @@ interface MasterCardProps {
 
 export default function MasterCard({ master }: MasterCardProps) {
   const locale = useLocale();
+  const t = useTranslations("specialists");
 
   return (
     <motion.article
@@ -75,13 +76,13 @@ export default function MasterCard({ master }: MasterCardProps) {
         <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-[10px] text-gray-400 uppercase tracking-tighter">
-              Освіта
+              {t("Education")}
             </span>
             <span className="text-xs font-medium text-gray-700 truncate max-w-[120px]">
               {/* Використовуємо локаль для education */}
               {master.education
                 ? master.education[locale as keyof typeof master.education]
-                : "Не вказано"}
+                : t("Не вказано")}
             </span>
           </div>
 
@@ -89,7 +90,7 @@ export default function MasterCard({ master }: MasterCardProps) {
             href={`/masters/${master._id}`}
             className="bg-red-500 hover:bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95 shadow-lg shadow-red-500/20 cursor-pointer"
           >
-            Записатись
+            {t("more details")}
           </Link>
         </div>
       </div>

@@ -3,16 +3,18 @@
 import { motion } from "framer-motion";
 import MasterCard from "./MasterCard";
 import { ISpecialist } from "@/helper/types/specialist";
+import { useTranslations } from "next-intl";
 
 interface MastersGridProps {
   filteredMasters: ISpecialist[];
 }
 
 export default function MastersGrid({ filteredMasters }: MastersGridProps) {
+  const t = useTranslations("specialists");
   if (filteredMasters.length === 0) {
     return (
       <div className="text-center py-10 text-gray-500">
-        Майстрів не знайдено за вашим запитом.
+        {t("Майстрів не знайдено за вашим запитом")}
       </div>
     );
   }
