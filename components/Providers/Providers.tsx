@@ -32,6 +32,7 @@ export const ProvidersSection: React.FC = () => {
         }
       } catch (e) {
         setGetError(true);
+        console.log(e);
         onFetchError(t("Failed to load wizards"));
       } finally {
         setIsLoading(false);
@@ -39,7 +40,7 @@ export const ProvidersSection: React.FC = () => {
     };
 
     fetchProviders();
-  }, []);
+  }, [t]);
 
   return (
     <>
@@ -100,7 +101,7 @@ export const ProvidersSection: React.FC = () => {
                     <h3 className="text-xl font-bold mt-3">
                       {provider.name[locale]}
                     </h3>
-                    <p className="text-blue-600">
+                    <p className="text-blue-600 capitalize">
                       {provider.specialty[locale]}
                     </p>
                   </Link>

@@ -7,10 +7,8 @@ import { MarketplaceSection } from "@/components/Marketplace/Marketplace";
 import { NewsSection } from "@/components/News/News";
 import { ProvidersSection } from "@/components/Providers/Providers";
 import { TestimonialsSection } from "@/components/Testimonials/Testimonials";
-import { useTranslations } from "next-intl";
 
 export default function HomePage() {
-  const t = useTranslations("home");
   return (
     <>
       <Hero />

@@ -74,7 +74,7 @@ export default function MasterProfile() {
     );
 
   return (
-    <div className="min-h-screen bg-white pb-20 text-slate-900">
+    <div className="min-h-screen bg-white pb-20 text-slate-900 mt-15">
       <div className="max-w-6xl mx-auto p-4 lg:p-8">
         <Link
           href="/masters"
@@ -149,7 +149,7 @@ export default function MasterProfile() {
             </div>
 
             {master.description && (
-              <div className="bg-gray-50 p-8 rounded-[32px] border-l-8 border-ua-blue">
+              <div className="bg-gray-50 p-8 rounded-4xl border-l-8 border-ua-blue">
                 <p className="text-xl font-medium text-slate-800 leading-relaxed italic">
                   {master.description[locale] || master.description.uk}
                 </p>
@@ -239,14 +239,14 @@ export default function MasterProfile() {
                     640: { slidesPerView: 2.2 },
                     1024: { slidesPerView: 3 },
                   }}
-                  className="pb-12 !overflow-visible" // щоб тіні не обрізалися
+                  className="pb-12"
                 >
                   {master.portfolio.map((url, idx) => (
                     <SwiperSlide key={idx}>
                       <motion.div
                         whileHover={{ y: -5 }}
                         onClick={() => setIndex(idx)}
-                        className="relative h-72 rounded-[32px] overflow-hidden cursor-zoom-in shadow-lg border-4 border-white"
+                        className="relative h-72 rounded-4xl overflow-hidden cursor-zoom-in shadow-lg border-4 border-white"
                       >
                         <Image
                           src={url}

@@ -105,7 +105,7 @@ export default function SpecialistsDashboardPage() {
             {!isLoading && (
               <tbody>
                 {items.map((s) => (
-                  <tr key={s._id} className="border-t text-white">
+                  <tr key={s._id} className="border-t bold">
                     <td className="p-2">
                       {s.imageUrl && (
                         <Image src={s.imageUrl} width={50} height={50} alt="" />

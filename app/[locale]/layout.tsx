@@ -30,7 +30,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-      <body className="min-h-screen bg-gray-50 text-gray-900">
+      <body className="min-h-screen bg-gray-50 text-gray-900 flex justify-center flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar locale={locale} />
           <main>

@@ -12,11 +12,19 @@ function NavItem({ item, locale, t, pathname, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
   const itemPath = item.path.startsWith("/") ? item.path : `/${item.path}`;
 
+  const segments = pathname.split("/");
+  const pathnameWithoutLocale = `/${segments.slice(2).join("/")}` || "/";
+
+  const normalizedPathname =
+    pathname === `/${locale}` || pathname === `/${locale}/`
+      ? "/"
+      : pathnameWithoutLocale;
+
   //  Прибираємо локаль із pathname через RegExp
   const isActive =
     itemPath === "/"
-      ? pathname === "/" || pathname === ""
-      : pathname.startsWith(itemPath);
+      ? normalizedPathname === "/"
+      : normalizedPathname.startsWith(itemPath);
 
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -79,7 +87,7 @@ export default function Navbar({ locale }) {
   }, [isMenuOpen]);
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-white shadow text-gray-700 relative z-30">
+    <nav className="flex justify-between items-center p-4 bg-white shadow text-gray-700 fixed z-30 w-full mx-auto top-0">
       {/* Логотип */}
       <Link href="/" className="text-[30px] font-bold flex items-center">
         <span className="text-blue-600">UA</span>
