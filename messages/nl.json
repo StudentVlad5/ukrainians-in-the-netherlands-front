@@ -142,6 +142,7 @@
   "providers": {
     "Failed to load wizards": "Kan wizards niet laden",
     "Our Masters and Entrepreneurs": "Onze meesters en ondernemers",
-    "Error loading data": "Fout bij het laden van gegevens"
+    "Error loading data": "Fout bij het laden van gegevens",
+    "loading": "Bezig met laden..."
   }
 }

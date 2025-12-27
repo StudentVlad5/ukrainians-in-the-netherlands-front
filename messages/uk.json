@@ -142,6 +142,7 @@
   "providers": {
     "Failed to load wizards": "Не вдалося завантажити майстрів",
     "Our Masters and Entrepreneurs": "Наші Майстри та Підприємці",
-    "Error loading data": "Помилка завантаження даних"
+    "Error loading data": "Помилка завантаження даних",
+    "loading": "Завантаження..."
   }
 }

@@ -142,6 +142,7 @@
   "providers": {
     "Failed to load wizards": "Assistenten konnten nicht geladen werden",
     "Our Masters and Entrepreneurs": "Unsere Meister und Unternehmer",
-    "Error loading data": "Fehler beim Laden der Daten"
+    "Error loading data": "Fehler beim Laden der Daten",
+    "loading": "Lädt..."
   }
 }

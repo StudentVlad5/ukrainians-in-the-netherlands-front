@@ -70,7 +70,7 @@ export const ProvidersSection: React.FC = () => {
           </Link>
           <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent_0,black_10%,black_90%,transparent_100%)]">
             {isLoading ? (
-              <div className="text-center py-20">{t("Loading")}...</div>
+              <div className="text-center py-20">{t("loading")}</div>
             ) : getError ? (
               <div className="text-center py-20 text-red-500">
                 {t("Error loading data")}

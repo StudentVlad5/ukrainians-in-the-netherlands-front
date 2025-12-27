@@ -142,6 +142,7 @@
   "providers": {
     "Failed to load wizards": "Failed to load wizards",
     "Our Masters and Entrepreneurs": "Our Masters and Entrepreneurs",
-    "Error loading data": "Error loading data"
+    "Error loading data": "Error loading data",
+    "loading": "Loading..."
   }
 }
