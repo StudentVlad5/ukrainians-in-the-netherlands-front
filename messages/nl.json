@@ -85,7 +85,10 @@
     "map message": "* De coördinaten worden automatisch bepaald na het invoeren van de stadsnaam. Dit is vereist voor weergave op de kaart.",
     "Save changes": "Wijzigingen opslaan",
     "My languages": "Mijn talen",
-    "IsActive": "Activeren"
+    "IsActive": "Activeren",
+    "Loading": "ЗLaden...",
+    "Edit": "Bewerken",
+    "Delete": "Verwijderen"
   },
   "specialists": {
     "Our specialists": "Onze specialisten",
@@ -157,5 +160,18 @@
     "Follow us": "Volg ons",
     "rights": "Alle rechten voorbehouden",
     "With love": "Met liefde uit Oekraïne, in het hart van Nederland."
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: 1 januari 2026",
+    "introduction": "Wij waarderen uw privacy en doen er alles aan om uw persoonlijke gegevens te beschermen wanneer u onze marktplaats gebruikt.",
+    "sections": {
+      "dataCollection": "Gegevensverzameling",
+      "cookies": "Cookies",
+      "thirdParties": "Derden"
+    },
+    "dataCollectionText": "Wij verzamelen alleen persoonsgegevens die nodig zijn voor de werking van het platform: naam, e-mail, telefoon, profielgegevens en evenementboekingen.",
+    "cookiesText": "Wij gebruiken cookies voor correcte werking, analyse en verbetering van de gebruikerservaring.",
+    "thirdPartiesText": "Wij kunnen gebruikmaken van externe diensten (analyse, ticketbetalingen) die voldoen aan de AVG (GDPR)."
   }
 }

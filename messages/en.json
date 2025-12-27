@@ -85,7 +85,10 @@
     "map message": "* We will automatically determine the coordinates after entering the city name. This is required for map display.",
     "Save changes": "Save changes",
     "My languages": "My languages",
-    "IsActive": "Activate"
+    "IsActive": "Activate",
+    "Loading": "Loading...",
+    "Edit": "Edit",
+    "Delete": "Delete"
   },
   "specialists": {
     "Our specialists": "Our specialists",
@@ -157,5 +160,18 @@
     "Follow us": "Follow us",
     "rights": "All rights reserved",
     "With love": "With love from Ukraine, in the heart of the Netherlands."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: January 1, 2026",
+    "introduction": "We value your privacy and are committed to protecting your personal data when using our marketplace.",
+    "sections": {
+      "dataCollection": "Data Collection",
+      "cookies": "Cookies",
+      "thirdParties": "Third Parties"
+    },
+    "dataCollectionText": "We collect only the personal data necessary for platform functionality: name, email, phone, profile data, and event bookings.",
+    "cookiesText": "We use cookies to ensure proper website functionality, analytics, and user experience improvements.",
+    "thirdPartiesText": "We may use third-party services (analytics, ticket payments) that comply with GDPR regulations."
   }
 }

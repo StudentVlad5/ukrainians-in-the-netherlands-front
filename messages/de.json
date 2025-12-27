@@ -85,7 +85,10 @@
     "map message": "* Die Koordinaten werden automatisch nach Eingabe des Stadtnamens ermittelt. Dies ist für die Kartenanzeige erforderlich.",
     "Save changes": "Änderungen speichern",
     "My languages": "Meine Sprachen",
-    "IsActive": "Aktivieren"
+    "IsActive": "Aktivieren",
+    "Loading": "Laden…",
+    "Edit": "Bearbeiten",
+    "Delete": "Löschen"
   },
   "specialists": {
     "Our specialists": "Unsere Spezialisten",
@@ -157,5 +160,18 @@
     "Follow us": "Folgen Sie uns",
     "rights": "ВAlle Rechte vorbehalten",
     "With love": "Mit Liebe aus der Ukraine, im Herzen der Niederlande."
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Letzte Aktualisierung: 1. Januar 2026",
+    "introduction": "Wir legen Wert auf Ihre Privatsphäre und verpflichten uns zum Schutz Ihrer personenbezogenen Daten bei der Nutzung unseres Marktplatzes.",
+    "sections": {
+      "dataCollection": "Datenerhebung",
+      "cookies": "Cookies",
+      "thirdParties": "Drittanbieter"
+    },
+    "dataCollectionText": "Wir erheben nur personenbezogene Daten, die für die Funktion der Plattform erforderlich sind: Name, E-Mail, Telefonnummer, Profildaten und Eventbuchungen.",
+    "cookiesText": "Wir verwenden Cookies zur Sicherstellung der Funktionalität, Analyse und Verbesserung der Nutzererfahrung.",
+    "thirdPartiesText": "Wir nutzen ggf. Drittanbieter-Dienste (Analyse, Ticketzahlungen), die der DSGVO entsprechen."
   }
 }

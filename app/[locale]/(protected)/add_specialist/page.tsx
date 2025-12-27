@@ -27,7 +27,7 @@ export default function SpecialistsDashboardPage() {
   const [items, setItems] = useState<ISpecialist[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<ISpecialist | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState("");
   const router = useRouter();
   const token = Cookies.get("accessToken");
@@ -117,12 +117,14 @@ export default function SpecialistsDashboardPage() {
                     </td>
                     <td className="p-2">{s.isActive ? "Active" : "Hidden"}</td>
                     <td className="p-2 flex gap-2">
-                      <Button onClick={() => openEdit(s)}>Edit</Button>
+                      <Button onClick={() => openEdit(s)} disabled={isLoading}>
+                        {isLoading ? t("Loading") : t("Edit")}
+                      </Button>
                       <Button
                         className="bg-red-600 text-white"
                         onClick={() => remove(s._id)}
                       >
-                        Delete
+                        {t("Delete")}
                       </Button>
                     </td>
                   </tr>

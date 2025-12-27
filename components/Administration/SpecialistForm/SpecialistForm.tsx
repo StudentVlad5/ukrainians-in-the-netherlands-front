@@ -37,6 +37,7 @@ export const SpecialistForm = ({
   const [portfolioPreviews, setPortfolioPreviews] = useState<string[]>(
     specialist?.portfolio || []
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const [form, setForm] = useState<Partial<ISpecialist>>({
     name: specialist?.name ?? { uk: "", en: "", nl: "", de: "" },
@@ -154,6 +155,7 @@ export const SpecialistForm = ({
     portfolioFiles.forEach((file) => formData.append("portfolio", file));
 
     try {
+      setIsLoading(true);
       if (specialist?._id) {
         await updateSpecialist(token!, specialist._id, formData);
       } else {
@@ -166,6 +168,8 @@ export const SpecialistForm = ({
         ...prev,
         global: t("Error saving to server"),
       }));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -477,6 +481,7 @@ export const SpecialistForm = ({
       </div>
 
       <Button
+        disabled={isLoading}
         onClick={save}
         className="w-full py-4 rounded-xl text-lg font-extrabold shadow-blue-200 shadow-lg"
       >
