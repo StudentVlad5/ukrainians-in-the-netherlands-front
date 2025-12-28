@@ -45,7 +45,8 @@
     "role": "Role",
     "welcome": "Welcome",
     "add_product": "Add product",
-    "add_specialist": "Add specialist"
+    "add_specialist": "Add specialist",
+    "add_news": "Add news"
   },
   "masters": {
     "title": "Masters",
@@ -173,5 +174,34 @@
     "dataCollectionText": "We collect only the personal data necessary for platform functionality: name, email, phone, profile data, and event bookings.",
     "cookiesText": "We use cookies to ensure proper website functionality, analytics, and user experience improvements.",
     "thirdPartiesText": "We may use third-party services (analytics, ticket payments) that comply with GDPR regulations."
+  },
+  "news_admin": {
+    "Are you sure?": "Are you sure?",
+    "Manage News": "Manage News",
+    "Date": "Date",
+    "Image": "Image",
+    "Title": "Title",
+    "Category": "Category",
+    "Status": "Status",
+    "Actions": "Actions",
+    "Add News Article": "Add News Article",
+    "Active": "Active",
+    "Draft": "Draft",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Edit News Article": "Edit News Article",
+    "Create News Article": "Create News Article",
+    "Official Source": "Official Source",
+    "Shares": "Напр. акції",
+    "Enter a title": "Enter a title",
+    "Brief description": "Brief description",
+    "News announcement": "News announcement",
+    "Article paragraphs": "Article paragraphs",
+    "Paragraph subtitle": "Paragraph subtitle",
+    "Main text": "Main text",
+    "Add a paragraph": "Add a paragraph",
+    "Publish": "Publish",
+    "Loading": "Loading",
+    "Save": "Save"
   }
 }

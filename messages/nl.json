@@ -14,7 +14,7 @@
     "sidebarPersonal": "Persoonlijke gegevens",
     "fullName": "Volledige naam",
     "workInProgress": "Werk in uitvoering...",
-    "loading": "Bezig met laden...",
+    "loading": "Laden...",
     "avatarTitle": "Gebruikersavatar",
     "avatarLabel": "Profielfoto uploaden",
     "avatarButton": "Avatar bijwerken",
@@ -45,7 +45,8 @@
     "role": "Rol",
     "welcome": "Welkom",
     "add_product": "Produkt hinzufügen",
-    "add_specialist": "Specialist toevoegen"
+    "add_specialist": "Specialist toevoegen",
+    "add_news": "Nieuws toevoegen"
   },
   "masters": {
     "title": "Meesters",
@@ -86,7 +87,7 @@
     "Save changes": "Wijzigingen opslaan",
     "My languages": "Mijn talen",
     "IsActive": "Activeren",
-    "Loading": "ЗLaden...",
+    "Loading": "Laden...",
     "Edit": "Bewerken",
     "Delete": "Verwijderen"
   },
@@ -146,7 +147,7 @@
     "Failed to load wizards": "Kan wizards niet laden",
     "Our Masters and Entrepreneurs": "Onze meesters en ondernemers",
     "Error loading data": "Fout bij het laden van gegevens",
-    "loading": "Bezig met laden..."
+    "loading": "Laden..."
   },
   "foot": {
     "moto": "Een platform voor de eenheid, ondersteuning en ontwikkeling van de Oekraïense gemeenschap in Nederland.",
@@ -173,5 +174,34 @@
     "dataCollectionText": "Wij verzamelen alleen persoonsgegevens die nodig zijn voor de werking van het platform: naam, e-mail, telefoon, profielgegevens en evenementboekingen.",
     "cookiesText": "Wij gebruiken cookies voor correcte werking, analyse en verbetering van de gebruikerservaring.",
     "thirdPartiesText": "Wij kunnen gebruikmaken van externe diensten (analyse, ticketbetalingen) die voldoen aan de AVG (GDPR)."
+  },
+  "news_admin": {
+    "Are you sure?": "Weet je het zeker?",
+    "Manage News": "Beheer nieuws",
+    "Date": "Datum",
+    "Image": "Afbeelding",
+    "Title": "Titel",
+    "Category": "Categorie",
+    "Status": "Status",
+    "Actions": "Acties",
+    "Add News Article": "Nieuwsartikel toevoegen",
+    "Active": "Actief",
+    "Draft": "Voorlopige versie",
+    "Edit": "Bewerking",
+    "Delete": "Verwijderen",
+    "Edit News Article": "Nieuwsartikel bewerken",
+    "Create News Article": "Nieuwsartikel maken",
+    "Official Source": "Officiële bron",
+    "Shares": "Ex. Aandelen",
+    "Enter a title": "Voer een titel in",
+    "Brief description": "Korte beschrijving",
+    "News announcement": "Nieuwsaankondiging",
+    "Article paragraphs": "Artikelparagrafen",
+    "Paragraph subtitle": "Paragraaf ondertitel",
+    "Main text": "Hoofdtekst",
+    "Add a paragraph": "Voeg een alinea toe",
+    "Publish": "Publiceren",
+    "Loading": "Laden",
+    "Save": "Wijzigingen"
   }
 }

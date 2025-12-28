@@ -31,7 +31,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={`
           w-full flex justify-center items-center py-2 px-4 rounded-md
           text-sm font-medium shadow-sm transition
-          focus:outline-none focus:ring-2 focus:ring-offset-2
+          focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer
           ${VARIANT_STYLES[variant]}
           ${disabled || isLoading ? "opacity-50 cursor-not-allowed" : ""}
           ${className}

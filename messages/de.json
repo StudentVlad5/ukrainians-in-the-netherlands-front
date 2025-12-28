@@ -45,7 +45,8 @@
     "role": "Rolle",
     "welcome": "Willkommen",
     "add_product": "Produkt hinzufügen",
-    "add_specialist": "Spezialist hinzufügen"
+    "add_specialist": "Spezialist hinzufügen",
+    "add_news": "Neuigkeiten hinzufügen"
   },
   "masters": {
     "title": "Meisters",
@@ -173,5 +174,34 @@
     "dataCollectionText": "Wir erheben nur personenbezogene Daten, die für die Funktion der Plattform erforderlich sind: Name, E-Mail, Telefonnummer, Profildaten und Eventbuchungen.",
     "cookiesText": "Wir verwenden Cookies zur Sicherstellung der Funktionalität, Analyse und Verbesserung der Nutzererfahrung.",
     "thirdPartiesText": "Wir nutzen ggf. Drittanbieter-Dienste (Analyse, Ticketzahlungen), die der DSGVO entsprechen."
+  },
+  "news_admin": {
+    "Are you sure?": "Bist du sicher?",
+    "Manage News": "Nachrichten verwalten",
+    "Date": "Datum",
+    "Image": "Bild",
+    "Title": "Titel",
+    "Category": "Kategorie",
+    "Status": "Status",
+    "Actions": "Aktionen",
+    "Add News Article": "Nachrichtenartikel hinzufügen",
+    "Active": "Aktiv",
+    "Draft": "Entwurf",
+    "Edit": "Bearbeiten",
+    "Delete": "Löschen",
+    "Edit News Article": "Nachrichtenartikel bearbeiten",
+    "Create News Article": "Erstellen Sie einen Nachrichtenartikel",
+    "Official Source": "Offizielle Quelle",
+    "Shares": "Ex. Aktien",
+    "Enter a title": "Geben Sie einen Titel ein",
+    "Brief description": "Kurze Beschreibung",
+    "News announcement": "Nachrichtenankündigung",
+    "Article paragraphs": "Artikelabsätze",
+    "Paragraph subtitle": "Untertitel des Absatzes",
+    "Main text": "Haupttext",
+    "Add a paragraph": "Fügen Sie einen Absatz hinzu",
+    "Publish": "Veröffentlichen",
+    "Loading": "Lädt",
+    "Save": "Änderungen"
   }
 }
