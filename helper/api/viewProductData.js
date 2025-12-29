@@ -65,3 +65,31 @@ export const DeleteDataProduct = async (token, id) => {
   if (data) onSuccess("Видалення відбулося успішно");
   return data;
 };
+
+export async function getPublicNews(page = 1, limit = 10) {
+  try {
+    const res = await fetch(`${BASE_URL}/news?page=${page}&limit=${limit}`, {
+      cache: "no-store", // або { next: { revalidate: 60 } } для кешування на 1 хвилину
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch news");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error in getPublicNews:", error);
+    throw error;
+  }
+}
+
+export async function getPublicNewsBySlug(slug) {
+  const res = await fetch(`${BASE_URL}/news/${slug}`);
+
+  if (!res.ok) {
+    if (res.status === 404) return null;
+    throw new Error("Failed to fetch news");
+  }
+
+  return res.json();
+}

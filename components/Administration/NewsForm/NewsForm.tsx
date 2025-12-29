@@ -170,75 +170,77 @@ export function NewsForm({ initialData, token, onSaved }: Props) {
         </div>
 
         <div className="p-6 bg-white space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-xs font-bold uppercase text-gray-400">
-                {t("Category")} ({activeTab})
-              </label>
-              <input
-                type="text"
-                {...register(`category.${activeTab}`)}
-                className="w-full border p-2 rounded"
-                placeholder={t("Shares")}
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="text-xs font-bold uppercase text-gray-400">
-                {t("Title")} ({activeTab})
-              </label>
-              <input
-                {...register(`title.${activeTab}`)}
-                className="w-full border p-2 rounded font-semibold"
-                placeholder={`${t("Enter a title")}...`}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-bold uppercase text-gray-400">
-              {t("Brief description")}
-            </label>
-            <textarea
-              {...register(`shortDescription.${activeTab}`)}
-              className="w-full border p-2 rounded h-20 resize-none"
-              placeholder={`${t("News announcement")}...`}
-            />
-          </div>
-
-          {/* ПАРАГРАФИ */}
-          <div className="space-y-4 border-t pt-4">
-            <h3 className="font-bold text-gray-400 text-xs uppercase tracking-wider">
-              {t("Article paragraphs")}
-            </h3>
-
-            {fields.map((field, index) => (
-              <div
-                key={field.id}
-                className="p-5 border-2 border-dashed border-gray-200 rounded-xl bg-white relative group transition-all hover:border-blue-200"
-              >
-                <button
-                  type="button"
-                  onClick={() => remove(index)}
-                  className="absolute -top-3 -right-3 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-transform hover:scale-110 shadow-lg cursor-pointer z-10"
-                  title="remove paragraph"
-                >
-                  <X size={18} />
-                </button>
-
-                <div className="space-y-3">
-                  <input
-                    placeholder={`${t("Paragraph subtitle")} (${activeTab})`}
-                    {...register(`paragraphs.${index}.title.${activeTab}`)}
-                    className="w-full border-b border-gray-100 p-2 focus:border-blue-500 outline-none font-medium transition-colors"
-                  />
-                  <textarea
-                    placeholder={`${t("Main text")} (${activeTab})...`}
-                    {...register(`paragraphs.${index}.body.${activeTab}`)}
-                    className="w-full border p-3 rounded-lg h-32 text-sm bg-gray-50 focus:bg-white transition-all"
-                  />
-                </div>
+          <div key={activeTab} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-gray-400">
+                  {t("Category")} ({activeTab})
+                </label>
+                <input
+                  type="text"
+                  {...register(`category.${activeTab}`)}
+                  className="w-full border p-2 rounded"
+                  placeholder={t("Shares")}
+                />
               </div>
-            ))}
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-gray-400">
+                  {t("Title")} ({activeTab})
+                </label>
+                <input
+                  {...register(`title.${activeTab}`)}
+                  className="w-full border p-2 rounded font-semibold"
+                  placeholder={`${t("Enter a title")}...`}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold uppercase text-gray-400">
+                {t("Brief description")}
+              </label>
+              <textarea
+                {...register(`shortDescription.${activeTab}`)}
+                className="w-full border p-2 rounded h-20 resize-none"
+                placeholder={`${t("News announcement")}...`}
+              />
+            </div>
+
+            {/* ПАРАГРАФИ */}
+            <div className="space-y-4 border-t pt-4">
+              <h3 className="font-bold text-gray-400 text-xs uppercase tracking-wider">
+                {t("Article paragraphs")}
+              </h3>
+
+              {fields.map((field, index) => (
+                <div
+                  key={field.id}
+                  className="p-5 border-2 border-dashed border-gray-200 rounded-xl bg-white relative group transition-all hover:border-blue-200"
+                >
+                  <button
+                    type="button"
+                    onClick={() => remove(index)}
+                    className="absolute -top-3 -right-3 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-transform hover:scale-110 shadow-lg cursor-pointer z-10"
+                    title="remove paragraph"
+                  >
+                    <X size={18} />
+                  </button>
+
+                  <div className="space-y-3">
+                    <input
+                      placeholder={`${t("Paragraph subtitle")} (${activeTab})`}
+                      {...register(`paragraphs.${index}.title.${activeTab}`)}
+                      className="w-full border-b border-gray-100 p-2 focus:border-blue-500 outline-none font-medium transition-colors"
+                    />
+                    <textarea
+                      placeholder={`${t("Main text")} (${activeTab})...`}
+                      {...register(`paragraphs.${index}.body.${activeTab}`)}
+                      className="w-full border p-3 rounded-lg h-32 text-sm bg-gray-50 focus:bg-white transition-all"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

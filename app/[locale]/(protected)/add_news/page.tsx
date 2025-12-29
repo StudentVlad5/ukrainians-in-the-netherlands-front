@@ -57,7 +57,7 @@ export default function NewsDashboardPage() {
     setIsLoading(true);
     try {
       const data = await getNews(token);
-      setItems(data);
+      setItems(data.news);
     } finally {
       setIsLoading(false);
     }
