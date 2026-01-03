@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { INews } from "@/helper/types/news";
 import { Lang } from "@/helper/types/common";
 import defaultImage from "@/public/images/no-photo-available-icon.jpg";
 
 export default function NewsCard({ item }: { item: INews }) {
   const locale = useLocale() as Lang;
-
+  const t = useTranslations("news");
   return (
     <Link href={`/news/${item.slug || item._id}`}>
       <article className="group bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
@@ -34,7 +34,7 @@ export default function NewsCard({ item }: { item: INews }) {
             {item.shortDescription[locale]}
           </p>
           <div className="text-ua-blue font-black text-xs uppercase tracking-widest flex items-center gap-2">
-            Read more <span className="text-lg">→</span>
+            {t("Read more")} <span className="text-lg">→</span>
           </div>
         </div>
       </article>

@@ -2,7 +2,7 @@
   "nav": {
     "home": "Thuis",
     "news": "Nieuws",
-    "market": "Advertenties",
+    "products": "Advertenties",
     "masters": "Meesters",
     "profile": "Profiel"
   },
@@ -203,5 +203,14 @@
     "Publish": "Publiceren",
     "Loading": "Laden",
     "Save": "Wijzigingen"
+  },
+  "news": {
+    "Failed to load news": "Kan nieuws niet laden",
+    "latest": "Laatste nieuws",
+    "loading": "laden",
+    "Error loading data": "Fout bij het laden van gegevens",
+    "readMore": "leesMeer",
+    "viewAll": "alles bekijken",
+    "Read more": "Lees meer"
   }
 }

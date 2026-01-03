@@ -53,7 +53,7 @@ export const NewsSection: React.FC = () => {
         </h2>
 
         {isLoading ? (
-          <div className="text-center py-20">{t("loading")}</div>
+          <div className="text-center py-20">{t("loading")}...</div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
             {t("Error loading data")}

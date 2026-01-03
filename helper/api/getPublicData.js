@@ -25,3 +25,28 @@ export async function getPublicSpecialistById(id) {
   }
   return res.json();
 }
+/* ===================== GET ALL ===================== */
+export async function getPublicProductssWithLimits(count, page = 1) {
+  const res = await fetch(
+    `${BASE_URL}/public/products_with_limits?limit=${count}&page=${page}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch specialists");
+  }
+  return res.json();
+}
+export async function getPublicProductsById(id) {
+  const res = await fetch(`${BASE_URL}/public/products/${id}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch specialists");
+  }
+  return res.json();
+}
+/* ===================== GET ALL ===================== */
+export async function getPublicServicesWithLimits(count) {
+  const res = await fetch(`${BASE_URL}/public/services?limit=${count}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch specialists");
+  }
+  return res.json();
+}

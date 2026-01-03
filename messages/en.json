@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "news": "News",
-    "market": "Ads",
+    "products": "Ads",
     "masters": "Masters",
     "profile": "Profile"
   },
@@ -203,5 +203,14 @@
     "Publish": "Publish",
     "Loading": "Loading",
     "Save": "Save"
+  },
+  "news": {
+    "Failed to load news": "Failed to load news",
+    "latest": "Latest news",
+    "loading": "loading",
+    "Error loading data": "Error loading data",
+    "readMore": "readMore",
+    "viewAll": "viewAll",
+    "Read more": "Read more"
   }
 }
