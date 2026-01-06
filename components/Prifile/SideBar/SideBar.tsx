@@ -14,6 +14,8 @@ import {
   IconOrders,
   IconPersonal,
   IconSpecialist,
+  IconAddEvent,
+  IconCategories,
 } from "@/helper/images/icon";
 
 export const Sidebar = ({
@@ -98,6 +100,20 @@ export const Sidebar = ({
             <Link href="/add_specialist" className={sidebarItemClass}>
               <IconSpecialist />
               {t("add_specialist")}
+            </Link>
+          )}
+
+          {(formData.role === "seller" || formData.role === "admin") && (
+            <Link href="/add_event" className={sidebarItemClass}>
+              <IconAddEvent />
+              {t("add_event")}
+            </Link>
+          )}
+
+          {(formData.role === "seller" || formData.role === "admin") && (
+            <Link href="/add_category" className={sidebarItemClass}>
+              <IconCategories />
+              {t("add_category")}
             </Link>
           )}
 

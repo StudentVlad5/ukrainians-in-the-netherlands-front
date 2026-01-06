@@ -116,3 +116,54 @@ export const IconLogout = () => (
     />
   </svg>
 );
+
+export const IconAddEvent = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M20.25 7.5 12 12.75 3.75 7.5M12 12.75v8.25m8.25-13.5v9a2.25 2.25 0 0 1-1.125 1.95l-6.75 3.9a2.25 2.25 0 0 1-2.25 0l-6.75-3.9A2.25 2.25 0 0 1 3.75 16.5v-9"
+    />
+  </svg>
+);
+
+export const IconCategories = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3.75 5.25h6.5v6.5h-6.5v-6.5Zm10 0h6.5v6.5h-6.5v-6.5ZM3.75 13.25h6.5v6.5h-6.5v-6.5Zm10 0h6.5v6.5h-6.5v-6.5Z"
+    />
+  </svg>
+);
+
+export const IconActivateEvent = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+    />
+  </svg>
+);

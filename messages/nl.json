@@ -46,7 +46,9 @@
     "welcome": "Welkom",
     "add_product": "Produkt hinzufügen",
     "add_specialist": "Specialist toevoegen",
-    "add_news": "Nieuws toevoegen"
+    "add_news": "Nieuws toevoegen",
+    "add_category": "Categorie toevoegen",
+    "add_event": "Evenement toevoegen"
   },
   "masters": {
     "title": "Meesters",
@@ -212,5 +214,6 @@
     "readMore": "leesMeer",
     "viewAll": "alles bekijken",
     "Read more": "Lees meer"
-  }
+  },
+  "add_event": {}
 }

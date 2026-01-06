@@ -59,7 +59,7 @@ export async function deleteNews(token, id) {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to delete specialist");
+    throw new Error("Failed to delete news");
   }
 
   return res.json();

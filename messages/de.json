@@ -46,7 +46,9 @@
     "welcome": "Willkommen",
     "add_product": "Produkt hinzufügen",
     "add_specialist": "Spezialist hinzufügen",
-    "add_news": "Neuigkeiten hinzufügen"
+    "add_news": "Neuigkeiten hinzufügen",
+    "add_category": "Kategorie hinzufügen",
+    "add_event": "Ereignis hinzufügen"
   },
   "masters": {
     "title": "Meisters",
@@ -212,5 +214,6 @@
     "readMore": "Weiterlesen",
     "viewAll": "Alle anzeigen",
     "Read more": "Weiterlesen"
-  }
+  },
+  "add_event": {}
 }

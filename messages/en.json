@@ -46,7 +46,9 @@
     "welcome": "Welcome",
     "add_product": "Add product",
     "add_specialist": "Add specialist",
-    "add_news": "Add news"
+    "add_news": "Add news",
+    "add_category": "Add category",
+    "add_event": "Add event"
   },
   "masters": {
     "title": "Masters",
@@ -212,5 +214,6 @@
     "readMore": "readMore",
     "viewAll": "viewAll",
     "Read more": "Read more"
-  }
+  },
+  "add_event": {}
 }

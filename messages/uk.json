@@ -46,7 +46,9 @@
     "welcome": "Вітаємо",
     "add_product": "Додати товар",
     "add_specialist": "Додати спеціаліста",
-    "add_news": "Додати новинy"
+    "add_news": "Додати новинy",
+    "add_category": "Додати категорію",
+    "add_event": "Додати подію"
   },
   "masters": {
     "title": "Майстри",
@@ -212,5 +214,6 @@
     "readMore": "читати більше",
     "viewAll": "переглянути все",
     "Read more": "Читати більше"
-  }
+  },
+  "add_event": {}
 }
