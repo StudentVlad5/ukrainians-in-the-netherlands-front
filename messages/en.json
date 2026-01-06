@@ -215,5 +215,9 @@
     "viewAll": "viewAll",
     "Read more": "Read more"
   },
-  "add_event": {}
+  "add_event": {},
+  "market": {
+    "service": "service"
+  },
+  "event_admin": {}
 }

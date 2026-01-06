@@ -215,5 +215,9 @@
     "viewAll": "переглянути все",
     "Read more": "Читати більше"
   },
-  "add_event": {}
+  "add_event": {},
+  "market": {
+    "service": "service"
+  },
+  "event_admin": {}
 }

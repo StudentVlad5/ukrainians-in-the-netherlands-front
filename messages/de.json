@@ -215,5 +215,10 @@
     "viewAll": "Alle anzeigen",
     "Read more": "Weiterlesen"
   },
-  "add_event": {}
+  "add_event": {},
+  "market": {},
+  "service": {
+    "service": "service"
+  },
+  "event_admin": {}
 }

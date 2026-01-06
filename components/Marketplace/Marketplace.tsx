@@ -71,8 +71,8 @@ export const MarketplaceSection: React.FC = () => {
         ]);
 
         /* PRODUCTS */
-        if (Array.isArray(resProducts)) {
-          const mappedProducts: IMarketItem[] = resProducts.map(
+        if (Array.isArray(resProducts?.data)) {
+          const mappedProducts: IMarketItem[] = resProducts.data.map(
             (p: ProductApi) => ({
               id: p._id,
               type: "product",
