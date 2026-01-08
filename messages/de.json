@@ -216,10 +216,7 @@
     "Read more": "Weiterlesen"
   },
   "add_event": {},
-  "market": {},
-  "service": {
-    "service": "service"
-  },
+  "market": { "service": "service" },
   "event_admin": {},
   "activate_event": {}
 }
