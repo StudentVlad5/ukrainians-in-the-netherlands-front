@@ -11,20 +11,33 @@ export interface ITranslatableString {
 
 // Основний інтерфейс івенту
 export interface IActiveEvent {
-  _id?: string;
+  _id: string;
   eventId: string;
-  date: Date;
+  date: string;
   time: string;
   price: number;
   seats: number;
   booking: number;
-  vacancies: number;
-  location: {
-    city: string;
-    address: string;
+  status: "active" | "archived";
+  type: "online" | "location";
+  location?: {
+    city?: string;
+    address?: string;
   };
-  status: string;
-  type: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  vacancies: number;
+  specialist?: {
+    imageUrl: string;
+    name: ITranslatableString;
+    specialty: ITranslatableString;
+    description: ITranslatableString;
+    rating: number;
+  };
+  parentEvent: {
+    title: ITranslatableString;
+    description: ITranslatableString;
+    images: string[];
+    duration: string;
+    category: string;
+    article_event: string;
+  };
 }

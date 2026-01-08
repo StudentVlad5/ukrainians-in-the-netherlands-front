@@ -1,152 +1,137 @@
 "use client";
-
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   format,
+  startOfMonth,
+  endOfMonth,
   startOfWeek,
-  addDays,
+  endOfWeek,
+  eachDayOfInterval,
+  isSameMonth,
   isSameDay,
-  getWeek,
-  addWeeks,
-  subWeeks,
+  isSameWeek,
+  addMonths,
+  subMonths,
 } from "date-fns";
 import { IconArrowLeft, IconArrowRight } from "@/helper/images/icon";
-import { CalendarProps } from "@/helper/types/calendar";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { enUS, uk, nl, de } from "date-fns/locale";
+import { IActiveEvent } from "@/helper/types/activeEvent";
 
 const Calendar = ({
-  showDetailsHandle,
-  currentWeek,
-  setCurrentWeek,
   selectedDate,
   setSelectedDate,
-  setState,
-}: CalendarProps) => {
-  const [currentMonth, setCurrentMonth] = useState<Date>(
-    selectedDate ?? new Date()
-  );
-  const [, setCurrentWeekNumber] = useState<number>(getWeek(currentMonth));
-
-  const t = useTranslations("Calendar");
-
+  events = [],
+}: {
+  selectedDate: Date;
+  setSelectedDate: (date: Date) => void;
+  events: IActiveEvent[];
+}) => {
+  const [viewDate, setViewDate] = useState(new Date());
   const local = useLocale();
+  const localeMap = { de, ua: uk, en: enUS, nl } as const;
+  const locale = localeMap[local as keyof typeof localeMap] ?? uk;
 
-  const localeMap = {
-    de,
-    ua: uk,
-    en: enUS,
-    nl,
-  } as const;
-  const locale = localeMap[local as keyof typeof localeMap] ?? localeMap["ua"];
+  // Логіка генерації днів для повної сітки місяця
+  const startMonth = startOfMonth(viewDate);
+  const endMonth = endOfMonth(startMonth);
+  const startDate = startOfWeek(startMonth, { weekStartsOn: 1 });
+  const endDate = endOfWeek(endMonth, { weekStartsOn: 1 });
 
-  const changeWeekHandle = (type: "prev" | "next") => {
-    const newDate =
-      type === "prev" ? subWeeks(currentMonth, 1) : addWeeks(currentMonth, 1);
-
-    setCurrentMonth(newDate);
-    setCurrentWeekNumber(getWeek(newDate));
-    getCurrentWeekDates(newDate);
-    setSelectedDate(null);
-    setState(false);
-  };
-
-  const onDateClickHandle = (day: Date) => {
-    const dayStr = format(day, "ccc dd MMM yy");
-    setSelectedDate(day);
-    showDetailsHandle(dayStr);
-  };
-
-  const getCurrentWeekDates = useCallback(
-    (date: Date) => {
-      const startWeek = startOfWeek(date, { weekStartsOn: 1 });
-      const weekDates = Array.from({ length: 7 }, (_, i) =>
-        format(addDays(startWeek, i), "ccc dd MMM yy")
-      );
-
-      localStorage.setItem("currentWeek", JSON.stringify(weekDates));
-
-      const formatted = weekDates.map((d) => new Date(d).toLocaleDateString());
-
-      if (JSON.stringify(formatted) !== JSON.stringify(currentWeek)) {
-        setCurrentWeek(formatted);
-      }
-    },
-    [currentWeek, setCurrentWeek]
-  );
-
-  useEffect(() => {
-    getCurrentWeekDates(currentMonth);
-  }, [currentMonth, getCurrentWeekDates]);
+  const days = eachDayOfInterval({ start: startDate, end: endDate });
 
   return (
-    <div className="relative flex flex-col items-center">
+    <div className="w-[360px] max-w-full mx-auto bg-white p-4 rounded-2xl border shadow-sm">
       {/* Header */}
-      <div className="mb-4 text-lg font-medium">
-        {t(format(currentMonth, "LLLL yyyy", { locale }))}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-bold text-gray-800 capitalize">
+          {format(viewDate, "LLLL yyyy", { locale })}
+        </h2>
+        <div className="flex gap-1">
+          <button
+            title="Previous Month"
+            type="button"
+            onClick={() => setViewDate(subMonths(viewDate, 1))}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <IconArrowLeft />
+          </button>
+          <button
+            type="button"
+            title="Next Month"
+            onClick={() => setViewDate(addMonths(viewDate, 1))}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <IconArrowRight />
+          </button>
+        </div>
       </div>
 
-      {/* Week days */}
-      <div className="grid grid-cols-7 gap-4 mb-2 text-sm text-gray-400">
-        {Array.from({ length: 7 }).map((_, i) => (
-          <span key={i}>
-            {format(
-              addDays(startOfWeek(currentMonth, { weekStartsOn: 1 }), i),
-              "EEE",
-              { locale }
-            )}
-          </span>
+      {/* Назви днів тижня */}
+      <div
+        className="gap-1"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+        }}
+      >
+        {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"].map((d) => (
+          <div
+            key={d}
+            className="h-8 flex items-center justify-center text-[10px] font-bold text-gray-400 uppercase tracking-widest"
+          >
+            {d}
+          </div>
         ))}
       </div>
 
-      {/* Days */}
-      <div className="grid grid-cols-7 gap-4">
-        {Array.from({ length: 7 }).map((_, i) => {
-          const day = addDays(
-            startOfWeek(currentMonth, { weekStartsOn: 1 }),
-            i
+      {/* Сітка чисел */}
+      <div
+        className="gap-1"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+        }}
+      >
+        {days.map((day) => {
+          const isSelected = selectedDate && isSameDay(day, selectedDate);
+          const isCurrentMonth = isSameMonth(day, viewDate);
+          const isToday = isSameDay(day, new Date());
+          const isSameWeekAsSelected =
+            selectedDate && isSameWeek(day, selectedDate, { weekStartsOn: 1 });
+          const hasEvents = events?.some((e) =>
+            isSameDay(new Date(e.date), day)
           );
 
           return (
             <button
               key={day.toISOString()}
-              onClick={() => onDateClickHandle(day)}
-              className={`
-                h-10 w-10 rounded-full flex items-center justify-center
-                transition
-                ${isSameDay(day, new Date()) ? "border border-black" : ""}
-                ${
-                  selectedDate && isSameDay(day, selectedDate)
-                    ? "bg-black text-white"
-                    : "hover:bg-gray-200"
-                }
-              `}
+              type="button"
+              onClick={() => setSelectedDate(day)}
+              className={`relative h-12 flex items-center justify-center rounded-lg transition-all duration-200 ${
+                !isCurrentMonth ? "text-gray-300" : "text-gray-800"
+              } ${isSelected ? "bg-black text-white shadow-lg" : ""} ${
+                isToday && !isSelected ? "border border-gray-900" : ""
+              }${
+                isSameWeekAsSelected && !isSelected ? "bg-gray-100" : ""
+              } hover:bg-gray-200`}
             >
-              {format(day, "d")}
+              <span className="text-sm font-semibold">{format(day, "d")}</span>
+
+              {/* Маркер події */}
+              {hasEvents && (
+                <span
+                  className={`absolute bottom-1 w-1 h-1 rounded-full ${
+                    isSelected ? "bg-white" : "bg-red-500"
+                  }`}
+                />
+              )}
             </button>
           );
         })}
-      </div>
-
-      {/* Footer */}
-      <div className="flex gap-6 mt-4">
-        <button
-          type="button"
-          title="to left"
-          onClick={() => changeWeekHandle("prev")}
-        >
-          <IconArrowLeft />
-        </button>
-        <button
-          type="button"
-          title="to right"
-          onClick={() => changeWeekHandle("next")}
-        >
-          <IconArrowRight />
-        </button>
+        {/* </div> */}
       </div>
     </div>
   );
 };
-
 export default Calendar;

@@ -220,5 +220,6 @@
     "service": "service"
   },
   "event_admin": {},
-  "activate_event": {}
+  "activate_event": {},
+  "calendar": {}
 }

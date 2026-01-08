@@ -50,3 +50,21 @@ export async function getPublicServicesWithLimits(count) {
   }
   return res.json();
 }
+
+export async function getPublicActiveEvents(page, limit, filter) {
+  const res = await fetch(
+    `${BASE_URL}/public/active-events?page=${page}&limit=${limit}&filter=${filter}`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch active events");
+  }
+  return res.json();
+}
+
+export async function getPublicActiveEventsById(id) {
+  const res = await fetch(`${BASE_URL}/public/active-events/${id}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch active event");
+  }
+  return res.json();
+}
