@@ -1,6 +1,3 @@
-// --- ІКОНКИ (ВБУДОВАНІ SVG) ---
-// Використовуємо inline SVG, щоб уникнути зовнішніх залежностей
-
 export const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -16,6 +16,7 @@ import {
   IconSpecialist,
   IconAddEvent,
   IconCategories,
+  IconActivateEvent,
 } from "@/helper/images/icon";
 
 export const Sidebar = ({
@@ -107,6 +108,13 @@ export const Sidebar = ({
             <Link href="/add_event" className={sidebarItemClass}>
               <IconAddEvent />
               {t("add_event")}
+            </Link>
+          )}
+
+          {(formData.role === "seller" || formData.role === "admin") && (
+            <Link href="/activate_events" className={sidebarItemClass}>
+              <IconActivateEvent />
+              {t("activate_event")}
             </Link>
           )}
 
