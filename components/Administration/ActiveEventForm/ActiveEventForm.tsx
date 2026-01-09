@@ -6,6 +6,7 @@ import { IActiveEvent } from "@/helper/types/activeEvent";
 import { IEvent } from "@/helper/types/event";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
+import { IProduct } from "../types";
 
 export const ActiveEventForm = ({
   baseEvents,
@@ -76,10 +77,15 @@ export const ActiveEventForm = ({
           title="select"
           className="border p-2 rounded"
           value={form.status}
-          onChange={(e) => setForm({ ...form, status: e.target.value })}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              status: e.target.value as "active" | "archived",
+            })
+          }
         >
           <option value="active">Активний</option>
-          <option value="blocked">Заблокований</option>
+          <option value="archived">Архівний</option>
         </select>
       </div>
 
@@ -152,7 +158,9 @@ export const ActiveEventForm = ({
           title="select"
           className="border p-2 rounded"
           value={form.type}
-          onChange={(e) => setForm({ ...form, type: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, type: e.target.value as "location" | "online" })
+          }
         >
           <option value="online">Онлайн</option>
           <option value="location">На локації</option>
