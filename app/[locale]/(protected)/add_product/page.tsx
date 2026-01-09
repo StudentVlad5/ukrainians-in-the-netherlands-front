@@ -163,7 +163,9 @@ export default function ProductsDashboardPage() {
                 id="status-select"
                 className="border p-2 rounded w-full h-[42px]"
                 value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) =>
+                  setStatus(e.target.value as "active" | "archived" | "blocked")
+                }
               >
                 <option value="">All Statuses</option>
                 <option value="active">Active</option>
