@@ -125,6 +125,13 @@ export const Sidebar = ({
             </Link>
           )}
 
+          {(formData.role === "seller" || formData.role === "admin") && (
+            <Link href="/orders" className={sidebarItemClass}>
+              <IconOrders />
+              {t("orders_managment")}
+            </Link>
+          )}
+
           {formData.role === "admin" && (
             <Link href="/add_news" className={sidebarItemClass}>
               <IconNews />
