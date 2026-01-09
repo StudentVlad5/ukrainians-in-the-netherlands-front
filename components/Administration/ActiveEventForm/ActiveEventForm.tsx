@@ -6,7 +6,6 @@ import { IActiveEvent } from "@/helper/types/activeEvent";
 import { IEvent } from "@/helper/types/event";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
-import { IProduct } from "../types";
 
 export const ActiveEventForm = ({
   baseEvents,

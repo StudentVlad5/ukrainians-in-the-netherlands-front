@@ -37,7 +37,7 @@ export interface IActiveEvent {
     description: ITranslatableString;
     images: string[];
     duration: string;
-    category: string;
+    category: ITranslatableString;
     article_event: string;
   };
 }

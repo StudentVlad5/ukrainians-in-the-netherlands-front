@@ -12,13 +12,14 @@ function NavItem({ item, locale, t, pathname, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
   const itemPath = item.path.startsWith("/") ? item.path : `/${item.path}`;
 
-  const segments = pathname.split("/");
-  const pathnameWithoutLocale = `/${segments.slice(2).join("/")}` || "/";
+  const pathnameWithoutLocale = pathname.replace(
+    new RegExp(`^/${locale}(/|$)`),
+    "/"
+  );
 
-  const normalizedPathname =
-    pathname === `/${locale}` || pathname === `/${locale}/`
-      ? "/"
-      : pathnameWithoutLocale;
+  const normalizedPathname = pathnameWithoutLocale.startsWith("/")
+    ? pathnameWithoutLocale
+    : `/${pathnameWithoutLocale}`;
 
   //  Прибираємо локаль із pathname через RegExp
   const isActive =

@@ -1,6 +1,7 @@
 "use client";
 import { AboutUs } from "@/components/AboutUs/AboutUs";
 import { CallToAction } from "@/components/CallToAction/CallToAction";
+import { EventsSection } from "@/components/Events/Events";
 import { Hero } from "@/components/Hero/Hero";
 import { LegalStatus } from "@/components/LegalStatus/LegalStatus";
 import { MarketplaceSection } from "@/components/Marketplace/Marketplace";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <AboutUs />
       <LegalStatus />
       <NewsSection />
+      <EventsSection />
       <ProvidersSection />
       <MarketplaceSection />
       <TestimonialsSection />
