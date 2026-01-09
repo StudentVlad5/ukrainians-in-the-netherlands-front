@@ -6,14 +6,16 @@ import { IActiveEvent } from "@/helper/types/activeEvent";
 import { useEffect, useState } from "react";
 import { getPublicActiveEventsById } from "@/helper/api/getPublicData";
 import { useParams } from "next/navigation";
+import BookingModal from "@/components/UI/BookingModal/BookingModal";
 
 const EventDetailPage = () => {
   // Змінюємо null для зручної перевірки
   const [eventData, setEventData] = useState<IActiveEvent | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const locale = useLocale() as "uk" | "en" | "de" | "nl";
   const { id } = useParams();
-
+  console.log("eventData", eventData);
   useEffect(() => {
     const fetchEvent = async () => {
       if (!id) return;
@@ -196,7 +198,9 @@ const EventDetailPage = () => {
             </div>
 
             <button
+              type="button"
               disabled={isSoldOut}
+              onClick={() => setIsModalOpen(true)}
               className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all shadow-xl 
                 ${
                   isSoldOut
@@ -206,6 +210,19 @@ const EventDetailPage = () => {
             >
               {isSoldOut ? "Місць немає" : "Забронювати"}
             </button>
+            {/* Модальне вікно */}
+            {eventData && (
+              <BookingModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                eventData={{
+                  eventId: parentEvent?._id,
+                  activeEventId: eventData._id,
+                  price: price,
+                  title: parentEvent.title[locale],
+                }}
+              />
+            )}
 
             <p className="text-center text-[10px] font-bold text-gray-400 mt-6 uppercase tracking-wider">
               Гарантія безпечного бронювання

@@ -33,6 +33,7 @@ export interface IActiveEvent {
     rating: number;
   };
   parentEvent: {
+    _id: string;
     title: ITranslatableString;
     description: ITranslatableString;
     images: string[];

@@ -68,3 +68,15 @@ export async function getPublicActiveEventsById(id) {
   }
   return res.json();
 }
+
+export async function creatPublicOrder(orderData) {
+  const res = await fetch(`${BASE_URL}/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderData),
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch active event");
+  }
+  return res.json();
+}
