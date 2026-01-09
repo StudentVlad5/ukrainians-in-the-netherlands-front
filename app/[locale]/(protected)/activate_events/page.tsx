@@ -145,7 +145,7 @@ export default function ActiveEventsDashboard() {
                       : "Завантаження..."}
                   </td>
                   <td className="p-3 text-gray-600">
-                    {item.location.city}, {item.location.address}
+                    {item?.location?.city}, {item?.location?.address}
                   </td>
                   <td className="p-3 text-center">
                     <span className="font-bold text-blue-600">
