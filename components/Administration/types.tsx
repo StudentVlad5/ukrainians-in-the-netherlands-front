@@ -14,7 +14,7 @@ export interface IProduct {
   category: string;
   tags: string[];
   images: string[];
-  status: "active" | "inactive";
+  status: "active" | "blocked" | "archived";
   location: {
     city: string;
     postalCode?: string;

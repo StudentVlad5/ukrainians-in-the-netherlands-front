@@ -167,7 +167,8 @@ export default function ProductsDashboardPage() {
               >
                 <option value="">All Statuses</option>
                 <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="archived">Archive</option>
+                <option value="blocked">Blocke</option>
               </select>
             </div>
           </div>

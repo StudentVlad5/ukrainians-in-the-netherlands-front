@@ -30,7 +30,7 @@ export const EditProfileForm = ({
 }) => {
   const t = useTranslations("profile");
 
-  const statusEnum = ["active", "inactive", "blocked"] as const;
+  const statusEnum = ["active", "archived", "blocked"] as const;
   const statusOptions: SelectOption[] = statusEnum.map((status) => ({
     value: status,
     label: status,
