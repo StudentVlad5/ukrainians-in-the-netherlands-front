@@ -10,7 +10,7 @@ import {
 } from "@/helper/api/viewProfileData";
 import { checkTokenWithStay } from "@/helper/api/checkTocken";
 import { onSuccess } from "@/lib/Messages/NotifyMessages";
-import { ActiveTab, UserProfile } from "@/components/Prifile/types";
+import { ActiveTab, UserProfile } from "@/components/Profile/types";
 
 type ContentAreaProps = {
   error: string;

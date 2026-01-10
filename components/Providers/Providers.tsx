@@ -61,7 +61,7 @@ export const ProvidersSection: React.FC = () => {
       `}</style>
       <section
         id="providers"
-        className="py-16 md:py-24 bg-blue-50 text-gray-900 overflow-hidden"
+        className="pt-16 pb-4 mt:py-24 bg-white text-gray-900 overflow-hidden"
       >
         <div className="container mx-auto">
           <Link href="/masters">
@@ -90,9 +90,9 @@ export const ProvidersSection: React.FC = () => {
                     <Image
                       src={provider?.imageUrl || defaultImage}
                       alt={provider.name[locale] || provider.name.uk}
-                      width={96}
-                      height={96}
-                      className="w-24 h-24 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
+                      width={120}
+                      height={120}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
                       onError={(e) =>
                         (e.currentTarget.src =
                           "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
@@ -109,6 +109,14 @@ export const ProvidersSection: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
+        <div className="text-center mt-12">
+          <Link
+            href="/masters"
+            className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition"
+          >
+            {t("viewAll")}
+          </Link>
         </div>
       </section>
     </>

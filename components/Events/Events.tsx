@@ -7,6 +7,7 @@ import { getPublicActiveEvents } from "@/helper/api/getPublicData";
 import { IActiveEvent } from "@/helper/types/activeEvent";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import EventCard from "./EventCard";
+import { EventCardSkeleton } from "./EventCardSkeleton";
 
 export const EventsSection: React.FC = () => {
   const [events, setEvents] = useState<IActiveEvent[]>([]);
@@ -19,9 +20,8 @@ export const EventsSection: React.FC = () => {
     const fetchEvents = async () => {
       try {
         setIsLoading(true);
-        const response = await getPublicActiveEvents(1, 3); // Беремо топ-3 для головної
+        const response = await getPublicActiveEvents(1, 3);
 
-        // Обробка даних залежно від структури відповіді вашого API
         const data = response.data || response;
         if (Array.isArray(data)) {
           setEvents(data);
@@ -40,15 +40,15 @@ export const EventsSection: React.FC = () => {
   }, [t]);
 
   return (
-    <section id="events" className="py-16 md:py-24 bg-gray-50">
+    <section id="events" className="py-16 md:py-24 bg-blue-50">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-5xl font-black text-center mb-12 text-slate-900">
           {t("latest")}
         </h2>
 
         {isLoading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <EventCardSkeleton />
           </div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500 font-bold">

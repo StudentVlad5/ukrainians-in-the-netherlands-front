@@ -1,6 +1,7 @@
 "use client";
 import MastersFilter from "@/components/Masters/MastersFilter";
 import MastersGrid from "@/components/Masters/MastersGrid";
+import { MasterCardSkeleton } from "@/components/Masters/MasterCardSkeleton";
 import { getPublicSpecialists } from "@/helper/api/getPublicData";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import { useEffect, useState } from "react";
@@ -67,7 +68,7 @@ export default function MastersPage() {
           onProfessionChange={setProfession}
         />
         {isLoading ? (
-          <div className="text-center py-20">{t("Loading")}...</div>
+          <MasterCardSkeleton />
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
             {t("Error loading data")}

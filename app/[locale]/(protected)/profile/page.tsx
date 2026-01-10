@@ -2,11 +2,11 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { Sidebar } from "@/components/Prifile/SideBar/SideBar";
-import { ActiveTab, UserProfile } from "@/components/Prifile/types";
+import { Sidebar } from "@/components/Profile/SideBar/SideBar";
+import { ActiveTab, UserProfile } from "@/components/Profile/types";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { checkToken } from "@/helper/api/checkTocken";
-import { ContentArea } from "@/components/Prifile/ContentArea/ContentArea";
+import { ContentArea } from "@/components/Profile/ContentArea/ContentArea";
 
 export default function ProfilePage() {
   const t = useTranslations("profile");
@@ -49,7 +49,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <section className="p-4 md:p-10 bg-gray-50">
+    <section className="p-4 md:p-10 mt-28 bg-gray-50">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 ">
         <Sidebar
           formData={formData as UserProfile}

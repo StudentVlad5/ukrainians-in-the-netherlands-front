@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { NewsCardSkeleton } from "./NewsCardSkeleton";
 
 interface INewsArticle {
   _id: string;
@@ -53,7 +54,9 @@ export const NewsSection: React.FC = () => {
         </h2>
 
         {isLoading ? (
-          <div className="text-center py-20">{t("loading")}...</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <NewsCardSkeleton />
+          </div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
             {t("Error loading data")}

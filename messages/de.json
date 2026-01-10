@@ -150,7 +150,8 @@
     "Failed to load wizards": "Assistenten konnten nicht geladen werden",
     "Our Masters and Entrepreneurs": "Unsere Meister und Unternehmer",
     "Error loading data": "Fehler beim Laden der Daten",
-    "loading": "Lädt..."
+    "loading": "Lädt...",
+    "viewAll": "Alles Spezialisten"
   },
   "foot": {
     "moto": "Eine Plattform für die Einheit, Unterstützung und Entwicklung der ukrainischen Gemeinschaft in den Niederlanden.",
@@ -213,12 +214,32 @@
     "loading": "Laden",
     "Error loading data": "Fehler beim Laden der Daten",
     "readMore": "Weiterlesen",
-    "viewAll": "Alle anzeigen",
+    "viewAll": "Alle Neuigkeiten anzeigen",
     "Read more": "Weiterlesen"
   },
   "add_event": {},
-  "market": { "service": "service" },
+  "market": {
+    "service": "Dienstleistungen",
+    "Failed to load goods": "Das Laden der Ware ist fehlgeschlagen",
+    "Market: Made by Ukrainians": "Markt: Von Ukrainern hergestellt",
+    "products": "Waren",
+    "all_goods": "Alle Waren",
+    "all_services": "Alle Dienstleistungen",
+    "more_details": "Weitere Details"
+  },
   "event_admin": {},
   "activate_event": {},
-  "calendar": {}
+  "calendar": {},
+  "events": {
+    "failedToLoad": "Ereignisse können nicht geladen werden",
+    "latest": "Kommende Veranstaltungen",
+    "errorLoading": "Fehler beim Laden von Ereignissen",
+    "viewAll": "Alle Veranstaltungen anzeigen",
+    "event": "Ereignis",
+    "readMore": "Weiterlesen"
+  },
+  "testimonials": {
+    "What People Say": "Was die Leute sagen",
+    "Ordered": "Bestellt"
+  }
 }

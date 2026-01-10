@@ -59,6 +59,7 @@ const EventDetailPage = () => {
     parentEvent,
     specialist,
     vacancies,
+    seats,
     price,
     date,
     time,
@@ -191,6 +192,7 @@ const EventDetailPage = () => {
                       vacancies < 5 ? "text-red-500" : "text-black"
                     }`}
                   >
+                    <span className="text-2xp text-gray-400">{seats} / </span>
                     {vacancies} квитків
                   </p>
                 </div>

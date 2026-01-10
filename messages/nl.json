@@ -150,7 +150,8 @@
     "Failed to load wizards": "Kan wizards niet laden",
     "Our Masters and Entrepreneurs": "Onze meesters en ondernemers",
     "Error loading data": "Fout bij het laden van gegevens",
-    "loading": "Laden..."
+    "loading": "Laden...",
+    "viewAll": "Allemaal specialisten"
   },
   "foot": {
     "moto": "Een platform voor de eenheid, ondersteuning en ontwikkeling van de Oekraïense gemeenschap in Nederland.",
@@ -209,18 +210,36 @@
   },
   "news": {
     "Failed to load news": "Kan nieuws niet laden",
-    "latest": "Laatste nieuws",
+    "latest": "Aankomende evenementen",
     "loading": "laden",
     "Error loading data": "Fout bij het laden van gegevens",
     "readMore": "leesMeer",
-    "viewAll": "alles bekijken",
+    "viewAll": "Bekijk al het nieuws",
     "Read more": "Lees meer"
   },
   "add_event": {},
   "market": {
-    "service": "service"
+    "service": "Diensten",
+    "Failed to load goods": "Kan goederen niet laden",
+    "Market: Made by Ukrainians": "Markt: Gemaakt door Oekraïners",
+    "products": "Goederen",
+    "all_goods": "Alle goederen",
+    "all_services": "Alle diensten",
+    "more_details": "Meer details"
   },
   "event_admin": {},
   "activate_event": {},
-  "calendar": {}
+  "calendar": {},
+  "events": {
+    "failedToLoad": "Kan gebeurtenissen niet laden",
+    "latest": "Laatste evenementen",
+    "errorLoading": "Fout bij het laden van gebeurtenissen",
+    "viewAll": "Bekijk alle evenementen",
+    "event": "evenement",
+    "readMore": "Lees meer"
+  },
+  "testimonials": {
+    "What People Say": "Wat mensen zeggen",
+    "Ordered": "Besteld"
+  }
 }

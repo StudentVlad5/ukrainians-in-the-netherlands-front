@@ -1,14 +1,6 @@
+import { MarketplaceCardProps } from "@/helper/types/market";
+import { useTranslations } from "use-intl";
 import Image from "next/image";
-
-interface MarketplaceCardProps {
-  id: string;
-  type: "product" | "service";
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  price: number;
-  location: string;
-}
 
 export const MarketplaceCard: React.FC<MarketplaceCardProps> = ({
   id,
@@ -20,7 +12,7 @@ export const MarketplaceCard: React.FC<MarketplaceCardProps> = ({
   location,
 }) => {
   const link = type === "product" ? `/products/${id}` : `/masters/${id}`;
-
+  const t = useTranslations("market");
   return (
     <div className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden group">
       <div className="relative h-40 w-full">
@@ -51,7 +43,7 @@ export const MarketplaceCard: React.FC<MarketplaceCardProps> = ({
             href={link}
             className="text-xs font-medium text-blue-500 hover:underline"
           >
-            Детальніше →
+            {t("more_details")} →
           </a>
         </div>
       </div>

@@ -91,49 +91,49 @@ export const Sidebar = ({
           />
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/add_product" className={sidebarItemClass}>
+            <Link href="/profile/add_product" className={sidebarItemClass}>
               <IconAddProduct />
               {t("add_product")}
             </Link>
           )}
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/add_specialist" className={sidebarItemClass}>
+            <Link href="/profile/add_specialist" className={sidebarItemClass}>
               <IconSpecialist />
               {t("add_specialist")}
             </Link>
           )}
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/add_event" className={sidebarItemClass}>
+            <Link href="/profile/add_event" className={sidebarItemClass}>
               <IconAddEvent />
               {t("add_event")}
             </Link>
           )}
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/activate_events" className={sidebarItemClass}>
+            <Link href="/profile/activate_events" className={sidebarItemClass}>
               <IconActivateEvent />
               {t("activate_event")}
             </Link>
           )}
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/add_category" className={sidebarItemClass}>
+            <Link href="/profile/add_category" className={sidebarItemClass}>
               <IconCategories />
               {t("add_category")}
             </Link>
           )}
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/orders" className={sidebarItemClass}>
+            <Link href="/profile/orders" className={sidebarItemClass}>
               <IconOrders />
               {t("orders_managment")}
             </Link>
           )}
 
           {formData.role === "admin" && (
-            <Link href="/add_news" className={sidebarItemClass}>
+            <Link href="/profile/add_news" className={sidebarItemClass}>
               <IconNews />
               {t("add_news")}
             </Link>

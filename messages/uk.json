@@ -150,7 +150,8 @@
     "Failed to load wizards": "Не вдалося завантажити майстрів",
     "Our Masters and Entrepreneurs": "Наші Майстри та Підприємці",
     "Error loading data": "Помилка завантаження даних",
-    "loading": "Завантаження..."
+    "loading": "Завантаження...",
+    "viewAll": "Всі спеціалісти"
   },
   "foot": {
     "moto": "Платформа для єднання, підтримки та розвитку української спільноти в Нідерландах.",
@@ -213,14 +214,32 @@
     "loading": "завантаження",
     "Error loading data": "Помилка завантаження даних",
     "readMore": "читати більше",
-    "viewAll": "переглянути все",
+    "viewAll": "Переглянути всі новини",
     "Read more": "Читати більше"
   },
   "add_event": {},
   "market": {
-    "service": "service"
+    "service": "Послуги",
+    "Failed to load goods": "Не вдалося завантажити товари",
+    "Market: Made by Ukrainians": "Ринок: Зроблено Українцями",
+    "products": "Goods",
+    "all_goods": "Всі товари",
+    "all_services": "Всі послуги",
+    "more_details": "Детальніше"
   },
   "event_admin": {},
   "activate_event": {},
-  "calendar": {}
+  "calendar": {},
+  "events": {
+    "failedToLoad": "Не вдається завантажити події",
+    "latest": "Найближчі події",
+    "errorLoading": "Помилка завантаження подій",
+    "viewAll": "Переглянути всі події",
+    "event": "подія",
+    "readMore": "Читати більше"
+  },
+  "testimonials": {
+    "What People Say": "Що Кажуть Люди",
+    "Ordered": "Замовив"
+  }
 }

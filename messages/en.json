@@ -150,7 +150,8 @@
     "Failed to load wizards": "Failed to load wizards",
     "Our Masters and Entrepreneurs": "Our Masters and Entrepreneurs",
     "Error loading data": "Error loading data",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "viewAll": "All specialists"
   },
   "foot": {
     "moto": "A platform for the unity, support and development of the Ukrainian community in the Netherlands.",
@@ -212,15 +213,33 @@
     "latest": "Latest news",
     "loading": "loading",
     "Error loading data": "Error loading data",
-    "readMore": "readMore",
-    "viewAll": "viewAll",
+    "readMore": "Read More",
+    "viewAll": "View all news",
     "Read more": "Read more"
   },
   "add_event": {},
   "market": {
-    "service": "service"
+    "service": "Services",
+    "Failed to load goods": "Failed to load goods",
+    "Market: Made by Ukrainians": "Market: Made by Ukrainians",
+    "products": "Products",
+    "all_goods": "All Goods",
+    "all_services": "All Services",
+    "more_details": "More details"
   },
   "event_admin": {},
   "activate_event": {},
-  "calendar": {}
+  "calendar": {},
+  "events": {
+    "failedToLoad": "Failed to load events",
+    "latest": "Upcoming events",
+    "errorLoading": "Error loading events",
+    "viewAll": "View all events",
+    "event": "event",
+    "readMore": "Read More"
+  },
+  "testimonials": {
+    "What People Say": "What People Say",
+    "Ordered": "Ordered"
+  }
 }
