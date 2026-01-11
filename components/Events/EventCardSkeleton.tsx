@@ -1,11 +1,17 @@
+import { it } from "@/helper/CONST";
+import { motion } from "framer-motion";
+
 export function EventCardSkeleton() {
   return (
-    <article className="bg-white rounded-[32px] overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full animate-pulse">
-      <div className="h-64 bg-gray-200 relative">
+    <motion.article
+      variants={it}
+      className="bg-white rounded-[32px] overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full"
+    >
+      <div className="h-64 bg-gray-200 relative animate-pulse">
         <div className="absolute top-4 left-4 h-6 w-28 bg-gray-300 rounded-full" />
       </div>
 
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col flex-grow animate-pulse">
         <div className="h-4 w-24 bg-gray-200 rounded mb-3" />
         <div className="h-6 w-full bg-gray-200 rounded mb-2" />
         <div className="h-6 w-3/4 bg-gray-200 rounded mb-4" />
@@ -17,6 +23,6 @@ export function EventCardSkeleton() {
 
         <div className="h-4 w-32 bg-gray-200 rounded mt-auto" />
       </div>
-    </article>
+    </motion.article>
   );
 }

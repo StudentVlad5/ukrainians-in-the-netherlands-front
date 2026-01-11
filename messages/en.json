@@ -240,6 +240,7 @@
   },
   "testimonials": {
     "What People Say": "What People Say",
-    "Ordered": "Ordered"
+    "Ordered": "Ordered",
+    "Error loading testimonials": "Error loading testimonials"
   }
 }

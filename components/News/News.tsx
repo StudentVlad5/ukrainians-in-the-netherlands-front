@@ -1,20 +1,13 @@
 import { getPublicNews } from "@/helper/api/viewProductData";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import { useTranslations, useLocale } from "next-intl";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NewsCardSkeleton } from "./NewsCardSkeleton";
-
-interface INewsArticle {
-  _id: string;
-  slug: string;
-  title: Record<string, string>;
-  shortDescription: Record<string, string>;
-  imageUrl: string;
-  date: string;
-  category: Record<string, string>;
-}
+import { motion } from "framer-motion";
+import { container } from "@/helper/CONST";
+import NewsCard from "./NewsCard";
+import { INewsArticle } from "@/helper/types/news";
 
 export const NewsSection: React.FC = () => {
   const [news, setNews] = useState<INewsArticle[]>([]);
@@ -53,55 +46,26 @@ export const NewsSection: React.FC = () => {
           {t("latest")}
         </h2>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <NewsCardSkeleton />
-          </div>
-        ) : getError ? (
-          <div className="text-center py-20 text-red-500">
-            {t("Error loading data")}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {news.map((article) => (
-              <article
-                key={article._id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition"
-              >
-                <div className="relative w-full h-48">
-                  <Image
-                    src={article.imageUrl || "/placeholder.jpg"}
-                    alt={article.title[locale]}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <span className="text-sm font-semibold text-blue-600">
-                    {article.category[locale]} • {article.date}
-                  </span>
-
-                  <h3 className="text-xl font-bold my-2">
-                    {article.title[locale]}
-                  </h3>
-
-                  <p className="text-gray-700 mb-4">
-                    {article.shortDescription[locale]}
-                  </p>
-
-                  <Link
-                    href={`/news/${article.slug}`}
-                    className="font-semibold text-blue-600 hover:text-blue-800"
-                  >
-                    {t("readMore")} →
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-
+        <motion.div
+          layout
+          key={isLoading ? "loading" : "loaded"} // Допомагає Framer Motion перезапустити анімацію
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {isLoading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <NewsCardSkeleton key={`skeleton-${i}`} />
+            ))
+          ) : getError ? (
+            <div className="col-span-full text-center py-20 text-red-500">
+              {t("Error loading data")}
+            </div>
+          ) : (
+            news.map((article) => <NewsCard key={article._id} item={article} />)
+          )}
+        </motion.div>
         <div className="text-center mt-12">
           <Link
             href="/news"

@@ -1,5 +1,5 @@
 export interface ITestimonial {
-  id: number;
+  _id: string;
   name: string;
   quote: string;
   service: string;

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { INews } from "@/helper/types/news";
+import { INewsArticle } from "@/helper/types/news";
 import { Lang } from "@/helper/types/common";
 import defaultImage from "@/public/images/no-photo-available-icon.jpg";
 
-export default function NewsCard({ item }: { item: INews }) {
+export default function NewsCard({ item }: { item: INewsArticle }) {
   const locale = useLocale() as Lang;
   const t = useTranslations("news");
   return (

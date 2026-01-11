@@ -240,6 +240,7 @@
   },
   "testimonials": {
     "What People Say": "Wat mensen zeggen",
-    "Ordered": "Besteld"
+    "Ordered": "Besteld",
+    "Error loading testimonials": "Fout bij het laden van getuigenissen"
   }
 }

@@ -10,20 +10,7 @@ import { MarketplaceCardSkeleton } from "./MarketplaceCardSkeleton";
 import Link from "next/link";
 import { ProductApi, ServiceApi, IMarketItem } from "@/helper/types/market";
 import { motion } from "framer-motion";
-
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-};
-
-const it = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+import { container, it } from "@/helper/CONST";
 
 export const MarketplaceSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"products" | "services">(

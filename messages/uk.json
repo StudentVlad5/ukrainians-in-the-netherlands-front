@@ -240,6 +240,7 @@
   },
   "testimonials": {
     "What People Say": "Що Кажуть Люди",
-    "Ordered": "Замовив"
+    "Ordered": "Замовив",
+    "Error loading testimonials": "Помилка завантаження відгуків"
   }
 }

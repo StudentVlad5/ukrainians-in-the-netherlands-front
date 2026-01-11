@@ -240,6 +240,7 @@
   },
   "testimonials": {
     "What People Say": "Was die Leute sagen",
-    "Ordered": "Bestellt"
+    "Ordered": "Bestellt",
+    "Error loading testimonials": "Fehler beim Laden der Testimonials"
   }
 }

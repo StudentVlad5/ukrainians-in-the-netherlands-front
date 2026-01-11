@@ -20,3 +20,13 @@ export interface INews {
     body: MultilangString;
   }[];
 }
+
+export interface INewsArticle {
+  _id: string;
+  slug: string;
+  title: Record<string, string>;
+  shortDescription: Record<string, string>;
+  imageUrl: string;
+  date: string;
+  category: Record<string, string>;
+}

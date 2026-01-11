@@ -8,6 +8,8 @@ import { IActiveEvent } from "@/helper/types/activeEvent";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import EventCard from "./EventCard";
 import { EventCardSkeleton } from "./EventCardSkeleton";
+import { motion } from "framer-motion";
+import { container } from "@/helper/CONST";
 
 export const EventsSection: React.FC = () => {
   const [events, setEvents] = useState<IActiveEvent[]>([]);
@@ -46,21 +48,27 @@ export const EventsSection: React.FC = () => {
           {t("latest")}
         </h2>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <EventCardSkeleton />
-          </div>
-        ) : getError ? (
-          <div className="text-center py-20 text-red-500 font-bold">
-            {t("errorLoading")}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.map((event) => (
-              <EventCard key={event._id} item={event} />
-            ))}
-          </div>
-        )}
+        <motion.div
+          key={isLoading ? "loading" : "loaded"}
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {isLoading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <EventCardSkeleton key={`skeleton-${i}`} />
+            ))
+          ) : getError ? (
+            <div className="col-span-full text-center py-20 text-red-500 font-bold">
+              {t("errorLoading")}
+            </div>
+          ) : (
+            events.map((event) => (
+              <EventCard key={event._id} item={event} isLoading={isLoading} />
+            ))
+          )}
+        </motion.div>
 
         <div className="text-center mt-16">
           <Link

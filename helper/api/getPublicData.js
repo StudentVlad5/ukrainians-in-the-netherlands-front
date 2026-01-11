@@ -80,3 +80,11 @@ export async function creatPublicOrder(orderData) {
   }
   return res.json();
 }
+
+export async function getPubliTestimonials() {
+  const res = await fetch(`${BASE_URL}/public/testimonials`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch testimonials");
+  }
+  return res.json();
+}
