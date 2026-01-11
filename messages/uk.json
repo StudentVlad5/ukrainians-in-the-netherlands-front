@@ -49,7 +49,10 @@
     "add_specialist": "Додати спеціаліста",
     "add_news": "Додати новинy",
     "add_category": "Додати категорію",
-    "add_event": "Додати подію"
+    "add_event": "Додати подію",
+    "sidebarAddBusiness": "Додати бізнес",
+    "management": "Управління",
+    "activate_event": "Активувати подію"
   },
   "masters": {
     "title": "Майстри",

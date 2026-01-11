@@ -18,12 +18,55 @@ import {
   IconAddEvent,
   IconCategories,
   IconActivateEvent,
+  IconAddBusiness,
 } from "@/helper/images/icon";
+import { refreshUserProfile } from "@/helper/api/viewProfileData";
+import { checkToken } from "@/helper/api/checkTocken";
+import { useState, useEffect } from "react";
 
-export const Sidebar = ({ formData }: { formData: UserProfile }) => {
+export const Sidebar = () => {
   const t = useTranslations("profile");
   const router = useRouter();
   const pathname = usePathname();
+
+  const [formData, setFormData] = useState<UserProfile | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = checkToken(router);
+
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+
+      try {
+        const data = await refreshUserProfile(token);
+        if (data) {
+          setFormData(data);
+        } else {
+          throw new Error("No data");
+        }
+      } catch (err) {
+        console.error("Layout fetch error:", err);
+        Cookies.remove("accessToken");
+        router.push("/login");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (!formData) fetchProfile();
+  }, [formData, router]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   const sidebarItemClass =
     "flex items-center gap-3 w-full p-3 rounded-xl text-sm font-bold transition-all duration-200";
@@ -58,16 +101,16 @@ export const Sidebar = ({ formData }: { formData: UserProfile }) => {
           <div className="relative w-24 h-24 mx-auto mb-3">
             <Image
               fill
-              src={formData.avatarUrl || "/default-avatar.png"}
+              src={formData?.avatarUrl || "/default-avatar.png"}
               alt="Avatar"
               className="rounded-full object-cover bg-gray-100 border-4 border-white shadow-sm"
             />
           </div>
           <h3 className="font-black text-slate-900 leading-tight">
-            {formData.fullName || t("welcome")}
+            {formData?.fullName || t("welcome")}
           </h3>
           <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-bold">
-            {formData.role}
+            {formData?.role}
           </p>
         </div>
 
@@ -102,7 +145,17 @@ export const Sidebar = ({ formData }: { formData: UserProfile }) => {
             {t("sidebarOrders")}
           </Link>
 
-          {(formData.role === "seller" || formData.role === "admin") && (
+          <Link
+            href="/profile/add_business"
+            className={`${sidebarItemClass} ${
+              isActive("/add_business") ? activeClass : inactiveClass
+            }`}
+          >
+            <IconAddBusiness />
+            {t("sidebarAddBusiness")}
+          </Link>
+
+          {(formData?.role === "seller" || formData?.role === "admin") && (
             <>
               <div className="pt-4 pb-2 px-3 text-[10px] font-black text-gray-300 uppercase tracking-[2px]">
                 {t("management")}
@@ -146,7 +199,7 @@ export const Sidebar = ({ formData }: { formData: UserProfile }) => {
             </>
           )}
 
-          {formData.role === "admin" && (
+          {formData?.role === "admin" && (
             <Link
               href="/profile/add_news"
               className={`${sidebarItemClass} ${
@@ -158,7 +211,7 @@ export const Sidebar = ({ formData }: { formData: UserProfile }) => {
             </Link>
           )}
 
-          {(formData.role === "seller" || formData.role === "admin") && (
+          {(formData?.role === "seller" || formData?.role === "admin") && (
             <Link
               href="/profile/add_category"
               className={`${sidebarItemClass} ${

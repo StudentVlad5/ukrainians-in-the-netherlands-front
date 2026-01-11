@@ -14,7 +14,7 @@ export const CallToAction: React.FC = () => {
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Link
-            href="/add-business"
+            href="/profile/add_business"
             className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-700 transition-colors duration-300"
           >
             {t("Add your business")}

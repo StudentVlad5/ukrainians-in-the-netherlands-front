@@ -7,6 +7,7 @@ export const roleRequests = async (token, requestedRole) => {
   const res = await fetch(`${BASE_URL}/role-requests`, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({ requestedRole }),

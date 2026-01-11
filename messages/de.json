@@ -49,7 +49,10 @@
     "add_specialist": "Spezialist hinzufügen",
     "add_news": "Neuigkeiten hinzufügen",
     "add_category": "Kategorie hinzufügen",
-    "add_event": "Ereignis hinzufügen"
+    "add_event": "Ereignis hinzufügen",
+    "sidebarAddBusiness": "Geschäft hinzufügen",
+    "management": "Management",
+    "activate_event": "Ereignis aktivieren"
   },
   "masters": {
     "title": "Meisters",

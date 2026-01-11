@@ -49,7 +49,10 @@
     "add_specialist": "Specialist toevoegen",
     "add_news": "Nieuws toevoegen",
     "add_category": "Categorie toevoegen",
-    "add_event": "Evenement toevoegen"
+    "add_event": "Evenement toevoegen",
+    "sidebarAddBusiness": "Voeg bedrijf toe",
+    "management": "Beheer",
+    "activate_event": "Gebeurtenis activeren"
   },
   "masters": {
     "title": "Meesters",

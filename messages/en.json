@@ -49,7 +49,10 @@
     "add_specialist": "Add specialist",
     "add_news": "Add news",
     "add_category": "Add category",
-    "add_event": "Add event"
+    "add_event": "Add event",
+    "sidebarAddBusiness": "Add business",
+    "management": "Management",
+    "activate_event": "Activate event"
   },
   "masters": {
     "title": "Masters",

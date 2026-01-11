@@ -203,3 +203,20 @@ export const IconArrowRight = () => (
     />
   </svg>
 );
+
+export const IconAddBusiness = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3 21h18M9 8h1m-1 4h1m4-4h1m-1 4h1M7 21V5a2 2 0 012-2h6a2 2 0 012 2v16M12 14v6m-3-3h6"
+    />
+  </svg>
+);
