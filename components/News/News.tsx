@@ -7,10 +7,10 @@ import { NewsCardSkeleton } from "./NewsCardSkeleton";
 import { motion } from "framer-motion";
 import { container } from "@/helper/CONST";
 import NewsCard from "./NewsCard";
-import { INewsArticle } from "@/helper/types/news";
+import { INews } from "@/helper/types/news";
 
 export const NewsSection: React.FC = () => {
-  const [news, setNews] = useState<INewsArticle[]>([]);
+  const [news, setNews] = useState<INews[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [getError, setGetError] = useState(false);
 
