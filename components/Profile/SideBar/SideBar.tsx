@@ -1,9 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
-import { SidebarButton } from "../../UI/SidebarButton/SidebarButtun";
-import { UserProfile, ActiveTab } from "../types";
+import { UserProfile } from "../types";
 import { BASE_URL } from "@/helper/CONST";
 import Link from "next/link";
 import {
@@ -19,19 +20,16 @@ import {
   IconActivateEvent,
 } from "@/helper/images/icon";
 
-export const Sidebar = ({
-  formData,
-  activeTab,
-  setActiveTab,
-}: {
-  formData: UserProfile;
-  activeTab: ActiveTab;
-  setActiveTab: (tab: ActiveTab) => void;
-}) => {
+export const Sidebar = ({ formData }: { formData: UserProfile }) => {
   const t = useTranslations("profile");
   const router = useRouter();
+  const pathname = usePathname();
+
   const sidebarItemClass =
-    "text-gray-600 hover:bg-gray-100 hover:text-gray-900 flex items-center gap-3 w-full p-3 rounded-md text-sm font-medium transition-colors duration-200";
+    "flex items-center gap-3 w-full p-3 rounded-xl text-sm font-bold transition-all duration-200";
+
+  const activeClass = "bg-blue-600 text-white shadow-md shadow-blue-100";
+  const inactiveClass = "text-gray-500 hover:bg-gray-50 hover:text-blue-900";
 
   const handleLogout = async () => {
     const token = Cookies.get("accessToken");
@@ -50,105 +48,138 @@ export const Sidebar = ({
     router.refresh();
   };
 
+  // Допоміжна функція для перевірки активності
+  const isActive = (path: string) => pathname.includes(path);
+
   return (
-    <aside className="w-full md:w-1/4 lg:w-1/5 p-4 bg-white shadow-md rounded-lg">
+    <aside className="w-full md:w-1/4 lg:w-1/5 p-4 bg-white shadow-sm border border-gray-100 rounded-[32px] h-fit sticky top-28">
       <nav className="flex flex-col h-full">
-        {/* Секція з аватаркою вгорі сайдбару */}
-        <div className="text-center mb-6">
-          <Image
-            width={200}
-            height={200}
-            src={formData.avatarUrl || "/default-avatar.png"}
-            alt="Avatar"
-            className="w-24 h-24 rounded-full object-cover bg-gray-200 mx-auto mb-2"
-          />
-          <h3 className="font-semibold text-blue-950">
+        <div className="text-center mb-8">
+          <div className="relative w-24 h-24 mx-auto mb-3">
+            <Image
+              fill
+              src={formData.avatarUrl || "/default-avatar.png"}
+              alt="Avatar"
+              className="rounded-full object-cover bg-gray-100 border-4 border-white shadow-sm"
+            />
+          </div>
+          <h3 className="font-black text-slate-900 leading-tight">
             {formData.fullName || t("welcome")}
           </h3>
+          <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-bold">
+            {formData.role}
+          </p>
         </div>
 
-        {/* Навігація */}
-        <div className="space-y-2 grow">
-          <SidebarButton
-            label={t("sidebarPersonal")}
-            icon={<IconPersonal />}
-            isActive={activeTab === "personal" || activeTab === "edit"}
-            onClick={() => setActiveTab("personal")}
-          />
+        <div className="space-y-1 grow">
+          <Link
+            href="/profile/personal"
+            className={`${sidebarItemClass} ${
+              isActive("/personal") ? activeClass : inactiveClass
+            }`}
+          >
+            <IconPersonal />
+            {t("sidebarPersonal")}
+          </Link>
 
-          <SidebarButton
-            label={t("sidebarFavorites")}
-            icon={<IconFavorites />}
-            isActive={activeTab === "favorites"}
-            onClick={() => setActiveTab("favorites")}
-          />
+          <Link
+            href="/profile/favorites"
+            className={`${sidebarItemClass} ${
+              isActive("/favorites") ? activeClass : inactiveClass
+            }`}
+          >
+            <IconFavorites />
+            {t("sidebarFavorites")}
+          </Link>
 
-          <SidebarButton
-            label={t("sidebarOrders")}
-            icon={<IconOrders />}
-            isActive={activeTab === "orders"}
-            onClick={() => setActiveTab("orders")}
-          />
-
-          {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/add_product" className={sidebarItemClass}>
-              <IconAddProduct />
-              {t("add_product")}
-            </Link>
-          )}
-
-          {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/add_specialist" className={sidebarItemClass}>
-              <IconSpecialist />
-              {t("add_specialist")}
-            </Link>
-          )}
+          <Link
+            href="/profile/my_orders"
+            className={`${sidebarItemClass} ${
+              isActive("/my_orders") ? activeClass : inactiveClass
+            }`}
+          >
+            <IconOrders />
+            {t("sidebarOrders")}
+          </Link>
 
           {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/add_event" className={sidebarItemClass}>
-              <IconAddEvent />
-              {t("add_event")}
-            </Link>
-          )}
-
-          {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/activate_events" className={sidebarItemClass}>
-              <IconActivateEvent />
-              {t("activate_event")}
-            </Link>
-          )}
-
-          {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/add_category" className={sidebarItemClass}>
-              <IconCategories />
-              {t("add_category")}
-            </Link>
-          )}
-
-          {(formData.role === "seller" || formData.role === "admin") && (
-            <Link href="/profile/orders" className={sidebarItemClass}>
-              <IconOrders />
-              {t("orders_managment")}
-            </Link>
+            <>
+              <div className="pt-4 pb-2 px-3 text-[10px] font-black text-gray-300 uppercase tracking-[2px]">
+                {t("management")}
+              </div>
+              <Link
+                href="/profile/add_product"
+                className={`${sidebarItemClass} ${
+                  isActive("/add_product") ? activeClass : inactiveClass
+                }`}
+              >
+                <IconAddProduct />
+                {t("add_product")}
+              </Link>
+              <Link
+                href="/profile/add_specialist"
+                className={`${sidebarItemClass} ${
+                  isActive("/add_specialist") ? activeClass : inactiveClass
+                }`}
+              >
+                <IconSpecialist />
+                {t("add_specialist")}
+              </Link>
+              <Link
+                href="/profile/add_event"
+                className={`${sidebarItemClass} ${
+                  isActive("/add_event") ? activeClass : inactiveClass
+                }`}
+              >
+                <IconAddEvent />
+                {t("add_event")}
+              </Link>
+              <Link
+                href="/profile/activate_events"
+                className={`${sidebarItemClass} ${
+                  isActive("/activate_events") ? activeClass : inactiveClass
+                }`}
+              >
+                <IconActivateEvent />
+                {t("activate_event")}
+              </Link>
+            </>
           )}
 
           {formData.role === "admin" && (
-            <Link href="/profile/add_news" className={sidebarItemClass}>
+            <Link
+              href="/profile/add_news"
+              className={`${sidebarItemClass} ${
+                isActive("/add_news") ? activeClass : inactiveClass
+              }`}
+            >
               <IconNews />
               {t("add_news")}
             </Link>
           )}
+
+          {(formData.role === "seller" || formData.role === "admin") && (
+            <Link
+              href="/profile/add_category"
+              className={`${sidebarItemClass} ${
+                isActive("/add_category") ? activeClass : inactiveClass
+              }`}
+            >
+              <IconCategories />
+              {t("add_category")}
+            </Link>
+          )}
         </div>
 
-        {/* Кнопка Виходу внизу */}
-        <div className="mt-auto">
-          <SidebarButton
-            label={t("logout")}
-            icon={<IconLogout />}
-            isActive={false}
+        <div className="mt-8 pt-4 border-t border-gray-50">
+          <button
+            type="button"
             onClick={handleLogout}
-            isLogout
-          />
+            className="flex items-center gap-3 w-full p-3 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 transition-all duration-200"
+          >
+            <IconLogout />
+            {t("logout")}
+          </button>
         </div>
       </nav>
     </aside>

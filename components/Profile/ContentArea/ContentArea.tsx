@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Placeholder } from "@/components/UI/Placeholder/Placeholder";
 import { EditProfileForm } from "../EditProfileForm/EditProfileForm";
 import { ViewProfileData } from "../ViewProfileData/ViewProfileData";
 import { useTranslations } from "next-intl";
@@ -97,40 +96,32 @@ export const ContentArea = ({
     }
   };
   return (
-    <main className="w-full md:w-3/4 lg:w-4/5 md:pl-6">
-      <div className="bg-white shadow-md rounded-lg p-6 min-h-[400px]">
-        {error && (
-          <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
-            <p className="text-sm text-red-700">{error}</p>
-          </div>
-        )}
+    <div className="bg-white shadow-md rounded-lg p-6 min-h-[400px] w-full">
+      {error && (
+        <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+          <p className="text-sm text-red-700">{error}</p>
+        </div>
+      )}
 
-        {activeTab === "personal" && (
-          <ViewProfileData
-            user={formData}
-            onEditClick={() => setActiveTab("edit")}
-          />
-        )}
+      {activeTab === "personal" && (
+        <ViewProfileData
+          user={formData}
+          onEditClick={() => setActiveTab("edit")}
+        />
+      )}
 
-        {activeTab === "edit" && (
-          <EditProfileForm
-            formData={formData}
-            avatarFile={avatarFile}
-            isSaving={isSaving}
-            isUploading={isUploading}
-            onFormChange={handleChange}
-            onFormSubmit={handleProfileSave}
-            onFileChange={handleFileChange}
-            onAvatarUpload={handleAvatarUpload}
-          />
-        )}
-
-        {activeTab === "favorites" && (
-          <Placeholder title={t("favoritesTitle")} />
-        )}
-
-        {activeTab === "orders" && <Placeholder title={t("ordersTitle")} />}
-      </div>
-    </main>
+      {activeTab === "edit" && (
+        <EditProfileForm
+          formData={formData}
+          avatarFile={avatarFile}
+          isSaving={isSaving}
+          isUploading={isUploading}
+          onFormChange={handleChange}
+          onFormSubmit={handleProfileSave}
+          onFileChange={handleFileChange}
+          onAvatarUpload={handleAvatarUpload}
+        />
+      )}
+    </div>
   );
 };
