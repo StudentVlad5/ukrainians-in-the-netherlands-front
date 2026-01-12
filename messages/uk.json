@@ -52,7 +52,17 @@
     "add_event": "Додати подію",
     "sidebarAddBusiness": "Додати бізнес",
     "management": "Управління",
-    "activate_event": "Активувати подію"
+    "activate_event": "Активувати подію",
+    "upgradeAccount": "Оновити обліковий запис",
+    "selectDesiredRole": "Виберіть бажану роль",
+    "roleSeller": "Seller",
+    "roleAdmin": "Admin",
+    "sellerDescription": "Доступ на додавання / редагування / видалення власних товарів або сервісів, можливість додавати івенти",
+    "adminDescription": "Доступ на додавання / редагування / видалення будь-яких товарів або сервісів, можливість додавати івенти, новини і інші опції",
+    "sending": "Відправка",
+    "submitRequest": "Надіслати",
+    "requestSentSuccessfully": "запит надіслано успішно",
+    "failedToSendRequest": "не вдалося надіслати запит"
   },
   "masters": {
     "title": "Майстри",

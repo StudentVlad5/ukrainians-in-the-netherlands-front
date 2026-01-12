@@ -21,7 +21,7 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const { locale } = params;
+  const { locale } = await params;
 
   const titles: Record<string, string> = {
     uk: "Українська спільнота в Європі | Маркетплейс",

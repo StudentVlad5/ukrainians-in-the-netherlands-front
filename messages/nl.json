@@ -52,7 +52,17 @@
     "add_event": "Evenement toevoegen",
     "sidebarAddBusiness": "Voeg bedrijf toe",
     "management": "Beheer",
-    "activate_event": "Gebeurtenis activeren"
+    "activate_event": "Gebeurtenis activeren",
+    "upgradeAccount": "Upgrade-account",
+    "selectDesiredRole": "Selecteer de gewenste rol",
+    "roleSeller": "Seller",
+    "roleAdmin": "Admin",
+    "sellerDescription": "Toegang om uw eigen goederen of diensten toe te voegen/bewerken/verwijderen, de mogelijkheid om evenementen toe te voegen",
+    "adminDescription": "Toegang om goederen of diensten toe te voegen/bewerken/verwijderen, de mogelijkheid om evenementen, nieuws en andere opties toe te voegen",
+    "sending": "Verzenden",
+    "submitRequest": "Indienen",
+    "requestSentSuccessfully": "verzoek succesvol verzonden",
+    "failedToSendRequest": "kan het verzoek niet verzenden"
   },
   "masters": {
     "title": "Meesters",

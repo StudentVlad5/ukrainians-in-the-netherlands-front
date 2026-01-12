@@ -52,7 +52,17 @@
     "add_event": "Add event",
     "sidebarAddBusiness": "Add business",
     "management": "Management",
-    "activate_event": "Activate event"
+    "activate_event": "Activate event",
+    "upgradeAccount": "Upgrade account",
+    "selectDesiredRole": "Select desired role",
+    "roleSeller": "Seller",
+    "roleAdmin": "Admin",
+    "sellerDescription": "Access to add / edit / delete your own goods or services, the ability to add events",
+    "adminDescription": "Access to add / edit / delete any goods or services, the ability to add events, news and other options",
+    "sending": "Sending",
+    "submitRequest": "Submit",
+    "requestSentSuccessfully": "request sent successfully",
+    "failedToSendRequest": "failed to send request"
   },
   "masters": {
     "title": "Masters",

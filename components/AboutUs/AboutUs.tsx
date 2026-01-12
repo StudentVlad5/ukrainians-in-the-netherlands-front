@@ -24,17 +24,17 @@ export const AboutUs: React.FC = () => {
               {t("part_3")}
             </p>
             <Link
-              href="#contact"
+              href="mailto:vlad_np@ukr.net?subject=Contact%20from%20website%20UAinNL&body=Hello%2C%0A%0AI%20would%20like%20to%20contact%20you."
               className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
             >
               {t("Contact us")}
             </Link>
           </div>
           <div className="flex justify-center">
-            {/* Використовуйте тут фото, що символізує спільноту */}
             <Image
               src={about_us}
               alt={t("alt")}
+              loading="eager"
               className="rounded-lg shadow-xl object-cover w-full max-w-md"
               onError={(e) =>
                 (e.currentTarget.src =

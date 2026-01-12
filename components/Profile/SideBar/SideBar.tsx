@@ -23,6 +23,7 @@ import {
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { checkToken } from "@/helper/api/checkTocken";
 import { useState, useEffect } from "react";
+import defaultPhoto from "@/public/images/no-photo-available-icon.jpg";
 
 export const Sidebar = () => {
   const t = useTranslations("profile");
@@ -101,8 +102,10 @@ export const Sidebar = () => {
           <div className="relative w-24 h-24 mx-auto mb-3">
             <Image
               fill
-              src={formData?.avatarUrl || "/default-avatar.png"}
+              src={formData?.avatarUrl || defaultPhoto}
               alt="Avatar"
+              loading="eager"
+              sizes="96px"
               className="rounded-full object-cover bg-gray-100 border-4 border-white shadow-sm"
             />
           </div>

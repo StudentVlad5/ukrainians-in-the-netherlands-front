@@ -29,6 +29,7 @@ const RoleRequestForm = ({ currentUserRole }: { currentUserRole: string }) => {
       onSuccess(t("requestSentSuccessfully"));
     } catch (error) {
       onFetchError(t("failedToSendRequest"));
+      if (error instanceof Error) onFetchError(error?.message);
       console.log(error);
     } finally {
       setIsSubmitting(false);

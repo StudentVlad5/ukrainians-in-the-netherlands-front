@@ -14,7 +14,7 @@ export default function MastersGrid({ filteredMasters }: MastersGridProps) {
   if (filteredMasters.length === 0) {
     return (
       <div className="text-center py-10 text-gray-500">
-        {t("Майстрів не знайдено за вашим запитом")}
+        {t("No masters found for your request")}
       </div>
     );
   }

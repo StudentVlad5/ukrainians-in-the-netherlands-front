@@ -47,7 +47,7 @@ function NavItem({ item, locale, t, pathname, onClick }) {
                 ]
               : isActive
               ? "#1E3A8A"
-              : "linear-gradient(0deg, #f3f4f6, #f3f4f6)",
+              : "#f3f4f6",
             color: isActive ? "#FFFFFF" : isHovered ? "#FFFFFF" : "#1F2937",
           }}
           transition={{

@@ -15,7 +15,8 @@ export const roleRequests = async (token, requestedRole) => {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch orders");
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Failed to send request");
   }
 
   return res.json();

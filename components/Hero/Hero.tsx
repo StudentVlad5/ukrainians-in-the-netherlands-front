@@ -23,7 +23,7 @@ export const Hero: React.FC = () => {
         </h1>
         <p className="text-xl md:text-2xl mb-8 drop-shadow-md">{t("moto")}</p>
         <Link
-          href="/market"
+          href="/masters"
           className="bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-300 transition-transform duration-300 hover:scale-105"
         >
           {t("Support")}

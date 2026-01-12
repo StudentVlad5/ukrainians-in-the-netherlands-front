@@ -52,7 +52,17 @@
     "add_event": "Ereignis hinzufügen",
     "sidebarAddBusiness": "Geschäft hinzufügen",
     "management": "Management",
-    "activate_event": "Ereignis aktivieren"
+    "activate_event": "Ereignis aktivieren",
+    "upgradeAccount": "Konto aktualisieren",
+    "selectDesiredRole": "Wählen Sie die gewünschte Rolle aus",
+    "roleSeller": "Seller",
+    "roleAdmin": "Admin",
+    "sellerDescription": "Zugriff zum Hinzufügen/Bearbeiten/Löschen Ihrer eigenen Waren oder Dienstleistungen sowie die Möglichkeit, Ereignisse hinzuzufügen",
+    "adminDescription": "Zugriff zum Hinzufügen/Bearbeiten/Löschen von Waren oder Dienstleistungen, die Möglichkeit, Ereignisse, Nachrichten und andere Optionen hinzuzufügen",
+    "sending": "Senden",
+    "submitRequest": "Einreichen",
+    "requestSentSuccessfully": "anfrage erfolgreich gesendet",
+    "failedToSendRequest": "anfrage konnte nicht gesendet werden"
   },
   "masters": {
     "title": "Meisters",
