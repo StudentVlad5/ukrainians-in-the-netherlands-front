@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { UserProfile } from "../types";
+import { UserProfile } from "@/helper/types/userData";
 import Image from "next/image";
 import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
