@@ -12,6 +12,8 @@
     "subtitle": "Сервіс для українців у Європі"
   },
   "profile": {
+    "role_requests": "Рольові запити",
+    "user_administration": "Управління користувачами",
     "sidebarPersonal": "Персональні дані",
     "fullName": "Повне ім'я",
     "workInProgress": "Робота триває...",
@@ -255,5 +257,16 @@
     "What People Say": "Що Кажуть Люди",
     "Ordered": "Замовив",
     "Error loading testimonials": "Помилка завантаження відгуків"
+  },
+  "admin": {
+    "Role Upgrade Requests": "Запити на підвищення ролі",
+    "User": "User",
+    "Requested Role": "Запитана роль",
+    "Status": "Статус",
+    "Actions": "Дії",
+    "Approve": "Затвердити",
+    "Reject": "Відхилити",
+    "Are you sure you want to delete this request?": "Ви впевнені, що хочете видалити цей запит?",
+    "Delete Request": "Видалити запит"
   }
 }

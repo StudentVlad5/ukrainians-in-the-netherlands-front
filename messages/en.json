@@ -12,6 +12,8 @@
     "subtitle": "Service for Ukrainians in Europe"
   },
   "profile": {
+    "role_requests": "Role requests",
+    "user_administration": "User management",
     "sidebarPersonal": "Personal Data",
     "fullName": "Full Name",
     "workInProgress": "Work in Progress...",
@@ -255,5 +257,16 @@
     "What People Say": "What People Say",
     "Ordered": "Ordered",
     "Error loading testimonials": "Error loading testimonials"
+  },
+  "admin": {
+    "Role Upgrade Requests": "Role Upgrade Requests",
+    "User": "Користувач",
+    "Requested Role": "Запитана роль",
+    "Status": "Status",
+    "Actions": "Actions",
+    "Approve": "Approve",
+    "Reject": "Reject",
+    "Are you sure you want to delete this request?": "Are you sure you want to delete this request?",
+    "Delete Request": "Delete Request"
   }
 }

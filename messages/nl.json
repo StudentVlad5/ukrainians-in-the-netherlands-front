@@ -12,6 +12,8 @@
     "subtitle": "Platform voor Oekraïners in Europa"
   },
   "profile": {
+    "role_requests": "Rolverzoeken",
+    "user_administration": "Gebruikersbeheer",
     "sidebarPersonal": "Persoonlijke gegevens",
     "fullName": "Volledige naam",
     "workInProgress": "Werk in uitvoering...",
@@ -255,5 +257,16 @@
     "What People Say": "Wat mensen zeggen",
     "Ordered": "Besteld",
     "Error loading testimonials": "Fout bij het laden van getuigenissen"
+  },
+  "admin": {
+    "Role Upgrade Requests": "Aanvragen voor rolupgrades",
+    "User": "Gebruiker",
+    "Requested Role": "Запитана роль",
+    "Status": "Status",
+    "Actions": "Acties",
+    "Approve": "Goedkeuren",
+    "Reject": "Afwijzen",
+    "Are you sure you want to delete this request?": "Weet u zeker dat u dit verzoek wilt verwijderen?",
+    "Delete Request": "Verzoek verwijderen"
   }
 }

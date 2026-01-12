@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { ActiveTab, UserProfile } from "@/components/Profile/types";
+import { ActiveTab, UserProfile } from "@/helper/types/userData";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { checkToken } from "@/helper/api/checkTocken";
 import { ContentArea } from "@/components/Profile/ContentArea/ContentArea";

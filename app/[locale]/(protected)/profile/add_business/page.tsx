@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { onFetchError, onSuccess } from "@/lib/Messages/NotifyMessages";
-import { roleRequests } from "@/helper/api/viewRolesData.js";
+import { createRoleRequests } from "@/helper/api/viewRolesData.js";
 import { redirect, RedirectType, useRouter } from "next/navigation";
 import { checkToken } from "@/helper/api/checkTocken";
 
@@ -23,14 +23,19 @@ const RoleRequestForm = ({ currentUserRole }: { currentUserRole: string }) => {
 
     try {
       const token = checkToken(router);
-      const data = await roleRequests(token, requestedRole);
-      if (data) redirect("/profile", RedirectType.push);
+      const data = await createRoleRequests(token, requestedRole);
+      if (data) {
+        router.push("/profile");
+        return;
+      }
       setIsSuccess(true);
       onSuccess(t("requestSentSuccessfully"));
     } catch (error) {
-      onFetchError(t("failedToSendRequest"));
-      if (error instanceof Error) onFetchError(error?.message);
-      console.log(error);
+      if (error instanceof Error) {
+        onFetchError(error.message);
+      } else {
+        onFetchError(t("failedToSendRequest"));
+      }
     } finally {
       setIsSubmitting(false);
     }

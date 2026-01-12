@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
-import { UserProfile } from "../types";
+import { UserProfile } from "@/helper/types/userData";
 import { BASE_URL } from "@/helper/CONST";
 import Link from "next/link";
 import {
@@ -19,6 +19,8 @@ import {
   IconCategories,
   IconActivateEvent,
   IconAddBusiness,
+  IconShieldCheck,
+  IconUsers,
 } from "@/helper/images/icon";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { checkToken } from "@/helper/api/checkTocken";
@@ -202,6 +204,18 @@ export const Sidebar = () => {
             </>
           )}
 
+          {(formData?.role === "seller" || formData?.role === "admin") && (
+            <Link
+              href="/profile/add_category"
+              className={`${sidebarItemClass} ${
+                isActive("/add_category") ? activeClass : inactiveClass
+              }`}
+            >
+              <IconCategories />
+              {t("add_category")}
+            </Link>
+          )}
+
           {formData?.role === "admin" && (
             <Link
               href="/profile/add_news"
@@ -214,15 +228,27 @@ export const Sidebar = () => {
             </Link>
           )}
 
-          {(formData?.role === "seller" || formData?.role === "admin") && (
+          {formData?.role === "admin" && (
             <Link
-              href="/profile/add_category"
+              href="/profile/user_administration"
               className={`${sidebarItemClass} ${
-                isActive("/add_category") ? activeClass : inactiveClass
+                isActive("/user_administration") ? activeClass : inactiveClass
               }`}
             >
-              <IconCategories />
-              {t("add_category")}
+              <IconUsers />
+              {t("user_administration")}
+            </Link>
+          )}
+
+          {formData?.role === "admin" && (
+            <Link
+              href="/profile/role_requests"
+              className={`${sidebarItemClass} ${
+                isActive("/role_requests") ? activeClass : inactiveClass
+              }`}
+            >
+              <IconShieldCheck />
+              {t("role_requests")}
             </Link>
           )}
         </div>

@@ -12,6 +12,8 @@
     "subtitle": "Plattform für Ukrainer in Europa"
   },
   "profile": {
+    "role_requests": "Rollenanfragen",
+    "user_administration": "Benutzerverwaltung",
     "sidebarPersonal": "Persönliche Daten",
     "fullName": "Vollständiger Name",
     "workInProgress": "In Arbeit...",
@@ -255,5 +257,16 @@
     "What People Say": "Was die Leute sagen",
     "Ordered": "Bestellt",
     "Error loading testimonials": "Fehler beim Laden der Testimonials"
+  },
+  "admin": {
+    "Role Upgrade Requests": "Anfragen zur Rollenaktualisierung",
+    "User": "Benutzer",
+    "Requested Role": "Запитана роль",
+    "Status": "Status",
+    "Actions": "Aktionen",
+    "Approve": "Genehmigen",
+    "Reject": "Ablehnen",
+    "Are you sure you want to delete this request?": "Sind Sie sicher, dass Sie diese Anfrage löschen möchten?",
+    "Delete Request": "Anfrage löschen"
   }
 }
