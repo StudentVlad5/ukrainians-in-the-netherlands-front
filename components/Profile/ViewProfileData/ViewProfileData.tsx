@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { UserProfile } from "../types";
+import { UserProfile } from "@/helper/types/userData";
 import { Button } from "@/components/UI/Button/Button";
 
 export const ViewProfileData = ({
