@@ -77,7 +77,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-screen bg-gray-50 text-gray-900 flex justify-center flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar locale={locale} />
-          <main>
+          <main className="pt-20">
             {" "}
             <PageTransitionWrapper>{children}</PageTransitionWrapper>
           </main>

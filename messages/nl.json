@@ -268,5 +268,26 @@
     "Reject": "Afwijzen",
     "Are you sure you want to delete this request?": "Weet u zeker dat u dit verzoek wilt verwijderen?",
     "Delete Request": "Verzoek verwijderen"
+  },
+  "manage_users": {
+    "Are you sure?": "Weet je het zeker?",
+    "Users Management": "Gebruikersbeheer",
+    "Search users": "Zoek gebruikers",
+    "Full Name": "Volledige naam",
+    "Email": "E-mail",
+    "Role": "Rol",
+    "Actions": "Acties",
+    "Edit": "Bewerking",
+    "Delete": "Verwijderen",
+    "Edit User Information": "EGebruikersinformatie bewerken",
+    "Saving": "Besparing",
+    "Save Changes": "Wijzigingen opslaan",
+    "First Name": "Voornaam",
+    "Last Name": "Achternaam",
+    "Status": "Status",
+    "Page": "Pagina",
+    "of": "van",
+    "Previous": "Vorig",
+    "Next": "Volgende"
   }
 }

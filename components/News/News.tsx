@@ -1,6 +1,6 @@
 import { getPublicNews } from "@/helper/api/viewProductData";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NewsCardSkeleton } from "./NewsCardSkeleton";
@@ -15,7 +15,6 @@ export const NewsSection: React.FC = () => {
   const [getError, setGetError] = useState(false);
 
   const t = useTranslations("news");
-  const locale = useLocale();
 
   useEffect(() => {
     const fetchNews = async () => {

@@ -13,6 +13,7 @@ import { UserForm } from "@/components/Administration/UserForm/UserForm";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { UserProfile } from "@/helper/types/userData";
+import { DeleteUserData, getAllUsers } from "@/helper/api/viewUsersData";
 
 export default function UsersAdministrationPage() {
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -21,27 +22,26 @@ export default function UsersAdministrationPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isFatch, setIsFatch] = useState(false);
 
-  const t = useTranslations("admin");
+  const t = useTranslations("manage_users");
   const token = Cookies.get("accessToken");
 
   useEffect(() => {
     if (!token) return;
     const fetchUsers = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/users?page=${page}&search=${search}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        const data = await res.json();
+        const data = await getAllUsers(token, page, search);
         setUsers(data.users);
         setTotalPages(data.totalPages);
+        setIsFatch(false);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchUsers();
-  }, [page, search, token]);
+    if ((!isModalOpen && (search === "" || search.length > 3)) || isFatch)
+      fetchUsers();
+  }, [page, search, token, isModalOpen, isFatch]);
 
   const openEdit = (user: UserProfile) => {
     setEditingUser(user);
@@ -50,11 +50,8 @@ export default function UsersAdministrationPage() {
 
   const deleteUser = async (id: string) => {
     if (!confirm(t("Are you sure?"))) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setPage(1);
+    await DeleteUserData(token, id);
+    setIsFatch(true);
   };
 
   return (
@@ -66,7 +63,7 @@ export default function UsersAdministrationPage() {
             <Input
               label="search"
               id="search"
-              placeholder={t("Search users...")}
+              placeholder={t("Search users") + "..."}
               className="max-w-xs"
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -81,6 +78,7 @@ export default function UsersAdministrationPage() {
                 <th className="p-3 border text-left">{t("Full Name")}</th>
                 <th className="p-3 border text-left">{t("Email")}</th>
                 <th className="p-3 border text-left">{t("Role")}</th>
+                <th className="p-3 border text-left">{t("Status")}</th>
                 <th className="p-3 border text-center">{t("Actions")}</th>
               </tr>
             </thead>
@@ -91,6 +89,9 @@ export default function UsersAdministrationPage() {
                   <td className="p-3 border">{user.email}</td>
                   <td className="p-3 border text-xs uppercase font-bold text-gray-600">
                     {user.role}
+                  </td>
+                  <td className="p-3 border text-xs uppercase font-bold text-gray-600">
+                    {user.status}
                   </td>
                   <td className="p-3 border text-center">
                     <div className="flex justify-center gap-2">
@@ -117,6 +118,28 @@ export default function UsersAdministrationPage() {
             </tbody>
           </table>
 
+          {/* Блок пагінації */}
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-sm text-gray-500">
+              {t("Page")} {page} {t("of")} {totalPages}
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="secondary"
+                disabled={page <= 1}
+                onClick={() => setPage((prev) => prev - 1)}
+              >
+                {t("Previous")}
+              </Button>
+              <Button
+                variant="secondary"
+                disabled={page >= totalPages}
+                onClick={() => setPage((prev) => prev + 1)}
+              >
+                {t("Next")}
+              </Button>
+            </div>
+          </div>
           {/* Пагінація аналогічна до попереднього прикладу */}
         </CardContent>
       </Card>

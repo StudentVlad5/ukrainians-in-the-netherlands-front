@@ -268,5 +268,26 @@
     "Reject": "Відхилити",
     "Are you sure you want to delete this request?": "Ви впевнені, що хочете видалити цей запит?",
     "Delete Request": "Видалити запит"
+  },
+  "manage_users": {
+    "Are you sure?": "Ви впевнені?",
+    "Users Management": "Керування користувачами",
+    "Search users": "Пошук користувачів",
+    "Full Name": "ПІБ",
+    "Email": "Електронна пошта",
+    "Role": "Роль",
+    "Actions": "Дії",
+    "Edit": "Редагувати",
+    "Delete": "Видалити",
+    "Edit User Information": "Редагувати інформацію про користувача",
+    "Saving": "Збереження",
+    "Save Changes": "Зберегти зміни",
+    "First Name": "Ім'я",
+    "Last Name": "Прізвище",
+    "Status": "Status",
+    "Page": "Сторінка",
+    "of": "з",
+    "Previous": "Попередня",
+    "Next": "Наступна"
   }
 }

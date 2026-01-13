@@ -268,5 +268,26 @@
     "Reject": "Ablehnen",
     "Are you sure you want to delete this request?": "Sind Sie sicher, dass Sie diese Anfrage löschen möchten?",
     "Delete Request": "Anfrage löschen"
+  },
+  "manage_users": {
+    "Are you sure?": "Bist du sicher?",
+    "Users Management": "Benutzerverwaltung",
+    "Search users": "Benutzer suchen",
+    "Full Name": "Vollständiger Name",
+    "Email": "E-Mail",
+    "Role": "Rolle",
+    "Actions": "Aktionen",
+    "Edit": "Bearbeiten",
+    "Delete": "Löschen",
+    "Edit User Information": "Benutzerinformationen bearbeiten",
+    "Saving": "Sparen",
+    "Save Changes": "Änderungen speichern",
+    "First Name": "Vorname",
+    "Last Name": "Nachname",
+    "Status": "Status",
+    "Page": "Seite",
+    "of": "von",
+    "Previous": "Vorherige",
+    "Next": "Nächste"
   }
 }

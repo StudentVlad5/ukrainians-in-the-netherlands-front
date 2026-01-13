@@ -268,5 +268,26 @@
     "Reject": "Reject",
     "Are you sure you want to delete this request?": "Are you sure you want to delete this request?",
     "Delete Request": "Delete Request"
+  },
+  "manage_users": {
+    "Are you sure?": "Are you sure?",
+    "Users Management": "Users Management",
+    "Search users": "Search users",
+    "Full Name": "Full Name",
+    "Email": "Email",
+    "Role": "Role",
+    "Actions": "Actions",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Edit User Information": "Edit User Information",
+    "Saving": "Saving",
+    "Save Changes": "Save Changes",
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Status": "Status",
+    "Page": "Page",
+    "of": "of",
+    "Previous": "Previous",
+    "Next": "Next"
   }
 }
