@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ISpecialist } from "@/helper/types/specialist";
 import { Input } from "@/components/UI/Input/Input";
@@ -10,7 +10,10 @@ import {
   updateSpecialist,
 } from "@/helper/api/viewSpecialistData";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { ILocationPlace } from "@/helper/types/locationPlace";
+import { Lang } from "@/helper/types/common";
+import { ICategory } from "@/helper/types/category";
 
 const langs = ["uk", "en", "nl", "de"] as const;
 const availableLanguages = ["uk", "en", "nl", "de"];
@@ -18,15 +21,24 @@ const availableLanguages = ["uk", "en", "nl", "de"];
 export const SpecialistForm = ({
   specialist,
   onSaved,
+  category,
   token,
 }: {
   specialist: ISpecialist | null;
   onSaved: () => void;
   token: string | undefined;
+  category: ICategory[];
 }) => {
   const [activeLang, setActiveLang] = useState<(typeof langs)[number]>("uk");
   const [isGeocoding, setIsGeocoding] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState<ILocationPlace[]>([]);
+  const [isLocationSelected, setIsLocationSelected] = useState(
+    specialist?.location?.lat ? true : false
+  );
+  const [categoryInput, setCategoryInput] = useState("");
 
   // Файли та прев'ю
   const [avatar, setAvatar] = useState<File | null>(null);
@@ -54,9 +66,11 @@ export const SpecialistForm = ({
     languages: specialist?.languages ?? [],
     location: specialist?.location ?? { address: "", lat: 0, lng: 0 },
     isActive: specialist?.isActive ?? false,
+    category: specialist?.category ?? "",
   });
 
   const t = useTranslations("add_specialist");
+  const locale = useLocale() as Lang;
 
   // Валідація Email (регулярний вираз)
   const validateEmail = (email: string) => {
@@ -67,46 +81,53 @@ export const SpecialistForm = ({
       );
   };
 
-  // Геокодинг з обробкою порожніх результатів
-  const handleAddressChange = async (address: string) => {
+  // 1. Обробник введення тексту
+  const handleAddressChange = (address: string) => {
     setForm((prev) => ({ ...prev, location: { ...prev.location!, address } }));
-    setErrors((prev) => ({ ...prev, location: "" })); // Очищуємо помилку при вводі
+    setSearchTerm(address); // Оновлюємо термін для пошуку
+    setIsLocationSelected(false); // Скидаємо вибір
+    setErrors((prev) => ({ ...prev, location: "" }));
+  };
 
-    if (address.length > 3) {
-      setIsGeocoding(true);
-      try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-            address
-          )}&limit=1`
-        );
-        const data = await res.json();
-
-        if (data && data.length > 0) {
-          setForm((prev) => ({
-            ...prev,
-            location: {
-              ...prev.location!,
-              lat: parseFloat(data[0].lat),
-              lng: parseFloat(data[0].lon),
-            },
-          }));
-        } else {
-          setErrors((prev) => ({
-            ...prev,
-            location: t("City not found"),
-          }));
+  // 2. Ефект для пошуку з затримкою
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (searchTerm.length > 2 && !isLocationSelected) {
+        setIsGeocoding(true);
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+              searchTerm
+            )}&limit=5&accept-language=${locale}`
+          );
+          const data = await res.json();
+          setSuggestions(data);
+        } catch (e) {
+          console.error("Geocoding error:", e);
+        } finally {
+          setIsGeocoding(false);
         }
-      } catch (e) {
-        console.log(e);
-        setErrors((prev) => ({
-          ...prev,
-          location: t("Map service error"),
-        }));
-      } finally {
-        setIsGeocoding(false);
+      } else {
+        setSuggestions([]);
       }
-    }
+    }, 500); // Затримка 500 мс
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, isLocationSelected, locale]);
+
+  // 3. Функція вибору
+  const handleSelectLocation = (item: ILocationPlace) => {
+    setForm((prev) => ({
+      ...prev,
+      location: {
+        address: item.display_name,
+        lat: parseFloat(item.lat),
+        lng: parseFloat(item.lon),
+      },
+    }));
+    setSearchTerm(item.display_name);
+    setIsLocationSelected(true);
+    setSuggestions([]);
   };
 
   const validate = () => {
@@ -123,6 +144,7 @@ export const SpecialistForm = ({
     if (!form.minOrder)
       newErrors.minOrder = t("Indicate the amount of the minimum order");
     if (!form.rating) newErrors.rating = t("Indicate a rating from 0 to 5");
+    if (!form.category) newErrors.rating = t("Chose the category");
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -130,8 +152,15 @@ export const SpecialistForm = ({
 
   const save = async () => {
     if (!validate()) return;
-
+    if (!isLocationSelected) {
+      setErrors((prev) => ({
+        ...prev,
+        location: t("Будь ласка, оберіть адресу зі списку"),
+      }));
+      return;
+    }
     const formData = new FormData();
+    // 1. Складні об'єкти додаємо як JSON
     [
       "name",
       "specialty",
@@ -143,6 +172,7 @@ export const SpecialistForm = ({
       formData.append(key, JSON.stringify(form[key as keyof ISpecialist]));
     });
 
+    // 2. Прості поля додаємо ЯК Є (без JSON.stringify, щоб не було зайвих лапок)
     formData.append("email", form.email || "");
     formData.append("phone", form.phone || "");
     formData.append("instagram", form.instagram || "");
@@ -150,6 +180,10 @@ export const SpecialistForm = ({
     formData.append("whatsapp", form.whatsapp || "");
     formData.append("minOrder", String(form.minOrder));
     formData.append("rating", String(form.rating));
+    formData.append("category", form.category || "");
+
+    if (avatar) formData.append("imageUrl", avatar);
+    portfolioFiles.forEach((file) => formData.append("portfolio", file));
 
     if (avatar) formData.append("imageUrl", avatar);
     portfolioFiles.forEach((file) => formData.append("portfolio", file));
@@ -408,6 +442,33 @@ export const SpecialistForm = ({
           />
           <ErrorMsg field="rating" />
         </div>
+        <div>
+          <Input
+            id="category"
+            label={t("Category")}
+            list="category-list"
+            value={categoryInput}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCategoryInput(value);
+              const selected = category.find((c) => c.title[locale] === value);
+              if (selected) {
+                setForm((prev) => ({
+                  ...prev,
+                  category: selected._id,
+                }));
+              }
+            }}
+          />
+
+          <datalist id="category-list">
+            {category.map((c) => (
+              <option key={c._id} value={c.title[locale]} />
+            ))}
+          </datalist>
+
+          <ErrorMsg field="category" />
+        </div>
       </div>
 
       {/* Локація з поясненням */}
@@ -417,13 +478,34 @@ export const SpecialistForm = ({
         </label>
         <div className="relative">
           <input
-            className="w-full p-2 border rounded-lg text-sm pr-10"
+            className={`w-full p-2 border rounded-lg text-sm pr-10 ${
+              errors.location ? "border-red-500" : "border-gray-300"
+            }`}
             placeholder={t("Enter a city (eg Amsterdam, NL)")}
-            value={form.location?.address}
+            value={form.location?.address || ""}
             onChange={(e) => handleAddressChange(e.target.value)}
           />
+
+          {/* Індикатор завантаження всередині інпуту */}
           {isGeocoding && (
             <div className="absolute right-3 top-2.5 animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" />
+          )}
+
+          {/* Випадаючий список результатів */}
+          {suggestions.length > 0 && (
+            <ul className="absolute z-50 w-full bg-white border border-gray-200 rounded-b-lg shadow-xl mt-1 max-h-48 overflow-y-auto">
+              {suggestions.map((item, index) => (
+                <li
+                  key={index}
+                  className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm transition-colors border-b last:border-none"
+                  onClick={() => handleSelectLocation(item)}
+                >
+                  <p className="font-medium text-gray-700 truncate">
+                    {item.display_name}
+                  </p>
+                </li>
+              ))}
+            </ul>
           )}
         </div>
         <ErrorMsg field="location" />
@@ -481,7 +563,7 @@ export const SpecialistForm = ({
       </div>
 
       <Button
-        disabled={isLoading}
+        disabled={isLoading || !isLocationSelected}
         onClick={save}
         className="w-full py-4 rounded-xl text-lg font-extrabold shadow-blue-200 shadow-lg"
       >

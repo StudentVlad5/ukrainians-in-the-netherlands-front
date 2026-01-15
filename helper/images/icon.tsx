@@ -255,3 +255,20 @@ export const IconShieldCheck = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
   </svg>
 );
+
+export const IconServices = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M11.423 20.242a3.375 3.375 0 0 1-1.041-5.18l1.41-1.41a3.375 3.375 0 0 1 4.772 0l1.41 1.41a3.375 3.375 0 0 1-5.18 5.181l-1.371-1.371Zm0-12.984a3.375 3.375 0 0 1-1.041-5.18l1.41-1.41a3.375 3.375 0 0 1 4.772 0l1.41 1.41a3.375 3.375 0 0 1-5.18 5.181l-1.371-1.371ZM4.25 12.042a3.375 3.375 0 0 1-1.041-5.18l1.41-1.41a3.375 3.375 0 0 1 4.772 0l1.41 1.41a3.375 3.375 0 0 1-5.18 5.181l-1.371-1.371Z"
+    />
+  </svg>
+);

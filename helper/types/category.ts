@@ -11,7 +11,7 @@ export interface ITranslatableString {
 
 // Основний інтерфейс категорії
 export interface ICategory {
-  _id?: string;
+  _id: string;
   title: ITranslatableString;
   createdAt?: Date;
   updatedAt?: Date;

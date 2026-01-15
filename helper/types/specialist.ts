@@ -23,4 +23,5 @@ export interface ISpecialist {
     lat?: number;
     lng?: number;
   };
+  category: string;
 }

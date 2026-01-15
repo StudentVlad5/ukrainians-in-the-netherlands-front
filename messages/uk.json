@@ -12,6 +12,7 @@
     "subtitle": "Сервіс для українців у Європі"
   },
   "profile": {
+    "add_service_category": "Додати категорію для послуги або товару",
     "role_requests": "Рольові запити",
     "user_administration": "Управління користувачами",
     "sidebarPersonal": "Персональні дані",
@@ -73,6 +74,8 @@
     "noResults": "Майстрів не знайдено."
   },
   "add_specialist": {
+    "Category": "Категорія",
+    "Chose the category": "Виберіть категорію",
     "Specialists": "Спеціалісти",
     "Add Specialist": "Додати спеціаліста",
     "Image": "Фото",

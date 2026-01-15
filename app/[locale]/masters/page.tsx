@@ -10,7 +10,8 @@ import { useTranslations } from "next-intl";
 
 export default function MastersPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [profession, setProfession] = useState("");
+  // 1. Змінюємо profession на масив selectedCategories
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [masters, setMasters] = useState<ISpecialist[]>([]);
   const [getError, setGetError] = useState(false);
@@ -35,18 +36,23 @@ export default function MastersPage() {
     };
 
     fetchMasters();
-  }, []);
+  }, [t]);
 
+  // 2. Оновлена логіка фільтрації
   const filteredMasters = masters.filter((m) => {
+    // Пошук за ім'ям (проходимо по всіх мовних полях об'єкта name)
     const matchesName = Object.values(m.name || {}).some((val) =>
       val.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    const matchesJob =
-      profession === "" ||
-      Object.values(m.specialty || {}).some((val) =>
-        val.toLowerCase().includes(profession.toLowerCase())
-      );
-    return matchesName && matchesJob;
+
+    // Фільтрація за категоріями:
+    // Якщо масив порожній — показуємо всіх.
+    // Якщо ні — перевіряємо, чи входить категорія майстра в масив обраних.
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      (m.category && selectedCategories.includes(m.category as string));
+
+    return matchesName && matchesCategory;
   });
 
   return (
@@ -61,20 +67,30 @@ export default function MastersPage() {
           </p>
         </div>
 
+        {/* 3. Оновлюємо пропси фільтра */}
         <MastersFilter
           filterQuery={searchQuery}
           onSearch={setSearchQuery}
-          selectedProfession={profession}
-          onProfessionChange={setProfession}
+          selectedCategories={selectedCategories}
+          onCategoriesChange={setSelectedCategories}
         />
+
         {isLoading ? (
-          <MasterCardSkeleton />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <MasterCardSkeleton />
+            <MasterCardSkeleton />
+            <MasterCardSkeleton />
+          </div>
         ) : getError ? (
           <div className="text-center py-20 text-red-500">
             {t("Error loading data")}
           </div>
-        ) : (
+        ) : filteredMasters.length > 0 ? (
           <MastersGrid filteredMasters={filteredMasters} />
+        ) : (
+          <div className="text-center py-20 text-gray-500">
+            {t("No masters found matching your criteria")}
+          </div>
         )}
       </div>
     </section>

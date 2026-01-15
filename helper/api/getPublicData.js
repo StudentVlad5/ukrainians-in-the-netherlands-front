@@ -88,3 +88,13 @@ export async function getPubliTestimonials() {
   }
   return res.json();
 }
+
+export async function getPublickServiceCategories() {
+  const res = await fetch(`${BASE_URL}/public/service-categories`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
+  return res.json();
+}

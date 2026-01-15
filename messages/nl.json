@@ -12,6 +12,7 @@
     "subtitle": "Platform voor Oekraïners in Europa"
   },
   "profile": {
+    "add_service_category": "Categorie toevoegen voor service of goed",
     "role_requests": "Rolverzoeken",
     "user_administration": "Gebruikersbeheer",
     "sidebarPersonal": "Persoonlijke gegevens",
@@ -73,6 +74,8 @@
     "noResults": "Geen masters gevonden."
   },
   "add_specialist": {
+    "Category": "Categorie",
+    "Chose the category": "Kies de categorie",
     "Specialists": "Specialisten",
     "Add Specialist": "Specialist toevoegen",
     "Image": "Afbeelding",

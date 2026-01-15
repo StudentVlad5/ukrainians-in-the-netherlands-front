@@ -12,6 +12,7 @@
     "subtitle": "Plattform für Ukrainer in Europa"
   },
   "profile": {
+    "add_service_category": "Kategorie für Dienstleistung oder Ware hinzufügen",
     "role_requests": "Rollenanfragen",
     "user_administration": "Benutzerverwaltung",
     "sidebarPersonal": "Persönliche Daten",
@@ -73,6 +74,8 @@
     "noResults": "Keine Meister gefunden."
   },
   "add_specialist": {
+    "Category": "Kategorie",
+    "Chose the category": "Wählen Sie die Kategorie",
     "Specialists": "Spezialisten",
     "Add Specialist": "Spezialisten hinzufügen",
     "Image": "Bild",

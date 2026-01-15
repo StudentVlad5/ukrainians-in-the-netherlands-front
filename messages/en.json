@@ -12,6 +12,7 @@
     "subtitle": "Service for Ukrainians in Europe"
   },
   "profile": {
+    "add_service_category": "Add category for service or good",
     "role_requests": "Role requests",
     "user_administration": "User management",
     "sidebarPersonal": "Personal Data",
@@ -73,6 +74,8 @@
     "noResults": "No masters found."
   },
   "add_specialist": {
+    "Category": "Category",
+    "Chose the category": "Chose the category",
     "Specialists": "Specialists",
     "Add Specialist": "Add Specialist",
     "Image": "Image",

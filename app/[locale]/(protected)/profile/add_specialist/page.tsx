@@ -22,9 +22,12 @@ import { useRouter } from "next/navigation";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { useTranslations, useLocale } from "next-intl";
 import type { Lang } from "@/helper/types/common";
+import { ICategory } from "@/helper/types/category";
+import { getServiceCategories } from "@/helper/api/viewServiceCategoriesData";
 
 export default function SpecialistsDashboardPage() {
   const [items, setItems] = useState<ISpecialist[]>([]);
+  const [category, setCategory] = useState<ICategory[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<ISpecialist | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,8 +59,18 @@ export default function SpecialistsDashboardPage() {
   const fetchData = useCallback(async () => {
     const token = Cookies.get("accessToken");
     if (!token) return;
-    const data = await getSpecialists(token);
-    setItems(data);
+
+    try {
+      const [data, category] = await Promise.all([
+        getSpecialists(token),
+        getServiceCategories(token),
+      ]);
+
+      setItems(data);
+      setCategory(category);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
   }, []);
 
   useEffect(() => {
@@ -98,6 +111,7 @@ export default function SpecialistsDashboardPage() {
                 <th className="p-2">{t("Image")}</th>
                 <th className="p-2">{t("Name")}</th>
                 <th className="p-2">{t("Specialty")}</th>
+                <th className="p-2">{t("Category")}</th>
                 <th className="p-2">{t("Status")}</th>
                 <th className="p-2">{t("Actions")}</th>
               </tr>
@@ -114,6 +128,14 @@ export default function SpecialistsDashboardPage() {
                     <td className="p-2">{s.name?.[locale] ?? s.name.uk}</td>
                     <td className="p-2">
                       {s.specialty?.[locale] ?? s.specialty.uk}
+                    </td>
+                    <td className="p-2">
+                      {(() => {
+                        const cat = category.find(
+                          (it) => it._id === s.category
+                        );
+                        return cat ? cat.title[locale] : "—";
+                      })()}
                     </td>
                     <td className="p-2">{s.isActive ? "Active" : "Hidden"}</td>
                     <td className="p-2 flex gap-2">
@@ -148,6 +170,7 @@ export default function SpecialistsDashboardPage() {
             key={editing?._id || "new"}
             specialist={editing}
             token={token}
+            category={category}
             onSaved={() => {
               setModalOpen(false);
               fetchData();

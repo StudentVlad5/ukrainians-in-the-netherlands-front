@@ -21,6 +21,7 @@ import {
   IconAddBusiness,
   IconShieldCheck,
   IconUsers,
+  IconServices,
 } from "@/helper/images/icon";
 import { refreshUserProfile } from "@/helper/api/viewProfileData";
 import { checkToken } from "@/helper/api/checkTocken";
@@ -205,15 +206,28 @@ export const Sidebar = () => {
           )}
 
           {(formData?.role === "seller" || formData?.role === "admin") && (
-            <Link
-              href="/profile/add_category"
-              className={`${sidebarItemClass} ${
-                isActive("/add_category") ? activeClass : inactiveClass
-              }`}
-            >
-              <IconCategories />
-              {t("add_category")}
-            </Link>
+            <>
+              <Link
+                href="/profile/add_category"
+                className={`${sidebarItemClass} ${
+                  isActive("/add_category") ? activeClass : inactiveClass
+                }`}
+              >
+                <IconCategories />
+                {t("add_category")}
+              </Link>
+              <Link
+                href="/profile/add_service_category"
+                className={`${sidebarItemClass} ${
+                  isActive("/add_service_category")
+                    ? activeClass
+                    : inactiveClass
+                }`}
+              >
+                <IconServices />
+                {t("add_service_category")}
+              </Link>
+            </>
           )}
 
           {formData?.role === "admin" && (

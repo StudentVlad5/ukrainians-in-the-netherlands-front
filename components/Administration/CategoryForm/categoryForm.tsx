@@ -6,14 +6,16 @@ import { Input } from "@/components/UI/Input/Input";
 import { Button } from "@/components/UI/Button/Button";
 import { Lang } from "@/helper/types/common";
 import { saveCategory } from "@/helper/api/viewCategoriesData";
+import { saveServiceCategory } from "@/helper/api/viewServiceCategoriesData";
 
 interface Props {
   category: ICategory | null;
   onSaved: () => void;
   token?: string;
+  type?: string;
 }
 
-export const CategoryForm = ({ category, onSaved, token }: Props) => {
+export const CategoryForm = ({ category, onSaved, token, type }: Props) => {
   const [activeLang, setActiveLang] = useState<Lang>("uk");
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState<Partial<ICategory>>({
@@ -24,7 +26,12 @@ export const CategoryForm = ({ category, onSaved, token }: Props) => {
     try {
       setIsLoading(true);
       if (category && category._id) form._id = category._id;
-      const res = await saveCategory(token, form);
+      let res = null;
+      if (type === "service") {
+        res = await saveServiceCategory(token, form);
+      } else {
+        res = await saveCategory(token, form);
+      }
       if (res) onSaved();
     } catch (error) {
       console.error(error);
