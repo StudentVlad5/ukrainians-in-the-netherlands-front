@@ -132,7 +132,15 @@
     "Languages": "Talen",
     "My works": "Mijn werken",
     "Foto": "foto",
-    "No address specified": "Geen adres opgegeven"
+    "No address specified": "Geen adres opgegeven",
+    "Search": "Zoekopdracht",
+    "master_name": "Naam van de meester",
+    "all category": "Alle categorieën",
+    "Category": "Categorieën",
+    "Radius": "Radius",
+    "km": "km",
+    "Reset": "Opnieuw instellen",
+    "apply filter": "Filter toepassen"
   },
   "about": {
     "About Us": "Over ons",

@@ -132,7 +132,15 @@
     "Languages": "Мови",
     "My works": "Мої роботи",
     "Foto": "фото",
-    "No address specified": "Адреса не вказана"
+    "No address specified": "Адреса не вказана",
+    "Search": "Пошук",
+    "master_name": "Ім'я майстра",
+    "all category": "Всі категорії",
+    "Category": "Категорії",
+    "Radius": "Радіус",
+    "km": "км",
+    "Reset": "Скинути",
+    "apply filter": "apply filter"
   },
   "about": {
     "About Us": "Про Нас",

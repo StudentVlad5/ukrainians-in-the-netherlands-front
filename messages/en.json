@@ -132,7 +132,15 @@
     "Languages": "Languages",
     "My works": "My works",
     "Foto": "foto",
-    "No address specified": "No address specified"
+    "No address specified": "No address specified",
+    "Search": "Search",
+    "master_name": "Master`s name",
+    "all category": "All categories",
+    "Category": "Categories",
+    "Radius": "Radius",
+    "km": "km",
+    "Reset": "Reset",
+    "apply filter": "Apply filter"
   },
   "about": {
     "About Us": "About Us",

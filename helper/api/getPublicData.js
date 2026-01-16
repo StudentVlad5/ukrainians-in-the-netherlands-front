@@ -1,11 +1,22 @@
 import { BASE_URL } from "../CONST";
 
 /* ===================== GET ALL ===================== */
-export async function getPublicSpecialists() {
-  const res = await fetch(`${BASE_URL}/public/specialists`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch specialists");
-  }
+// export async function getPublicSpecialists() {
+//   const res = await fetch(`${BASE_URL}/public/specialists`);
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch specialists");
+//   }
+//   return res.json();
+// }
+export async function getPublicSpecialists(params) {
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) query.append(key, value.toString());
+  });
+
+  const res = await fetch(`${BASE_URL}/public/specialists?${query.toString()}`);
+  if (!res.ok) throw new Error("Failed to fetch specialists");
   return res.json();
 }
 /* ===================== GET ALL ===================== */

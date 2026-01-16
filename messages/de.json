@@ -132,7 +132,15 @@
     "Languages": "Sprachen",
     "My works": "Meine Werke",
     "Foto": "foto",
-    "No address specified": "Keine Adresse angegeben"
+    "No address specified": "Keine Adresse angegeben",
+    "Search": "Suchen",
+    "master_name": "Name des Meisters",
+    "all category": "Alle Kategorien",
+    "Category": "Kategorien",
+    "Radius": "Radius",
+    "km": "km",
+    "Reset": "Zurücksetzen",
+    "apply filter": "Filter anwenden"
   },
   "about": {
     "About Us": "Über uns",

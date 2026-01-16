@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ISpecialist } from "@/helper/types/specialist";
 import { Input } from "@/components/UI/Input/Input";
@@ -11,9 +11,9 @@ import {
 } from "@/helper/api/viewSpecialistData";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { ILocationPlace } from "@/helper/types/locationPlace";
 import { Lang } from "@/helper/types/common";
 import { ICategory } from "@/helper/types/category";
+import { LocationInput } from "@/components/UI/LocationAutocomplete/LocationInput";
 
 const langs = ["uk", "en", "nl", "de"] as const;
 const availableLanguages = ["uk", "en", "nl", "de"];
@@ -30,11 +30,7 @@ export const SpecialistForm = ({
   category: ICategory[];
 }) => {
   const [activeLang, setActiveLang] = useState<(typeof langs)[number]>("uk");
-  const [isGeocoding, setIsGeocoding] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<ILocationPlace[]>([]);
   const [isLocationSelected, setIsLocationSelected] = useState(
     specialist?.location?.lat ? true : false
   );
@@ -79,55 +75,6 @@ export const SpecialistForm = ({
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
-  };
-
-  // 1. Обробник введення тексту
-  const handleAddressChange = (address: string) => {
-    setForm((prev) => ({ ...prev, location: { ...prev.location!, address } }));
-    setSearchTerm(address); // Оновлюємо термін для пошуку
-    setIsLocationSelected(false); // Скидаємо вибір
-    setErrors((prev) => ({ ...prev, location: "" }));
-  };
-
-  // 2. Ефект для пошуку з затримкою
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      if (searchTerm.length > 2 && !isLocationSelected) {
-        setIsGeocoding(true);
-        try {
-          const res = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-              searchTerm
-            )}&limit=5&accept-language=${locale}`
-          );
-          const data = await res.json();
-          setSuggestions(data);
-        } catch (e) {
-          console.error("Geocoding error:", e);
-        } finally {
-          setIsGeocoding(false);
-        }
-      } else {
-        setSuggestions([]);
-      }
-    }, 500); // Затримка 500 мс
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, isLocationSelected, locale]);
-
-  // 3. Функція вибору
-  const handleSelectLocation = (item: ILocationPlace) => {
-    setForm((prev) => ({
-      ...prev,
-      location: {
-        address: item.display_name,
-        lat: parseFloat(item.lat),
-        lng: parseFloat(item.lon),
-      },
-    }));
-    setSearchTerm(item.display_name);
-    setIsLocationSelected(true);
-    setSuggestions([]);
   };
 
   const validate = () => {
@@ -472,43 +419,18 @@ export const SpecialistForm = ({
       </div>
 
       {/* Локація з поясненням */}
-      <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100 relative">
-        <label className="text-sm font-bold block mb-1">
-          {t("City and Country")}
-        </label>
-        <div className="relative">
-          <input
-            className={`w-full p-2 border rounded-lg text-sm pr-10 ${
-              errors.location ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder={t("Enter a city (eg Amsterdam, NL)")}
-            value={form.location?.address || ""}
-            onChange={(e) => handleAddressChange(e.target.value)}
-          />
+      <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100">
+        <LocationInput
+          label={t("City and Country")}
+          value={form.location}
+          error={errors.location}
+          onChange={(locationValue) => {
+            setForm((prev) => ({ ...prev, location: locationValue }));
+            setIsLocationSelected(true); // або перевіряйте валідність в самому об'єкті
+            setErrors((prev) => ({ ...prev, location: "" }));
+          }}
+        />
 
-          {/* Індикатор завантаження всередині інпуту */}
-          {isGeocoding && (
-            <div className="absolute right-3 top-2.5 animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full" />
-          )}
-
-          {/* Випадаючий список результатів */}
-          {suggestions.length > 0 && (
-            <ul className="absolute z-50 w-full bg-white border border-gray-200 rounded-b-lg shadow-xl mt-1 max-h-48 overflow-y-auto">
-              {suggestions.map((item, index) => (
-                <li
-                  key={index}
-                  className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm transition-colors border-b last:border-none"
-                  onClick={() => handleSelectLocation(item)}
-                >
-                  <p className="font-medium text-gray-700 truncate">
-                    {item.display_name}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <ErrorMsg field="location" />
         {!form.location?.lat && !errors.location && (
           <p className="text-[10px] text-blue-600 mt-1 italic">
             {t("map message")}

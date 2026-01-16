@@ -1,59 +1,110 @@
 "use client";
-import MastersFilter from "@/components/Masters/MastersFilter";
-import MastersGrid from "@/components/Masters/MastersGrid";
-import { MasterCardSkeleton } from "@/components/Masters/MasterCardSkeleton";
-import { getPublicSpecialists } from "@/helper/api/getPublicData";
-import { onFetchError } from "@/lib/Messages/NotifyMessages";
+
 import { useEffect, useState } from "react";
-import { ISpecialist } from "@/helper/types/specialist";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-export default function MastersPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  // 1. Змінюємо profession на масив selectedCategories
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [masters, setMasters] = useState<ISpecialist[]>([]);
-  const [getError, setGetError] = useState(false);
-  const t = useTranslations("specialists");
+import MastersFilter, {
+  IFilterState,
+} from "@/components/Masters/MastersFilter";
+import MastersGrid from "@/components/Masters/MastersGrid";
+import { MasterCardSkeleton } from "@/components/Masters/MasterCardSkeleton";
+import { Pagination } from "@/components/Pagination/Pagination";
+import { getPublicSpecialists } from "@/helper/api/getPublicData";
+import { ISpecialist } from "@/helper/types/specialist";
+import { onFetchError } from "@/lib/Messages/NotifyMessages";
+import { PaginationProps } from "@/helper/types/pagination";
 
+export default function MastersPage() {
+  const t = useTranslations("specialists");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const STORAGE_KEY = "masters_filter_settings";
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<{
+    data: ISpecialist[];
+    pagination: PaginationProps;
+  }>({
+    data: [],
+    pagination: { totalPages: 0, currentPage: 1 },
+  });
+  // localstorige saving data of the filters
+  useEffect(() => {
+    const hasParams = searchParams.toString().length > 0;
+    const savedFilters = localStorage.getItem(STORAGE_KEY);
+
+    if (!hasParams && savedFilters) {
+      try {
+        const filters: IFilterState = JSON.parse(savedFilters);
+        // Застосовуємо збережені фільтри до URL
+        handleApply(filters);
+      } catch (e) {
+        console.error("Error parsing saved filters", e);
+      }
+    }
+  }, []);
+
+  // 1. Отримуємо фільтри з URL для передачі в компонент Filters
+  const currentFilters: IFilterState = {
+    search: searchParams.get("search") || "",
+    categories:
+      searchParams.get("categories")?.split(",").filter(Boolean) || [],
+    location: searchParams.get("lat")
+      ? {
+          address: searchParams.get("address") || "",
+          lat: Number(searchParams.get("lat")),
+          lng: Number(searchParams.get("lng")),
+        }
+      : null,
+    radius: Number(searchParams.get("radius")) || 50,
+  };
+
+  // Викликаємо фетч при кожній зміні параметрів URL
   useEffect(() => {
     const fetchMasters = async () => {
       try {
         setIsLoading(true);
-        const data = await getPublicSpecialists();
-
-        if (Array.isArray(data)) {
-          setMasters(data);
-          setGetError(false);
-        }
+        // Перетворюємо всі параметри URL в об'єкт для API
+        const params = Object.fromEntries(searchParams.entries());
+        const response = await getPublicSpecialists(params);
+        setData(response);
       } catch (e) {
-        setGetError(true);
-        onFetchError(t("Не вдалося завантажити майстрів"));
+        onFetchError(t("Error loading data"));
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchMasters();
-  }, [t]);
+  }, [searchParams, t]);
 
-  // 2. Оновлена логіка фільтрації
-  const filteredMasters = masters.filter((m) => {
-    // Пошук за ім'ям (проходимо по всіх мовних полях об'єкта name)
-    const matchesName = Object.values(m.name || {}).some((val) =>
-      val.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  // 3. Обробники подій
+  const handleApply = (filters: IFilterState) => {
+    // Зберігаємо в LocalStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filters));
 
-    // Фільтрація за категоріями:
-    // Якщо масив порожній — показуємо всіх.
-    // Якщо ні — перевіряємо, чи входить категорія майстра в масив обраних.
-    const matchesCategory =
-      selectedCategories.length === 0 ||
-      (m.category && selectedCategories.includes(m.category as string));
+    const params = new URLSearchParams();
+    if (filters.search) params.set("search", filters.search);
+    if (filters.categories.length)
+      params.set("categories", filters.categories.join(","));
+    if (filters.location) {
+      const { lat, lng, address } = filters.location;
 
-    return matchesName && matchesCategory;
-  });
+      if (lat != null && lng != null) {
+        params.set("lat", lat.toString());
+        params.set("lng", lng.toString());
+        if (address) params.set("address", address);
+        params.set("radius", filters.radius.toString());
+      }
+    }
+    params.set("currentPage", "1");
+    router.push(`?${params.toString()}`);
+  };
+
+  const handleReset = () => {
+    router.push("/masters");
+  };
 
   return (
     <section className="min-h-screen bg-gray-50">
@@ -67,29 +118,29 @@ export default function MastersPage() {
           </p>
         </div>
 
-        {/* 3. Оновлюємо пропси фільтра */}
         <MastersFilter
-          filterQuery={searchQuery}
-          onSearch={setSearchQuery}
-          selectedCategories={selectedCategories}
-          onCategoriesChange={setSelectedCategories}
+          initialFilters={currentFilters}
+          onApply={handleApply}
+          onReset={handleReset}
         />
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <MasterCardSkeleton />
-            <MasterCardSkeleton />
-            <MasterCardSkeleton />
+            {[...Array(6)].map((_, i) => (
+              <MasterCardSkeleton key={i} />
+            ))}
           </div>
-        ) : getError ? (
-          <div className="text-center py-20 text-red-500">
-            {t("Error loading data")}
-          </div>
-        ) : filteredMasters.length > 0 ? (
-          <MastersGrid filteredMasters={filteredMasters} />
+        ) : data.data.length > 0 ? (
+          <>
+            <MastersGrid filteredMasters={data.data} />
+            <Pagination
+              totalPages={data.pagination.totalPages}
+              currentPage={data.pagination.currentPage}
+            />
+          </>
         ) : (
           <div className="text-center py-20 text-gray-500">
-            {t("No masters found matching your criteria")}
+            {t("No masters found for your request")}
           </div>
         )}
       </div>
