@@ -140,7 +140,8 @@
     "Radius": "Radius",
     "km": "km",
     "Reset": "Opnieuw instellen",
-    "apply filter": "Filter toepassen"
+    "apply filter": "Filter toepassen",
+    "Rating": "Beoordeling"
   },
   "about": {
     "About Us": "Over ons",
@@ -241,7 +242,9 @@
     "Error loading data": "Fout bij het laden van gegevens",
     "readMore": "leesMeer",
     "viewAll": "Bekijk al het nieuws",
-    "Read more": "Lees meer"
+    "Read more": "Lees meer",
+    "Show more": "Laat meer zien",
+    "Back": "Rug"
   },
   "add_event": {},
   "market": {
@@ -257,12 +260,39 @@
   "activate_event": {},
   "calendar": {},
   "events": {
+    "No seats": "Geen zitplaatsen",
+    "Book": "Boek",
+    "Safe Booking Guarantee": "Veilige boekingsgarantie",
+    "tickets": "kaartjes",
+    "Free places": "Vrije plaatsen",
+    "Location": "Locatie",
+    "Time and Duration": "Tijd en duur",
+    "Date": "Datum",
+    "person": "persoon",
+    "Cost of participation": "Kosten van deelname",
+    "The presenter": "De presentator",
+    "About the event": "Over het evenement",
+    "Back": "Rug",
+    "No event found": "Geen evenement gevonden",
+    "loading": "Laden...",
     "failedToLoad": "Kan gebeurtenissen niet laden",
     "latest": "Laatste evenementen",
     "errorLoading": "Fout bij het laden van gebeurtenissen",
     "viewAll": "Bekijk alle evenementen",
     "event": "evenement",
-    "readMore": "Lees meer"
+    "readMore": "Lees meer",
+    "Select a date": "Selecteer een datum",
+    "Click on the date from": "Klik op de datum vanaf",
+    "red dot": "rode stip",
+    "to see available events": "om beschikbare evenementen te zien",
+    "events": "Evenementen",
+    "Find the perfect event for you": "Vind het perfecte evenement voor jou",
+    "day": "Dag",
+    "week": "Week",
+    "month": "Maand",
+    "Found": "Gevonden",
+    "More details": "Meer details",
+    "There are no events scheduled for the selected period": "Er zijn geen evenementen gepland voor de geselecteerde periode"
   },
   "testimonials": {
     "What People Say": "Wat mensen zeggen",

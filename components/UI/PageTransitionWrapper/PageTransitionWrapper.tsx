@@ -15,7 +15,7 @@ export default function PageTransitionWrapper({
   const transitionKey = isProfile ? "profile-root" : pathname;
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <AnimatePresence mode="wait">
         <motion.div
           key={transitionKey}

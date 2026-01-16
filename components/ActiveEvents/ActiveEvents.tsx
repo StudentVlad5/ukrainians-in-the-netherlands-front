@@ -4,6 +4,8 @@ import { isSameDay, isSameWeek, isSameMonth, parseISO, format } from "date-fns";
 import Image from "next/image";
 import { IActiveEvent } from "@/helper/types/activeEvent";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
 
 const ActiveEvents = ({
   events,
@@ -14,8 +16,10 @@ const ActiveEvents = ({
   selectedDate: Date;
   loading: boolean;
 }) => {
-  const [filterType, setFilterType] = useState<"day" | "week" | "month">("day");
-
+  const [filterType, setFilterType] = useState<"day" | "week" | "month">(
+    "month"
+  );
+  const t = useTranslations("events");
   const filteredEvents = useMemo(() => {
     return events.filter((event: IActiveEvent) => {
       const eventDate = parseISO(event.date);
@@ -44,12 +48,16 @@ const ActiveEvents = ({
                 }
               `}
             >
-              {type === "day" ? "День" : type === "week" ? "Тиждень" : "Місяць"}
+              {type === "day"
+                ? t("day")
+                : type === "week"
+                ? t("week")
+                : t("month")}
             </button>
           ))}
         </div>
         <div className="text-sm text-gray-500 font-medium">
-          Знайдено: {filteredEvents.length}
+          {t("Found")}: {filteredEvents.length}
         </div>
       </div>
 
@@ -66,9 +74,37 @@ const ActiveEvents = ({
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                €{event.price}
-              </div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="absolute top-4 right-4 z-10"
+              >
+                <div className="relative group overflow-hidden backdrop-blur-md bg-ua-blue px-4 py-1.5 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-1.5 transition-all duration-300 hover:bg-black/80">
+                  {/* Анімований значок Євро */}
+                  <motion.span
+                    animate={{
+                      y: [0, -2, 0],
+                      rotate: [0, -5, 5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="text-ua-yellow font-black text-lg"
+                  >
+                    €
+                  </motion.span>
+
+                  {/* Ціна */}
+                  <span className="text-white font-black text-lg tracking-tighter">
+                    {event.price > 0 ? event.price : "Free"}
+                  </span>
+
+                  {/* Ефект легкого блику при наведенні (проходить крізь кнопку) */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </div>
+              </motion.div>
             </div>
 
             <div className="p-5">
@@ -87,9 +123,9 @@ const ActiveEvents = ({
 
               <Link
                 href={`events/${event._id}`}
-                className="flex not-prose mt-4 w-full py-3 bg-gray-500 text-white rounded-xl font-medium hover:bg-black transition-colors justify-center items-center"
+                className="flex not-prose mt-4 w-full py-3 bg-nl-blue text-white rounded-xl font-medium hover:bg-black transition-colors justify-center items-center"
               >
-                Детальніше
+                {t("More details")}
               </Link>
             </div>
           </div>
@@ -99,7 +135,7 @@ const ActiveEvents = ({
       {filteredEvents.length === 0 && !loading && (
         <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
           <p className="text-gray-400">
-            На обраний період подій не заплановано
+            {t("There are no events scheduled for the selected period")}
           </p>
         </div>
       )}

@@ -140,7 +140,8 @@
     "Radius": "Radius",
     "km": "km",
     "Reset": "Reset",
-    "apply filter": "Apply filter"
+    "apply filter": "Apply filter",
+    "Rating": "Rating"
   },
   "about": {
     "About Us": "About Us",
@@ -241,7 +242,9 @@
     "Error loading data": "Error loading data",
     "readMore": "Read More",
     "viewAll": "View all news",
-    "Read more": "Read more"
+    "Read more": "Read more",
+    "Show more": "Show more",
+    "Back": "Back"
   },
   "add_event": {},
   "market": {
@@ -257,12 +260,39 @@
   "activate_event": {},
   "calendar": {},
   "events": {
+    "No seats": "No seats",
+    "Book": "Book",
+    "Safe Booking Guarantee": "Safe Booking Guarantee",
+    "tickets": "tickets",
+    "Free places": "Free places",
+    "Location": "Location",
+    "Time and Duration": "Time and Duration",
+    "Date": "Date",
+    "person": "person",
+    "Cost of participation": "Вартість участі",
+    "The presenter": "The presenter",
+    "About the event": "About the event",
+    "Back": "Back",
+    "No event found": "No event found",
+    "loading": "Loading...",
     "failedToLoad": "Failed to load events",
     "latest": "Upcoming events",
     "errorLoading": "Error loading events",
     "viewAll": "View all events",
     "event": "event",
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "Select a date": "Select a date",
+    "Click on the date from": "Натисніть на дату з",
+    "red dot": "червоною крапкою",
+    "to see available events": "to see available events",
+    "events": "Events",
+    "Find the perfect event for you": "Find the perfect event for you",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "Found": "Found",
+    "More details": "More details",
+    "There are no events scheduled for the selected period": "There are no events scheduled for the selected period"
   },
   "testimonials": {
     "What People Say": "What People Say",

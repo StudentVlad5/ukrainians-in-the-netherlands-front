@@ -39,6 +39,12 @@ const Calendar = ({
   const endDate = endOfWeek(endMonth, { weekStartsOn: 1 });
 
   const days = eachDayOfInterval({ start: startDate, end: endDate });
+  // Створюємо масив дат для одного тижня (починаючи з понеділка)
+  const weeksDays = Array.from({ length: 7 }, (_, i) => {
+    // 2024-01-01 — це Понеділок
+    const date = new Date(2024, 0, 1 + i);
+    return new Intl.DateTimeFormat(local, { weekday: "short" }).format(date);
+  });
 
   return (
     <div className="w-[360px] max-w-full mx-auto bg-white p-4 rounded-2xl border shadow-sm">
@@ -75,7 +81,7 @@ const Calendar = ({
           gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
         }}
       >
-        {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"].map((d) => (
+        {weeksDays.map((d) => (
           <div
             key={d}
             className="h-8 flex items-center justify-center text-[10px] font-bold text-gray-400 uppercase tracking-widest"

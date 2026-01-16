@@ -35,9 +35,13 @@ export default function MasterCard({ master }: MasterCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="absolute top-4 right-4 backdrop-blur-md bg-white/70 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
-          <span className="text-ua-yellow text-sm">★</span>
-          <span className="text-xs font-bold text-gray-800">
+        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm flex items-center gap-1 border border-gray-100">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />{" "}
+          {/* Індикатор "Online" або активності */}
+          <span className="text-[11px] uppercase tracking-widest font-bold text-gray-400 mr-1">
+            {t("Rating")}
+          </span>
+          <span className="text-sm font-bold text-blue-600">
             {master.rating || 0}
           </span>
         </div>

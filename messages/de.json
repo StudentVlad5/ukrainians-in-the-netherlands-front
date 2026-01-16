@@ -140,7 +140,8 @@
     "Radius": "Radius",
     "km": "km",
     "Reset": "Zurücksetzen",
-    "apply filter": "Filter anwenden"
+    "apply filter": "Filter anwenden",
+    "Rating": "Bewertung"
   },
   "about": {
     "About Us": "Über uns",
@@ -241,7 +242,9 @@
     "Error loading data": "Fehler beim Laden der Daten",
     "readMore": "Weiterlesen",
     "viewAll": "Alle Neuigkeiten anzeigen",
-    "Read more": "Weiterlesen"
+    "Read more": "Weiterlesen",
+    "Show more": "Mehr anzeigen",
+    "Back": "Zurück"
   },
   "add_event": {},
   "market": {
@@ -257,12 +260,39 @@
   "activate_event": {},
   "calendar": {},
   "events": {
+    "No seats": "Keine Sitzplätze",
+    "Book": "Buch",
+    "Safe Booking Guarantee": "Sichere Buchungsgarantie",
+    "tickets": "tickets",
+    "Free places": "Freie Plätze",
+    "Location": "Standort",
+    "Time and Duration": "Zeit und Dauer",
+    "Date": "Datum",
+    "person": "person",
+    "Cost of participation": "Kosten der Teilnahme",
+    "The presenter": "Der Moderator",
+    "About the event": "Über die Veranstaltung",
+    "Back": "Zurück",
+    "No event found": "Keine Veranstaltung gefunden",
+    "loading": "Lädt...",
     "failedToLoad": "Ereignisse können nicht geladen werden",
     "latest": "Kommende Veranstaltungen",
     "errorLoading": "Fehler beim Laden von Ereignissen",
     "viewAll": "Alle Veranstaltungen anzeigen",
     "event": "Ereignis",
-    "readMore": "Weiterlesen"
+    "readMore": "Weiterlesen",
+    "Select a date": "Wählen Sie ein Datum aus",
+    "Click on the date from": "Klicken Sie auf das Datum von",
+    "red dot": "roter Punkt",
+    "to see available events": "um verfügbare Veranstaltungen anzuzeigen",
+    "events": "Ereignisse",
+    "Find the perfect event for you": "Finden Sie die perfekte Veranstaltung für Sie",
+    "day": "Tag",
+    "week": "Woche",
+    "month": "Monat",
+    "Found": "Gefunden",
+    "More details": "Weitere Details",
+    "There are no events scheduled for the selected period": "Für den ausgewählten Zeitraum sind keine Veranstaltungen geplant"
   },
   "testimonials": {
     "What People Say": "Was die Leute sagen",

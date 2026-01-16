@@ -104,6 +104,7 @@ export default function MastersPage() {
 
   const handleReset = () => {
     router.push("/masters");
+    localStorage.removeItem(STORAGE_KEY);
   };
 
   return (

@@ -4,12 +4,13 @@ import { getPublicActiveEvents } from "@/helper/api/getPublicData";
 import { IActiveEvent } from "@/helper/types/activeEvent";
 import Calendar from "@/components/ActiveEvents/calendar";
 import ActiveEvents from "@/components/ActiveEvents/ActiveEvents";
+import { useTranslations } from "next-intl";
 
 const EventList = () => {
   const [events, setEvents] = useState<IActiveEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [loading, setLoading] = useState(true);
-
+  const t = useTranslations("events");
   useEffect(() => {
     const fetchActiveEvents = async () => {
       try {
@@ -32,7 +33,7 @@ const EventList = () => {
         <aside className="w-full lg:w-[400px] flex-shrink-0">
           <div className="sticky top-24">
             <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 ml-2">
-              Виберіть дату
+              {t("Select a date")}
             </h3>
             <Calendar
               selectedDate={selectedDate}
@@ -43,9 +44,9 @@ const EventList = () => {
             {/* Додаткова інфо-картка під календарем */}
             <div className="mt-6 p-4 bg-blue-50 rounded-2xl border border-blue-100">
               <p className="text-blue-800 text-xs leading-relaxed">
-                💡 Натисніть на дату з{" "}
-                <span className="text-red-500 font-bold">червоною крапкою</span>
-                , щоб побачити доступні події.
+                💡 {t("Click on the date from")}{" "}
+                <span className="text-red-500 font-bold">{t("red dot")}</span>,{" "}
+                {t("to see available events")}.
               </p>
             </div>
           </div>
@@ -55,10 +56,10 @@ const EventList = () => {
         <main className="flex-grow">
           <div className="mb-6">
             <h1 className="text-3xl font-black text-gray-900 mb-2 italic uppercase">
-              Події
+              {t("events")}
             </h1>
             <p className="text-gray-500 italic">
-              Знайдіть ідеальний захід для себе
+              {t("Find the perfect event for you")}
             </p>
           </div>
           <ActiveEvents

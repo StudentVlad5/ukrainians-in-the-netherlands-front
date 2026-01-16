@@ -140,7 +140,8 @@
     "Radius": "Радіус",
     "km": "км",
     "Reset": "Скинути",
-    "apply filter": "apply filter"
+    "apply filter": "apply filter",
+    "Rating": "Рейтинг"
   },
   "about": {
     "About Us": "Про Нас",
@@ -241,7 +242,9 @@
     "Error loading data": "Помилка завантаження даних",
     "readMore": "читати більше",
     "viewAll": "Переглянути всі новини",
-    "Read more": "Читати більше"
+    "Read more": "Читати більше",
+    "Show more": "Показати більше",
+    "Back": "Назад"
   },
   "add_event": {},
   "market": {
@@ -257,12 +260,39 @@
   "activate_event": {},
   "calendar": {},
   "events": {
+    "No seats": "Місць немає",
+    "Book": "Забронювати",
+    "Safe Booking Guarantee": "Гарантія безпечного бронювання",
+    "tickets": "квитків",
+    "Free places": "Вільні місця",
+    "Location": "Локація",
+    "Time and Duration": "Час та тривалість",
+    "Date": "Дата",
+    "person": "особа",
+    "Cost of participation": "Cost of participation",
+    "The presenter": "Ведучий",
+    "About the event": "Про захід",
+    "Back": "Назад",
+    "No event found": "Подію не знайдено",
+    "loading": "Завантаження...",
     "failedToLoad": "Не вдається завантажити події",
     "latest": "Найближчі події",
     "errorLoading": "Помилка завантаження подій",
     "viewAll": "Переглянути всі події",
     "event": "подія",
-    "readMore": "Читати більше"
+    "readMore": "Читати більше",
+    "Select a date": "Виберіть дату",
+    "Click on the date from": "Натисніть на дату з",
+    "red dot": "червоною крапкою",
+    "to see available events": "щоб побачити доступні події",
+    "events": "Події",
+    "Find the perfect event for you": "Знайдіть ідеальний захід для себе",
+    "day": "День",
+    "week": "Тиждень",
+    "month": "Місяць",
+    "Found": "Знайдено",
+    "More details": "Детальніше",
+    "There are no events scheduled for the selected period": "На обраний період подій не заплановано"
   },
   "testimonials": {
     "What People Say": "Що Кажуть Люди",

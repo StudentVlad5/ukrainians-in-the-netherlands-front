@@ -1,5 +1,5 @@
 "use client";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { format } from "date-fns";
 import { IActiveEvent } from "@/helper/types/activeEvent";
@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { getPublicActiveEventsById } from "@/helper/api/getPublicData";
 import { useParams } from "next/navigation";
 import BookingModal from "@/components/UI/BookingModal/BookingModal";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 const EventDetailPage = () => {
   // Змінюємо null для зручної перевірки
@@ -15,7 +17,7 @@ const EventDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const locale = useLocale() as "uk" | "en" | "de" | "nl";
   const { id } = useParams();
-  console.log("eventData", eventData);
+  const t = useTranslations("events");
   useEffect(() => {
     const fetchEvent = async () => {
       if (!id) return;
@@ -39,7 +41,7 @@ const EventDetailPage = () => {
       <div className="container mx-auto px-4 py-24 text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto"></div>
         <p className="mt-4 text-gray-500 uppercase tracking-widest text-xs">
-          Завантаження...
+          {t("loading")}
         </p>
       </div>
     );
@@ -49,12 +51,11 @@ const EventDetailPage = () => {
   if (!eventData || !eventData.parentEvent) {
     return (
       <div className="container mx-auto px-4 py-24 text-center">
-        <p className="text-gray-500">Подію не знайдено</p>
+        <p className="text-gray-500">{t("No event found")}</p>
       </div>
     );
   }
 
-  // Тепер деструктуризація безпечна
   const {
     parentEvent,
     specialist,
@@ -70,9 +71,14 @@ const EventDetailPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         {/* Ліва частина */}
         <div className="lg:col-span-2">
+          <Link href="/events">
+            <div className="flex items-center gap-2 text-black hover:text-white mb-6 font-bold uppercase text-xl tracking-widest">
+              <ArrowLeft size={16} /> {t("Back")}
+            </div>
+          </Link>
           <h1 className="text-4xl font-black italic uppercase mb-6 leading-tight text-gray-900">
             {parentEvent.title[locale]}
           </h1>
@@ -96,7 +102,7 @@ const EventDetailPage = () => {
 
           <div className="prose prose-lg max-w-none mb-12">
             <h2 className="text-2xl font-black uppercase italic mb-4">
-              Про захід
+              {t("About the event")}
             </h2>
             <p className="text-gray-700 leading-relaxed whitespace-pre-line">
               {parentEvent.description[locale]}
@@ -115,7 +121,7 @@ const EventDetailPage = () => {
             </div>
             <div>
               <p className="text-red-500 text-xs font-black uppercase tracking-[0.2em] mb-2">
-                Ведучий
+                {t("The presenter")}
               </p>
               <h3 className="text-3xl font-black italic uppercase mb-2">
                 {specialist?.name[locale]}
@@ -131,16 +137,16 @@ const EventDetailPage = () => {
         </div>
 
         {/* Права частина: Sidebar */}
-        <aside className="lg:col-span-1">
+        <aside className="lg:col-span-1 h-full">
           <div className="sticky top-24 bg-white rounded-3xl border border-gray-100 shadow-2xl p-8">
             <div className="mb-8 border-b pb-6">
               <p className="text-xs font-black uppercase text-gray-400 mb-1 tracking-widest">
-                Вартість участі
+                {t("Cost of participation")}
               </p>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-black">€{price}</span>
                 <span className="text-gray-400 font-bold text-sm uppercase">
-                  / особа
+                  / {t("person")}
                 </span>
               </div>
             </div>
@@ -150,7 +156,7 @@ const EventDetailPage = () => {
                 <div className="text-2xl">📅</div>
                 <div>
                   <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
-                    Дата
+                    {t("Date")}
                   </p>
                   <p className="font-bold">
                     {format(new Date(date), "dd MMMM yyyy")}
@@ -161,7 +167,7 @@ const EventDetailPage = () => {
                 <div className="text-2xl">⏰</div>
                 <div>
                   <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
-                    Час та тривалість
+                    {t("Time and Duration")}
                   </p>
                   <p className="font-bold">
                     {time} ({parentEvent.duration})
@@ -172,7 +178,7 @@ const EventDetailPage = () => {
                 <div className="text-2xl">📍</div>
                 <div>
                   <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
-                    Локація
+                    {t("Location")}
                   </p>
                   <p className="font-bold">
                     {type === "online"
@@ -185,7 +191,7 @@ const EventDetailPage = () => {
                 <div className="text-2xl">🎟️</div>
                 <div>
                   <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
-                    Вільні місця
+                    {t("Free places")}
                   </p>
                   <p
                     className={`font-bold ${
@@ -193,7 +199,7 @@ const EventDetailPage = () => {
                     }`}
                   >
                     <span className="text-2xp text-gray-400">{seats} / </span>
-                    {vacancies} квитків
+                    {vacancies} {t("tickets")}
                   </p>
                 </div>
               </div>
@@ -210,7 +216,7 @@ const EventDetailPage = () => {
                     : "bg-black text-white hover:bg-gray-800 active:scale-95 shadow-black/20"
                 }`}
             >
-              {isSoldOut ? "Місць немає" : "Забронювати"}
+              {isSoldOut ? t("No seats") : t("Book")}
             </button>
             {/* Модальне вікно */}
             {eventData && (
@@ -227,7 +233,7 @@ const EventDetailPage = () => {
             )}
 
             <p className="text-center text-[10px] font-bold text-gray-400 mt-6 uppercase tracking-wider">
-              Гарантія безпечного бронювання
+              {t("Safe Booking Guarantee")}
             </p>
           </div>
         </aside>

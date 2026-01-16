@@ -6,6 +6,7 @@ import { getPublicNews } from "@/helper/api/viewProductData";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
 import NewsCard from "@/components/News/NewsCard";
 import { Button } from "@/components/UI/Button/Button";
+import { NewsCardSkeleton } from "@/components/News/NewsCardSkeleton";
 
 export default function NewsPage() {
   const [news, setNews] = useState<INews[]>([]);
@@ -49,7 +50,7 @@ export default function NewsPage() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-10 text-center">
           <h1 className="text-4xl font-black text-slate-900 uppercase italic">
-            {t("Latest News")}
+            {t("latest")}
           </h1>
           <div className="h-1.5 w-24 bg-ua-blue mx-auto mt-4 rounded-full" />
         </div>
@@ -61,7 +62,11 @@ export default function NewsPage() {
         </div>
 
         {isLoading && (
-          <div className="text-center py-10 font-bold">{t("Loading")}...</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, index) => (
+              <NewsCardSkeleton key={index} />
+            ))}
+          </div>
         )}
 
         {hasMore && !isLoading && (
