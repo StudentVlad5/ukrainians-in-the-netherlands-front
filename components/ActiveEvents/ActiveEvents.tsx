@@ -17,7 +17,7 @@ const ActiveEvents = ({
   loading: boolean;
 }) => {
   const [filterType, setFilterType] = useState<"day" | "week" | "month">(
-    "month"
+    "month",
   );
   const t = useTranslations("events");
   const filteredEvents = useMemo(() => {
@@ -40,7 +40,7 @@ const ActiveEvents = ({
               type="button"
               key={type}
               onClick={() => setFilterType(type)}
-              className={`px-6 py-2 text-sm font-medium rounded-lg transition-all
+              className={`px-6 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer hover:bg-nl-blue hover:text-white
                 ${
                   filterType === type
                     ? "bg-white text-black shadow-sm"
@@ -51,8 +51,8 @@ const ActiveEvents = ({
               {type === "day"
                 ? t("day")
                 : type === "week"
-                ? t("week")
-                : t("month")}
+                  ? t("week")
+                  : t("month")}
             </button>
           ))}
         </div>
@@ -79,7 +79,7 @@ const ActiveEvents = ({
                 animate={{ opacity: 1, x: 0 }}
                 className="absolute top-4 right-4 z-10"
               >
-                <div className="relative group overflow-hidden backdrop-blur-md bg-orange px-4 py-1.5 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-1.5 transition-all duration-300 hover:bg-black/80">
+                <div className="relative group overflow-hidden backdrop-blur-md bg-nl-red px-4 py-1.5 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-1.5 transition-all duration-300">
                   {/* Анімований значок Євро */}
                   <motion.span
                     animate={{
@@ -91,13 +91,13 @@ const ActiveEvents = ({
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="text-ua-blue font-black text-lg"
+                    className="text-white font-black text-lg"
                   >
                     €
                   </motion.span>
 
                   {/* Ціна */}
-                  <span className="text-nl-red font-black text-2xl tracking-tighter">
+                  <span className="text-white font-black text-2xl tracking-tighter">
                     {event.price > 0 ? event.price : "Free"}
                   </span>
 

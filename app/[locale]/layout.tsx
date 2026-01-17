@@ -7,7 +7,6 @@ import "@/app/globals.css";
 
 // 1. Import ReactNode for typing children
 import { ReactNode } from "react";
-import PageTransitionWrapper from "@/components/UI/PageTransitionWrapper/PageTransitionWrapper";
 import { Footer } from "@/components/Footer/Footer";
 
 // 2. Define the prop types
@@ -77,10 +76,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-screen bg-gray-50 text-gray-900 flex justify-center flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar locale={locale} />
-          <main className="pt-20">
-            {" "}
-            <PageTransitionWrapper>{children}</PageTransitionWrapper>
-          </main>
+          <main className="pt-20">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>
