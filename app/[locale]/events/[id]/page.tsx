@@ -93,6 +93,7 @@ const EventDetailPage = () => {
                   src={img}
                   alt="Event"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                   className="object-cover"
                   priority={idx === 0}
                 />
@@ -114,6 +115,7 @@ const EventDetailPage = () => {
             <div className="relative w-40 h-40 shrink-0 rounded-2xl overflow-hidden shadow-lg border-4 border-white">
               <Image
                 src={specialist?.imageUrl || "/placeholder-avatar.jpg"}
+                sizes="160px"
                 alt="Specialist"
                 fill
                 className="object-cover"

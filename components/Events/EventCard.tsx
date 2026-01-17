@@ -30,6 +30,7 @@ export default function EventCard({
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="eager"
         />
         {/* Категорія івенту */}
         <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">

@@ -1,4 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion"; // Додаємо motion
 import { getPublicSpecialistsWithLimits } from "@/helper/api/getPublicData";
 import { ISpecialist } from "@/helper/types/specialist";
 import { onFetchError } from "@/lib/Messages/NotifyMessages";
@@ -11,114 +14,108 @@ import { Lang } from "@/helper/types/common";
 export const ProvidersSection: React.FC = () => {
   const [providers, setProviders] = useState<ISpecialist[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [getError, setGetError] = useState(false);
   const t = useTranslations("providers");
   const locale = useLocale() as Lang;
-
-  const duplicatedProviders = useMemo(
-    () => [...providers, ...providers],
-    [providers]
-  );
 
   useEffect(() => {
     const fetchProviders = async () => {
       try {
         setIsLoading(true);
         const data = await getPublicSpecialistsWithLimits(20);
-
-        if (Array.isArray(data)) {
-          setProviders(data);
-          setGetError(false);
+        if (Array.isArray(data.data)) {
+          setProviders(data.data);
         }
       } catch (e) {
-        setGetError(true);
-        console.log(e);
+        console.error(e);
         onFetchError(t("Failed to load wizards"));
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchProviders();
   }, [t]);
 
-  return (
-    <>
-      {" "}
-      <style>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-${providers.length * 12}rem);
-          }
-        }
+  // Дублюємо масив для безкінечного ефекту
+  const duplicatedProviders =
+    providers.length > 0 ? [...providers, ...providers] : [];
 
-        .animate-scroll-slow {
-          animation: scroll 40s linear infinite;
-        }
-      `}</style>
-      <section
-        id="providers"
-        className="pt-16 pb-4 mt:py-24 bg-white text-gray-900 overflow-hidden"
-      >
-        <div className="container mx-auto">
-          <Link href="/masters">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              {t("Our Masters and Entrepreneurs")}
-            </h2>
-          </Link>
-          <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent_0,black_10%,black_90%,transparent_100%)]">
-            {isLoading ? (
-              <div className="text-center py-20">{t("loading")}</div>
-            ) : getError ? (
-              <div className="text-center py-20 text-red-500">
-                {t("Error loading data")}
-              </div>
-            ) : (
-              <div
-                className="flex animate-scroll-slow p-2"
-                style={{ width: `${providers.length * 2 * 12}rem` }}
+  return (
+    <section
+      id="providers"
+      className="pt-16 pb-4 bg-white text-gray-900 overflow-hidden"
+    >
+      <div className="container mx-auto">
+        <Link href="/masters">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 hover:text-blue-600 transition">
+            {t("Our Masters and Entrepreneurs")}
+          </h2>
+        </Link>
+
+        <div className="relative w-full overflow-hidden">
+          {/* Градієнтне затінення по боках (заміна mask-image) */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+
+          {isLoading ? (
+            <div className="text-center py-20 flex justify-center">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600" />
+            </div>
+          ) : (
+            providers.length > 0 && (
+              <motion.div
+                className="flex gap-8 p-2"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  x: ["0%", "-50%"],
+                }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  x: {
+                    ease: "linear",
+                    duration: 40,
+                    repeat: Infinity,
+                  },
+                }}
+                style={{ width: "max-content" }}
               >
                 {duplicatedProviders.map((provider, index) => (
                   <Link
-                    key={index}
+                    key={`${provider._id}-${index}`} // Унікальний ключ надважливий
                     href={`/masters/${provider._id}`}
-                    className="flex flex-col items-center justify-center w-48 mx-4 shrink-0 group"
+                    className="flex flex-col items-center justify-center w-48 shrink-0 group"
                   >
-                    <Image
-                      src={provider?.imageUrl || defaultImage}
-                      alt={provider.name[locale] || provider.name.uk}
-                      width={120}
-                      height={120}
-                      className="w-32 h-32 rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
-                      onError={(e) =>
-                        (e.currentTarget.src =
-                          "https://placehold.co/100x100/eeeeee/222222?text=Помилка+зображення")
-                      }
-                    />
-                    <h3 className="text-xl font-bold mt-3">
-                      {provider.name[locale]}
+                    <div className="w-32 h-32 relative mb-3">
+                      <Image
+                        src={provider?.imageUrl || defaultImage}
+                        alt={provider.name[locale] || "Master"}
+                        fill
+                        sizes="128px"
+                        className="rounded-full object-cover border-4 border-blue-900 border-b-red-700 transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-center">
+                      {provider.name[locale] || provider.name.uk}
                     </h3>
-                    <p className="text-blue-600 capitalize">
+                    <p className="text-blue-600 capitalize text-center">
                       {provider.specialty[locale]}
                     </p>
                   </Link>
                 ))}
-              </div>
-            )}
-          </div>
+              </motion.div>
+            )
+          )}
         </div>
-        <div className="text-center mt-12">
-          <Link
-            href="/masters"
-            className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition"
-          >
-            {t("viewAll")}
-          </Link>
-        </div>
-      </section>
-    </>
+      </div>
+
+      <div className="text-center mt-12">
+        <Link
+          href="/masters"
+          className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition inline-block"
+        >
+          {t("viewAll")}
+        </Link>
+      </div>
+    </section>
   );
 };

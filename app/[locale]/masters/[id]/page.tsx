@@ -96,6 +96,8 @@ export default function MasterProfile() {
                 src={master.imageUrl || defaultImage}
                 alt={master.name[locale] || master.name.uk || "Master"}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                priority
                 className="object-cover"
               />
             </div>
@@ -252,6 +254,8 @@ export default function MasterProfile() {
                           src={url}
                           alt={`Portfolio ${idx}`}
                           fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          priority
                           className="object-cover transition-transform duration-500 hover:scale-110"
                         />
                       </motion.div>

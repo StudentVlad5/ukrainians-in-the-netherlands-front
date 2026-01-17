@@ -54,6 +54,8 @@ export default function ProductDetailPage() {
               src={product.images[0]}
               alt={title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              loading="eager"
               className="object-cover"
             />
           </div>
@@ -101,7 +103,7 @@ export default function ProductDetailPage() {
                   <a
                     href={`https://t.me/${product.user.telegram.replace(
                       "@",
-                      ""
+                      "",
                     )}`}
                     target="_blank"
                     className="flex items-center justify-center gap-2 bg-[#229ED9] text-white py-3 rounded-xl font-bold"

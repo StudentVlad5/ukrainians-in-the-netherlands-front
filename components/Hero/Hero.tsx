@@ -10,6 +10,7 @@ export const Hero: React.FC = () => {
       <Image
         src={hero_img}
         alt={t("Ukrainians and friends in the Netherlands")}
+        loading="eager"
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
         onError={(e) =>
           (e.currentTarget.src =
