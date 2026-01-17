@@ -79,7 +79,7 @@ const ActiveEvents = ({
                 animate={{ opacity: 1, x: 0 }}
                 className="absolute top-4 right-4 z-10"
               >
-                <div className="relative group overflow-hidden backdrop-blur-md bg-nl-red px-4 py-1.5 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-1.5 transition-all duration-300">
+                <div className="relative group overflow-hidden backdrop-blur-md bg-red-500 px-4 py-1.5 rounded-2xl border border-white/20 shadow-2xl flex items-center gap-1.5 transition-all duration-300">
                   {/* Анімований значок Євро */}
                   <motion.span
                     animate={{

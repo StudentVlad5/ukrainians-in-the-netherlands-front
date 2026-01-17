@@ -92,7 +92,7 @@ export default function MasterCard({ master }: MasterCardProps) {
 
           <Link
             href={`/masters/${master._id}`}
-            className="bg-red-500 hover:bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95 shadow-lg shadow-red-500/20 cursor-pointer"
+            className="bg-red-500 hover:bg-blue-600 text-white text-center px-5 py-2 rounded-xl text-sm  font-semibold transition-all active:scale-95 shadow-lg shadow-red-500/20 cursor-pointer"
           >
             {t("more details")}
           </Link>
